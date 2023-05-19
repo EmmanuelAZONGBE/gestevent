@@ -2,20 +2,14 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>Listeun reclamation</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Liste des reclamations</a></li>
-                <li class="breadcrumb-item active">Liste un reclamation</li>
-            </ol>
-        </nav>
+        <h1>Vos Réclamation</h1>
     </div>
 
     <!-- Affichage de la liste des réclamations -->
     <section class="section">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Liste des reclamations</h5>
+                <h5 class="card-title">Liste de reclamation</h5>
                 <table>
                     <thead>
                         <tr>
@@ -49,7 +43,5 @@
                         @endforeach
                     </tbody>
                 </table>
-
-                <a href="{{ route('reclamations.create') }}">Ajouter une réclamation</a>
     </section>
 @endsection

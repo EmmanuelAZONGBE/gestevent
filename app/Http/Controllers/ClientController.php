@@ -17,8 +17,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-       if (clientPermission() == true) {
-           
+       if (clientPermission() == false) {
+
         $userId = auth()->user()->id; // Récupère l'ID de l'utilisateur connecté
         $clients = Client::select('clients.*', 'users.id')
             ->join('users', 'clients.user_id', '=', 'users.id')
@@ -29,7 +29,7 @@ class ClientController extends Controller
         } else {
             return abort (403);
         }
-    
+
     }
 
 
@@ -44,9 +44,9 @@ class ClientController extends Controller
         } else {
             return abort (403);
         }
-        
 
-        
+
+
     }
 
     /**
@@ -62,7 +62,7 @@ class ClientController extends Controller
                 'adresse' => 'required|string',
                 'password' => 'required|string',
             ]);
-    
+
             $user = users::create([
                 'last_name' => $request->last_name,
                 'first_name' => $request->first_name,
@@ -71,17 +71,17 @@ class ClientController extends Controller
                 'email' => $request->email,
                 'password' => $request->password,
             ]);
-    
+
             $client = Client::create([
                 'user_id' => $user->id,
                 // Autres colonnes du modèle Client
             ]);
-    
+
             return redirect()->route('client.index')->with('success', 'Le client a été ajouté avec succès.');
         } else {
             return abort (403);
         }
- 
+
     }
     /**
      * Display the specified resource.

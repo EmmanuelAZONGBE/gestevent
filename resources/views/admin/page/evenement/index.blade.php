@@ -2,20 +2,12 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>Liste des evenements</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a >Liste des evenements</a></li>
-                <li class="breadcrumb-item active">Liste des événements</li>
-            </ol>
-        </nav>
+        <h1>Vos Evenements </h1>
     </div>
     <section class="section">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Liste des evenements</h5>
-                <a href="{{ route('evenement.create') }}" class="btn btn-sm btn-primary mb-3">Ajouter un client</a>
-                <div class="card-header">Liste des événements</div>
                 <table class="table">
                     <thead>
                         <tr>
