@@ -1,0 +1,70 @@
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a class="navbar-brand" methode="POST" href="{{url('welcome')}}">
+                      GestEvent
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav align-items-lg-center ms-auto me-lg-5">
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="#section_1">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="#section_2">About</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="#section_3">Artists</a>
+                            </li>
+                            @if (Route::has('login'))
+
+                            @auth
+
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="{{ asset('frontend.page.prestataire.create') }}">Prestataire</a>
+                            </li>
+
+
+
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="#section_4">Organisateur</a>
+                            </li>
+
+
+
+
+
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="#section_6">Contact</a>
+                            </li>
+
+                            <li class="nav-item">
+                              <a class="btn btn-rouned btn-info" id="logincss" href="{{ url('/logout')}}">Log Out</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="btn btn-primary" id="logincss" href="{{ url('/redirect')}}">Dash</a>
+                              </li>
+
+                            @else
+
+                            <li class="nav-item">
+                                <a class="btn btn-primary" id="logincss" href="{{ route('login') }}">Login</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="btn btn-success" href="{{ route('register') }}">Register</a>
+                            </li>
+                            @endauth
+
+                            @endif
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
