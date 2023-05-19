@@ -13,9 +13,14 @@ class PrestataireController extends Controller
      */
     public function index()
     {
-        $prestataires = users::join('prestataires', 'prestataires.users_id', '=', 'users.id')
-            ->get();
-        return view('admin.page.prestataire.index', compact('prestataires'));
+        if (prestatairePermission() == false || auth()->user()->usertype == 1) {
+            $prestataires = users::join('prestataires', 'prestataires.user_id', '=', 'users.id')
+                ->get();
+
+            return view('admin.page.prestataire.index', compact('prestataires'));
+        } else {
+            abort(401);
+        }
     }
 
     /**
@@ -23,7 +28,11 @@ class PrestataireController extends Controller
      */
     public function create()
     {
-        return view('admin.page.prestataire.create');
+        if (prestatairePermission() == false || auth()->user()->usertype == 0) {
+            return view('admin.page.prestataire.create');
+        } else {
+            abort(401);
+        }
     }
 
     /**
@@ -31,22 +40,27 @@ class PrestataireController extends Controller
      */
     public function store(Request $request)
     {
-        $users = users::create([
-            'last_name' => $request->last_name,
-            'first_name' => $request->first_name,
-            'picture' => $request->picture,
-            'adresse' => $request->adresse,
-            'email' => $request->email,
-            'societer'=>$request->societer,
-            'password' => $request->password,
-        ]);
+        if (prestatairePermission() == true || auth()->user()->usertype == 1) {
 
-        $users= Prestataire::create([
-            'users_id' => $users->id,
-            'societer' => $request->societer,
-        ]);
+            $users = users::create([
+                'last_name' => $request->last_name,
+                'first_name' => $request->first_name,
+                'picture' => $request->picture,
+                'adresse' => $request->adresse,
+                'email' => $request->email,
+                'societer' => $request->societer,
+                'password' => $request->password,
+            ]);
 
-        return redirect()->route('prestataire.index')->with('success', 'Prestataire créé avec succès');
+            $users = Prestataire::create([
+                'users_id' => $users->id,
+                'societer' => $request->societer,
+            ]);
+
+            return redirect()->route('prestataire.index')->with('success', 'Prestataire créé avec succès');
+        } else {
+            return view('frontend.page.index');
+        }
     }
 
     /**
@@ -54,7 +68,11 @@ class PrestataireController extends Controller
      */
     public function show(Prestataire $prestataire)
     {
-        return view('admin.page.prestataire.show', compact('prestataire'));
+        if (prestatairePermission() == true || auth()->user()->usertype == 1) {
+            return view('admin.page.prestataire.show', compact('prestataire'));
+        } else {
+            return view('frontend.page.index');
+        }
     }
 
     /**
@@ -62,7 +80,11 @@ class PrestataireController extends Controller
      */
     public function edit(Prestataire $prestataire)
     {
-        return view('admin.page.prestataire.edit', compact('prestataire'));
+        if (prestatairePermission() == true || auth()->user()->usertype == 1) {
+            return view('admin.page.prestataire.edit', compact('prestataire'));
+        } else {
+            return view('frontend.page.index');
+        }
     }
 
     /**
@@ -70,27 +92,31 @@ class PrestataireController extends Controller
      */
     public function update(Request $request, Prestataire $prestataire)
     {
-        $request->validate([
-            'last_name' => 'required|string',
-            'first_name' => 'required|string',
-            'picture' => 'nullable|file',
-            'email' => 'required',
-            'societer' => 'required',
-            'adresse' => 'nullable|string',
-            'password' => 'required|string',
-        ]);
+        if (prestatairePermission() == true || auth()->user()->usertype == 1) {
+            $request->validate([
+                'last_name' => 'required|string',
+                'first_name' => 'required|string',
+                'picture' => 'nullable|file',
+                'email' => 'required',
+                'societer' => 'required',
+                'adresse' => 'nullable|string',
+                'password' => 'required|string',
+            ]);
 
-        $prestataire->users()->update([
-            'last_name' => $request->last_name,
-            'first_name' => $request->first_name,
-            'picture' => $request->picture,
-            'adresse' => $request->adresse,
-            'email' => $request->email,
-            'societer' => $request->societer,
-            'password' => $request->password,
-        ]);
+            $prestataire->users()->update([
+                'last_name' => $request->last_name,
+                'first_name' => $request->first_name,
+                'picture' => $request->picture,
+                'adresse' => $request->adresse,
+                'email' => $request->email,
+                'societer' => $request->societer,
+                'password' => $request->password,
+            ]);
 
-        return redirect()->route('prestataire.index')->with('success', 'Prestataire mis à jour avec succès');
+            return redirect()->route('prestataire.index')->with('success', 'Prestataire mis à jour avec succès');
+        } else {
+            return view('frontend.page.index');
+        }
     }
 
     /**
@@ -98,7 +124,11 @@ class PrestataireController extends Controller
      */
     public function destroy(Prestataire $prestataire)
     {
-        $prestataire->delete();
-        return redirect()->route('prestataire.index')->with('success', 'Prestataire supprimé avec succès');
+        if (prestatairePermission() == true || auth()->user()->usertype == 1) {
+            $prestataire->delete();
+            return redirect()->route('prestataire.index')->with('success', 'Prestataire supprimé avec succès');
+        } else {
+            return abort(401);
+        }
     }
 }

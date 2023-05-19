@@ -17,12 +17,12 @@ class ClientController extends Controller
      */
     public function index()
     {
-       if (clientPermission() == false) {
+       if (clientPermission() == false || auth()->user()->usertype == 1) {
 
-        $userId = auth()->user()->id; // Récupère l'ID de l'utilisateur connecté
+        // $userId = auth()->user()->id; // Récupère l'ID de l'utilisateur connecté
         $clients = Client::select('clients.*', 'users.id')
             ->join('users', 'clients.user_id', '=', 'users.id')
-            ->where('clients.user_id', $userId) // Restreint les clients à l'utilisateur connecté
+            // ->where('clients.user_id', $userId) // Restreint les clients à l'utilisateur connecté
             ->get();
 
         return view('admin.page.client.index', compact('clients'));
@@ -54,7 +54,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        if (clientPermission() == true) {
+        if (clientPermission() == true || auth()->user()->usertype == 1) {
             $request->validate([
                 'last_name' => 'required|string',
                 'first_name' => 'required|string',
@@ -88,7 +88,7 @@ class ClientController extends Controller
      */
     public function show($client)
     {
-        if (clientPermission() == true) {
+        if (clientPermission() == true || auth()->user()->usertype == 1) {
             return view('admin.page.client.show', compact('client'));
         } else {
             return abort(403);
@@ -100,7 +100,7 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        if (clientPermission() == true) {
+        if (clientPermission() == true || auth()->user()->usertype == 1) {
             return view('admin.page.client.edit', compact('client'));
         } else {
             return abort(403);
@@ -112,7 +112,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        if (clientPermission() == true) {
+        if (clientPermission() == true || auth()->user()->usertype == 1) {
             $request->validate([
                 'last_name' => 'required|string',
                 'first_name' => 'required|string',
@@ -140,7 +140,7 @@ class ClientController extends Controller
     public function delete($id)
     {
 
-        if (clientPermission() == true) {
+        if (clientPermission() == true || auth()->user()->usertype == 1) {
             $id->delete();
 
             // Redirige vers la liste des clients

@@ -13,7 +13,7 @@
           <!-- End Dashboard Nav -->
 
 
-          @if (auth()->user()->usertype == 1 || organisateurPermission() == true)
+          @if (auth()->user()->usertype == 1 )
               <li class="nav-item">
                   <a class="nav-link collapsed" data-bs-target="#client-nav" data-bs-toggle="collapse">
                       <i class="bi bi-person"></i>
@@ -112,7 +112,7 @@
                   <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
 
                       <li>
-                          @if (organisateurPermission() == false)
+                          @if (organisateurPermission() == false )
                               <a href="{{ route('service.create') }}">
                                   <i class="bi bi-circle"></i>
                                   <span>Valider vos service</span>
