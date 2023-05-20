@@ -16,7 +16,7 @@
             <div class="card-body">
                 <h5 class="card-title">Modifier un organisateur</h5>
 <!--  Form -->
-          <form action="{{ route('organisateur.update', $organisateur->id) }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ url('/update', $organisateur->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('put')
             <div class="col-md-12">
@@ -37,7 +37,7 @@
                 </span>
             @endif
             </div>
-         
+
             <div class="col-12">
               <label for="email" class="form-label">Email</label>
               <input class="form-control {{ $errors->has('email') ? ' is-invalid' : ''}}" type="email" value="{{ old('email') ?? $organisateur->email }}" name="email" id="email" >

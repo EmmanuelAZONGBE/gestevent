@@ -31,7 +31,7 @@
                                 <td>{{ $typeevenement->libelle }}</td>
                                 <td>
                                     <a class="btn btn-success btn-sm btn-rounded "
-                                        title="update this evenement type" href="{{ route('type.edit', $typeevenement) }}"
+                                        title="update" href="{{ route('type.edit', $typeevenement) }}"
                                         data-bs-toggle="tooltip">
                                         <i class="bi bi-pencil"></i>
                                     </a>
@@ -39,7 +39,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger btn-sm btn-rounded "
-                                            title="Remove this evenement type" data-bs-toggle="tooltip">
+                                            title="Remove" data-bs-toggle="tooltip">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>

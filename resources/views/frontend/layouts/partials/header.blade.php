@@ -26,20 +26,10 @@
                             @auth
 
                             <li class="nav-item">
-                                <a class="nav-link click-scroll" href="{{ asset('frontend.page.prestataire.create') }}">Prestataire</a>
+                                <a class="nav-link click-scroll">Service</a>
                             </li>
 
-
-
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_4">Organisateur</a>
-                            </li>
-
-
-
-
-
-                            <li class="nav-item">
+                          <li class="nav-item">
                                 <a class="nav-link click-scroll" href="#section_6">Contact</a>
                             </li>
 

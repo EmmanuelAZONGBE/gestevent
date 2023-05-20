@@ -9,8 +9,12 @@ class ReclamationController extends Controller
 {
     public function index()
     {
-        $reclamations = Reclamation::all();
-       return view('admin.page.reclamation.index', compact('reclamations'));
+        if (clientPermission() == true || auth()->user()->usertype == 1 ||organisateurPermission() == true || prestatairePermission() == true) {
+            $reclamations = Reclamation::all();
+            return view('admin.page.reclamation.index', compact('reclamations'));
+        } else {
+            return abort(401);
+        }
     }
 
     public function create()
@@ -49,9 +53,9 @@ class ReclamationController extends Controller
         return redirect()->route('reclamation.index')->with('success', 'Reclamation updated successfully.');
     }
 
-    public function destroy(Reclamation $reclamation)
+    public function destroy($id)
     {
-        $reclamation->delete();
+        Reclamation::findOrFail($id)->delete();
 
         return redirect()->route('reclamation.index')->with('success', 'Reclamation deleted successfully.');
     }

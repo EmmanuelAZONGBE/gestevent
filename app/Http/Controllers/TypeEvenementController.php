@@ -45,9 +45,9 @@ class TypeEvenementController extends Controller
         return redirect()->route('type.index')->with('success', 'Reclamation created successfully.');
     }
 
-    public function destroy(TypeEvenement $typeevenement)
+    public function destroy($id)
     {
-        $typeevenement->delete();
+        TypeEvenement::findOrFail($id)->delete();
 
         return redirect()->route('type.index')->with('success', 'Reclamation deleted successfully.');
     }

@@ -37,7 +37,14 @@
                                         href="{{ route('client.edit', $client->id) }}" data-bs-toggle="tooltip">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <a href="{{ route('client.destroy', $client->id) }}">suprimer</a>
+                                    <form action="{{ url('/destroy', $client->id) }}"  method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button  class="btn btn-danger btn-sm btn-rounded " title="Remove"
+                                            data-bs-toggle="tooltip">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
@@ -45,6 +52,9 @@
                                 <td colspan="6" class="text-center">Aucun client enregistré.</td>
                             </tr>
                         @endforelse
+                        <div>
+                            {{ $clients->links() }}
+                        </div>
                     </tbody>
                 </table>
                 <!-- End Table -->

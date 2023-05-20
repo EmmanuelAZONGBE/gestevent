@@ -20,7 +20,7 @@ class OrganisateurController extends Controller
                 ->get();
             return view('admin.page.organisateur.index', compact('organisateurs'));
         } else {
-            return abort(401);
+            return view('admin.page.index');
         }
     }
 
@@ -30,7 +30,7 @@ class OrganisateurController extends Controller
      */
     public function create()
     {
-        if (organisateurPermission() == false || auth()->user()->usertype == 1) {
+        if (organisateurPermission() == false || auth()->user()->usertype == 0) {
 
             return view('admin.page.organisateur.create');
         } else {
@@ -175,11 +175,12 @@ class OrganisateurController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Organisateur $organisateur)
+    public function destroy($id)
     {
         if (organisateurPermission() == true || auth()->user()->usertype == 1) {
-            $organisateur->delete();
-            return redirect()->back()->with('success', '  a été supprimé avec succès.');
+
+           Organisateur::findOrFail($id)->delete();
+            return redirect()->route('organisateur.index')->with('success', '  a été supprimé avec succès.');
         } else {
             return view('frontend.page.index');
         }

@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <div class="card-header">Modifier l'événement</div>
 
-                        <form method="POST" action="{{ route('evenement.update', $evenement->id) }}">
+                        <form method="POST" action="{{ url('/update', $evenement->id) }}">
                             @csrf
                             @method('PUT')
 

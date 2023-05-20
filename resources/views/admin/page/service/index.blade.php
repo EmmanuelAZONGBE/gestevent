@@ -37,14 +37,14 @@
                                     <form action="{{ route('service.destroy', $service->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-sm btn-rounded " title="Remove this organisateur"
+                                        <button class="btn btn-danger btn-sm btn-rounded " title="Remove"
                                             data-bs-toggle="tooltip">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
                                 </td>
                                 <td>
-                                    <a class="btn btn-success btn-sm btn-rounded " title="update this organisateur"
+                                    <a class="btn btn-success btn-sm btn-rounded " title="update"
                                         href="{{ route('service.edit', $service->id) }}" data-bs-toggle="tooltip">
                                         <i class="bi bi-pencil"></i>
                                     </a>

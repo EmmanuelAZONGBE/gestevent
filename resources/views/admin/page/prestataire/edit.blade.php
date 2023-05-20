@@ -17,7 +17,7 @@
                     <h5 class="card-title">Modifier un prestataire</h5>
 
                 <!--  Form -->
-                <form class="row g-3" action="{{ route('prestataire.update', $prestataire) }}" method="POST"
+                <form class="row g-3" action="{{ url('/update', $prestataire) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('put')

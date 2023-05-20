@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Modifier une réclamation</h5>
 
-                    <form action="{{ route('reclamation.update', $reclamation) }}" method="POST">
+                    <form action="{{ url('/update', $reclamation) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div>

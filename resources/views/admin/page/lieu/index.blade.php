@@ -48,14 +48,14 @@
                                     href="{{ route('lieu.show', $lieu->id) }}" data-bs-toggle="tooltip">
                                     <i class="bi bi-eye"></i>
                                      </a>
-                                    <a class="btn btn-success btn-sm btn-rounded " title="update this"
+                                    <a class="btn btn-success btn-sm btn-rounded " title="update"
                                         href="{{ route('lieu.edit', $lieu->id) }}" data-bs-toggle="tooltip">
                                         <i class="bi bi-pencil"></i>
                                     </a>
                                     <form action="{{ route('lieu.destroy', $lieu->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-sm btn-rounded " title="Remove this prestataire"
+                                        <button class="btn btn-danger btn-sm btn-rounded " title="Remove"
                                             data-bs-toggle="tooltip">
                                             <i class="bi bi-trash"></i>
                                         </button>

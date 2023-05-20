@@ -17,20 +17,18 @@ class ClientController extends Controller
      */
     public function index()
     {
-       if (clientPermission() == false || auth()->user()->usertype == 1) {
+        if (clientPermission() == false || auth()->user()->usertype == 1) {
+            $clients = Client::select('clients.*', 'users.id')
+                ->join('users', 'clients.user_id', '=', 'users.id')
+               // ->where('clients.user_id', $userId) // Restreint les clients à l'utilisateur connecté
+                ->paginate(7); // Ajoutez paginate() avec le nombre d'éléments que vous souhaitez afficher par page
 
-        // $userId = auth()->user()->id; // Récupère l'ID de l'utilisateur connecté
-        $clients = Client::select('clients.*', 'users.id')
-            ->join('users', 'clients.user_id', '=', 'users.id')
-            // ->where('clients.user_id', $userId) // Restreint les clients à l'utilisateur connecté
-            ->get();
-
-        return view('admin.page.client.index', compact('clients'));
+            return view('admin.page.client.index', compact('clients'));
         } else {
-            return abort (403);
+            return abort(403);
         }
-
     }
+
 
 
 
@@ -101,6 +99,7 @@ class ClientController extends Controller
     public function edit($id)
     {
         if (clientPermission() == true || auth()->user()->usertype == 1) {
+            $client = Client::find($id);
             return view('admin.page.client.edit', compact('client'));
         } else {
             return abort(403);
@@ -110,15 +109,16 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, $id)
     {
         if (clientPermission() == true || auth()->user()->usertype == 1) {
+            $client = Client::find($id);
             $request->validate([
                 'last_name' => 'required|string',
                 'first_name' => 'required|string',
                 'email' => 'required|string',
                 'adresse' => 'required|string',
-                'password' => 'required|string',
+
             ]);
 
             $client->user()->update([
@@ -126,7 +126,7 @@ class ClientController extends Controller
                 'first_name' => $request->first_name,
                 'adresse' => $request->adresse,
                 'email' => $request->email,
-                'password' => $request->password,
+
             ]);
 
             return redirect()->route('client.index')->with('success', 'Le client a été mis à jour avec succès.');
@@ -137,11 +137,13 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function delete($id)
+    public function destroy($id)
     {
 
+
         if (clientPermission() == true || auth()->user()->usertype == 1) {
-            $id->delete();
+
+            Client::findOrFail($id)->delete();
 
             // Redirige vers la liste des clients
             return redirect()->route('client.index')->with('success', 'Client supprimé avec succès.');
@@ -150,3 +152,4 @@ class ClientController extends Controller
         };
     }
 }
+

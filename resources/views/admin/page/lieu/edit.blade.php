@@ -17,7 +17,7 @@
             <div class="card col-lg-6">
                 <div class="card-body">
                     <h5 class="card-title">Modifier un Lieux</h5>
-                    <form action="{{ route('lieu.update', $lieux->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('/update', $lieux->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="col-md-12">

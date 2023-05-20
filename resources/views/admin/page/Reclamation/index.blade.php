@@ -26,14 +26,14 @@
                                 <td>{{ $reclamation->message }}</td>
                                 <td>{{ $reclamation->description }}</td>
                                 <td>
-                                    <a class="btn btn-success btn-sm btn-rounded " title="update this reclamation"
+                                    <a class="btn btn-success btn-sm btn-rounded " title="update"
                                         href="{{ route('reclamation.edit', $reclamation) }}" data-bs-toggle="tooltip">
                                         <i class="bi bi-pencil"></i>
                                     </a>
                                     <form action="{{ route('reclamation.destroy', $reclamation->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-sm btn-rounded " title="Remove this reclamation"
+                                        <button class="btn btn-danger btn-sm btn-rounded " title="Remove"
                                             data-bs-toggle="tooltip">
                                             <i class="bi bi-trash"></i>
                                         </button>

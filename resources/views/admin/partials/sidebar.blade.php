@@ -112,7 +112,7 @@
                   <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
 
                       <li>
-                          @if (organisateurPermission() == false )
+                          @if (organisateurPermission() == false && auth()->user()->usertype == 0 )
                               <a href="{{ route('service.create') }}">
                                   <i class="bi bi-circle"></i>
                                   <span>Valider vos service</span>
@@ -191,7 +191,6 @@
 
 
 
-          @if (clientPermission() == true || organisateurPermission() == true)
               <li class="nav-item">
                   <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse">
                       <i class="bi bi-calendar-event"></i>
@@ -200,7 +199,7 @@
                   </a>
                   <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                       <li>
-                          @if (clientPermission() == false || organisateurPermission() == false)
+                          @if (clientPermission() == false && organisateurPermission() == false && auth()->user()->usertype == 0)
                               <a href="{{ route('evenement.create') }}">
                                   <i class="bi bi-circle"></i>
                                   <span>Ajouter un événement</span>
@@ -208,7 +207,7 @@
                           @endif
                       </li>
                       <li>
-                          @if (clientPermission() == true || organisateurPermission() == true)
+                          @if (clientPermission() == true || organisateurPermission() == true || auth()->user()->usertype == 1)
                               <a href="{{ route('evenement.index') }}">
                                   <i class="bi bi-circle"></i>
                                   <span>Liste des événements</span>
@@ -217,7 +216,6 @@
                       </li>
                   </ul>
               </li>
-          @endif
 
 
           <!-- End  evenement Nav -->

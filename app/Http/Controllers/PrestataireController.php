@@ -122,10 +122,10 @@ class PrestataireController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Prestataire $prestataire)
+    public function destroy($id)
     {
         if (prestatairePermission() == true || auth()->user()->usertype == 1) {
-            $prestataire->delete();
+            Prestataire::findOrFail($id)->delete();
             return redirect()->route('prestataire.index')->with('success', 'Prestataire supprimé avec succès');
         } else {
             return abort(401);

@@ -30,7 +30,8 @@
                                 <td>{{ $evenement->date }}</td>
                                 <td>{{ $evenement->statut }}</td>
                                 <td>{{ $evenement->facture }}</td>
-                                <td>{{ $evenement->organisateur->first_name }} {{ $evenement->organisateur->last_name }}</td>
+                                <td>{{ $evenement->organisateur->first_name }} {{ $evenement->organisateur->last_name }}
+                                </td>
                                 <td>
                                     @if ($evenement->type_evenement)
                                         {{ $evenement->type_evenement->libelle }}
@@ -41,8 +42,8 @@
                                     <form action="{{ route('evenement.destroy', $evenement->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" id="logincss" class="btn btn-danger btn-sm btn-rounded "
-                                            title="Remove" data-bs-toggle="tooltip">
+                                        <button type="submit" class="btn btn-danger btn-sm btn-rounded " title="Remove"
+                                            data-bs-toggle="tooltip">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
@@ -52,7 +53,10 @@
                                         <i class="bi bi-eye"></i>
                                     </a>
 
-                                    <a href="{{ route('evenement.edit', $evenement->id) }}" class="btn btn-primary">Modifier</a>
+                                    <a class="btn btn-success btn-sm btn-rounded " id="logincss" title="edit"
+                                        href="{{ route('evenement.edit', $evenement->id) }}" data-bs-toggle="tooltip">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

@@ -2,29 +2,23 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>Editer un client</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a >Liste des clients</a></li>
-                <li class="breadcrumb-item active"><a>Editer un client</a></li>
-            </ol>
-        </nav>
+        <h1>Modifier un client</h1>
     </div>
     <section class="section">
         <div class="d-flex align-items-center justify-content-center mb-3">
             <div class="card col-lg-6">
                 <div class="card-body">
-                    <h5 class="card-title">Modifier un client</h5>
+                    <h5 class="card-title">Modification un client</h5>
 
                     <!--  Form -->
-                    <form class="row g-3" action="{{ route('client.update', $client) }}" method="POST"
+                    <form class="row g-3" action="{{ url('/update', $client->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="col-md-12">
                             <label for="last_name" class="form-label">Nom</label>
                             <input class="form-control {{ $errors->has('last_name') ? ' is-invalid' : '' }}"
-                                value="{{ old('last_name') ?? $users->last_name }}" type="text" name="last_name"
+                                value="{{ old('last_name') ?? $client->last_name }}" type="text" name="last_name"
                                 id="last_name">
                             @if ($errors->has('last_name'))
                                 <span class="invalid-feedback" role="alert">
@@ -35,7 +29,7 @@
                         <div class="col-md-6">
                             <label for="first_name" class="form-label">Prenom</label>
                             <input class="form-control {{ $errors->has('first_name') ? ' is-invalid' : '' }}"
-                                value="{{ old('first_name') ?? $users->first_name }}" type="text" name="first_name"
+                                value="{{ old('first_name') ?? $client->first_name }}" type="text" name="first_name"
                                 id="first_name">
                             @if ($errors->has('first_name'))
                                 <span class="invalid-feedback" role="alert">
@@ -43,11 +37,11 @@
                                 </span>
                             @endif
                         </div>
-                        
+
                         <div class="col-12">
                             <label for="email" class="form-label">Email</label>
                             <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" type="email"
-                                name="email" id="email" value="{{ old('email') ?? $users->email }}">
+                                name="email" id="email" value="{{ old('email') ?? $client->email }}">
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
                                     {{ $errors->first('email') }}
@@ -57,23 +51,14 @@
                         <div class="col-12">
                             <label for="adresse" class="form-label">Adresse</label>
                             <input class="form-control {{ $errors->has('adresse') ? ' is-invalid' : '' }}" type="adresse"
-                                name="adresse" id="adresse" value="{{ old('adresse') ?? $users->adresse }}">
+                                name="adresse" id="adresse" value="{{ old('adresse') ?? $client->adresse }}">
                             @if ($errors->has('adresse'))
                                 <span class="invalid-feedback" role="alert">
                                     {{ $errors->first('adresse') }}
                                 </span>
                             @endif
                         </div>
-                        <div class="col-md-6">
-                            <label for="password" class="form-label">Mot de passe</label>
-                            <input class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" type="password"
-                                name="password" id="password">
-                            @if ($errors->has('password'))
-                                <span class="invalid-feedback" role="alert">
-                                    {{ $errors->first('password') }}
-                                </span>
-                            @endif
-                        </div>
+
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Actualiser</button>
                         </div>

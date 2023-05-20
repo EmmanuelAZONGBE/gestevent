@@ -40,15 +40,15 @@
                                     href="{{ route('prestataire.show', $prestataire->id) }}" data-bs-toggle="tooltip">
                                     <i class="bi bi-eye"></i>
                                      </a>
-                                    <a class="btn btn-success btn-sm btn-rounded " title="update this prestataire"
+                                    <a class="btn btn-success btn-sm btn-rounded " title="update "
                                         href="{{ route('prestataire.edit', $prestataire->id) }}" data-bs-toggle="tooltip">
                                         <i class="bi bi-pencil"></i>
                                     </a>
                                     <form action="{{ route('prestataire.destroy', $prestataire->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm btn-rounded "
-                                            title="Remove this prestataire" data-bs-toggle="tooltip">
+                                        <button  class="btn btn-danger btn-sm btn-rounded "
+                                            title="Remove " data-bs-toggle="tooltip">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>

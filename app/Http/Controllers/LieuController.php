@@ -9,61 +9,85 @@ class LieuController extends Controller
 {
     public function index()
     {
-        $lieux = Lieu::all();
-        return view('admin.page.lieu.index', compact('lieux'));
+        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+            $lieux = Lieu::all();
+            return view('admin.page.lieu.index', compact('lieux'));
+        }else{
+            return view('admin.page.index');
+        }
     }
 
     public function create()
     {
-        return view('admin.page.lieu.create');
+        if (organisateurPermission() == true ) {
+            return view('admin.page.lieu.create');
+        }else{
+            abort (401);
+        }
     }
 
     public function store(Request $request)
     {
-       $request->validate([
-            'nom' => 'required',
-            'description' => 'nullable|string',
-            'picture' => 'required',
-            'adresse' => 'required',
-        ]);
+        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+            $request->validate([
+                'nom' => 'required',
+                'description' => 'nullable|string',
+                'picture' => 'required',
+                'adresse' => 'required',
+            ]);
 
-       Lieu::create($request->all());
+            Lieu::create($request->all());
 
 
-        return redirect()->route('lieu.index')->with('success', 'lieu created successfully.');
+            return redirect()->route('lieu.index')->with('success', 'lieu created successfully.');
+        }else{
+            return view('admin.page.index');
+        }
     }
 
     public function edit(Lieu $lieux)
     {
-        return view('admin.page.lieu.edit', compact('lieux'));
+        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+            return view('admin.page.lieu.edit', compact('lieux'));
+        }else{
+            return view('admin.page.index');
+        }
     }
 
     public function update(Request $request, Lieu $lieux)
     {
-        $validatedData = $request->validate([
-            'nom' => 'required',
-            'description' => 'required',
-            'picture' => 'picture',
-            'adresse' => 'required',
-        ]);
+        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+            $validatedData = $request->validate([
+                'nom' => 'required',
+                'description' => 'required',
+                'picture' => 'picture',
+                'adresse' => 'required',
+            ]);
 
-        $lieux->nom = $validatedData['nom'];
-        $lieux->description = $validatedData['description'];
+            $lieux->nom = $validatedData['nom'];
+            $lieux->description = $validatedData['description'];
 
-        if ($request->hasFile('uploads')) {
-            $file = $request->file('uploads')->store('picture');
-            $lieux->picture = $file;
+            if ($request->hasFile('uploads')) {
+                $file = $request->file('uploads')->store('picture');
+                $lieux->picture = $file;
+            }
+
+            $lieux->adresse = $validatedData['adresse'];
+            $lieux->save();
+
+            return redirect()->route('lieu.index');
+        } else {
+            return view('admin.page.index');
         }
-
-        $lieux->adresse = $validatedData['adresse'];
-        $lieux->save();
-
-        return redirect()->route('lieu.index');
     }
 
-    public function destroy(Lieu $lieux)
+    public function destroy($id)
     {
-        $lieux->delete();
-        return redirect()->route('lieu.index');
+        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+            Lieu::findOrFail($id)->delete();
+            return redirect()->route('lieu.index');
+        } else {
+            return view('admin.page.index');
+        }
     }
 }

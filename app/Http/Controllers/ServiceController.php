@@ -29,7 +29,7 @@ class ServiceController extends Controller
         //affichage du formulaire
         return view('admin.page.service.create');
     }
- 
+
     /**
      * Store a newly created resource in storage.
      */
@@ -91,9 +91,9 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Service $service)
+    public function destroy($id)
     {
-       $service->delete();
+        Service::findOrFail($id)->delete();
        return redirect()->route('service.index')->with('success','le service à été supprimer');
     }
 }
