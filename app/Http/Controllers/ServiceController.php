@@ -12,13 +12,12 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //Liste des personnes
+        // Liste des services paginés
+        $services = Service::where('etat', true)
+                            ->orWhere('etat', false)
+                            ->paginate(10); // 10 services par page
 
-        $service = Service::all();
-        $service = Service::where('etat',true)
-                            ->orWhere('etat',false)
-                            ->get();
-        return view('admin.page.service.index',compact('service'));
+        return view('admin.page.service.index', compact('services'));
     }
 
     /**

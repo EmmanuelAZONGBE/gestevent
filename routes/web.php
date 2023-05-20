@@ -1,19 +1,20 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LieuController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\EvenementController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LieuController;
-use App\Http\Controllers\OrganisateurController;
-use App\Http\Controllers\PrestataireController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\PrestataireController;
 use App\Http\Controllers\ReclamationController;
-use App\Http\Controllers\TypeEvenementController;
 
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrganisateurController;
+use App\Http\Controllers\TypeEvenementController;
+use App\Http\Controllers\Frontend\EvenementController as FrontendEvenementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,7 +117,6 @@ Route::post('/organisateur/storeLogin', [OrganisateurController::class,'storeLog
 
 //Route::resource('profile', ProfileController::class);
 
-
 Route::get('/lieu/index', [LieuController::class,'index'])->name('lieu.index');
 Route::get('/lieu/create', [LieuController::class,'create'])->name('lieu.create');
 Route::post('/lieu/store', [LieuController::class,'store'])->name('lieu.store');
@@ -129,14 +129,16 @@ Route::get('/lieu/show', [LieuController::class,'show'])->name('lieu.show');
 
 
 Route::resource('/reclamations', ReclamationController::class);
-Route::get('/reclamation/index', [ReclamationController::class,'index'])->name('reclamation.index');
-Route::get('/reclamation/create', [ReclamationController::class,'create'])->name('reclamation.create');
-Route::post('/reclamation/store', [ReclamationController::class,'store'])->name('reclamation.store');
-Route::get('/reclamation/edit/{id}', [ReclamationController::class,'edit'])->name('reclamation.edit');
-Route::put('/reclamation/update/{id}', [ReclamationController::class,'update'])->name('reclamation.update');
-Route::get('/reclamation/update{reclamation}', [ReclamationController::class,'update']);
-Route::delete('/reclamation/destroy/{id}', [ReclamationController::class,'destroy'])->name('reclamation.destroy');
+// Route::get('/reclamation/index', [ReclamationController::class,'index'])->name('reclamation.index');
+// Route::get('/reclamation/create', [ReclamationController::class,'create'])->name('reclamation.create');
+// Route::post('/reclamation/store', [ReclamationController::class,'store'])->name('reclamation.store');
+// Route::get('/reclamation/edit/{id}', [ReclamationController::class,'edit'])->name('reclamation.edit');
+// Route::put('/reclamation/update/{id}', [ReclamationController::class,'update'])->name('reclamation.update');
+// Route::get('/reclamation/update{reclamation}', [ReclamationController::class,'update']);
+// Route::delete('/reclamation/destroy/{id}', [ReclamationController::class,'destroy'])->name('reclamation.destroy');
 
+
+Route::get('frontend_evenements/create', [FrontendEvenementController::class,'create'])->name('frontend_evenements.create');
 
 
 // typeevenements routes
@@ -148,3 +150,6 @@ Route::get('type/edit/{id}', [TypeEvenementController::class,'edit'])->name('typ
 Route::put('type/update/{id}', [TypeEvenementController::class,'update'])->name('type.update');
 Route::post('type/update{typeevenement}', [TypeEvenementController::class,'update']);
 Route::delete('type/destroy/{id}', [TypeEvenementController::class,'destroy'])->name('type.destroy');
+
+
+//frontend

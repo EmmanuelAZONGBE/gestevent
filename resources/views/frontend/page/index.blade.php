@@ -12,14 +12,12 @@
 
                     <h1 class="text-white mb-5">TRANSFORMEZ VOTRE VISION D'EVENEMENT EN REALITER</h1>
 
-                    @if (Route::has('login'))
                         @auth
-
-                            <button id="commencerButton" class="btn custom-btn smoothscroll">
-                                <a href="">commencer</a>
-                            </button>
+                            <a id="commencerButton" href="{{ route('frontend_evenements.create') }}" class="btn custom-btn smoothscroll">
+                                commencer
+                            </a>
                         @endauth
-                    @endif
+
                 </div>
 
                 <div class="col-lg-12 col-12 mt-auto d-flex flex-column flex-lg-row text-center">
