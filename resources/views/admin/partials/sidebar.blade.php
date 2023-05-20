@@ -168,20 +168,20 @@
               <li class="nav-item">
                   <a class="nav-link collapsed" data-bs-target="#type-evenement-nav" data-bs-toggle="collapse">
                       <i class="bi bi-tag"></i>
-                      <span>Type d'événement</span>
+                      <span>Type événement</span>
                       <i class="bi bi-chevron-down ms-auto"></i>
                   </a>
                   <ul id="type-evenement-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                       <li>
                           <a href="{{ route('type.create') }}">
                               <i class="bi bi-circle"></i>
-                              <span>Ajouter un type d'événement</span>
+                              <span>Ajouter un type événement</span>
                           </a>
                       </li>
                       <li>
                           <a href="{{ route('type.index') }}">
                               <i class="bi bi-circle"></i>
-                              <span>Liste des types d'événements</span>
+                              <span>Liste des types événements</span>
                           </a>
                       </li>
                   </ul>

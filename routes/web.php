@@ -128,14 +128,14 @@ Route::get('/lieu/show', [LieuController::class,'show'])->name('lieu.show');
 
 
 
-Route::resource('/reclamations', ReclamationController::class);
-// Route::get('/reclamation/index', [ReclamationController::class,'index'])->name('reclamation.index');
-// Route::get('/reclamation/create', [ReclamationController::class,'create'])->name('reclamation.create');
-// Route::post('/reclamation/store', [ReclamationController::class,'store'])->name('reclamation.store');
-// Route::get('/reclamation/edit/{id}', [ReclamationController::class,'edit'])->name('reclamation.edit');
-// Route::put('/reclamation/update/{id}', [ReclamationController::class,'update'])->name('reclamation.update');
-// Route::get('/reclamation/update{reclamation}', [ReclamationController::class,'update']);
-// Route::delete('/reclamation/destroy/{id}', [ReclamationController::class,'destroy'])->name('reclamation.destroy');
+// Route::resource('/reclamations', ReclamationController::class);
+Route::get('/reclamation/index', [ReclamationController::class,'index'])->name('reclamation.index');
+Route::get('/reclamation/create', [ReclamationController::class,'create'])->name('reclamation.create');
+Route::post('/reclamation/store', [ReclamationController::class,'store'])->name('reclamation.store');
+Route::get('/reclamation/edit/{id}', [ReclamationController::class,'edit'])->name('reclamation.edit');
+Route::put('/reclamation/update/{id}', [ReclamationController::class,'update'])->name('reclamation.update');
+Route::get('/reclamation/update{reclamation}', [ReclamationController::class,'update']);
+Route::delete('/reclamation/destroy/{id}', [ReclamationController::class,'destroy'])->name('reclamation.destroy');
 
 
 Route::get('frontend_evenements/create', [FrontendEvenementController::class,'create'])->name('frontend_evenements.create');
