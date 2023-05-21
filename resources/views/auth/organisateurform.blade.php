@@ -79,12 +79,12 @@
                                 </div>
 
                                 <div class="col-6">
-                                    <label for="adresse" class="form-label">Address </label>
-                                    <input class="form-control {{ $errors->has('adresse') ? ' is-invalid' : '' }}"
-                                        type="adresse" name="adresse" id="adresse"value="{{ old('adresse') }}" required>
-                                    @if ($errors->has('adresse'))
+                                    <label for="phone">phone :</label>
+                                    <input class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}"
+                                        type="phone" name="phone" id="phone"value="{{ old('phone') }}" required>
+                                    @if ($errors->has('phone'))
                                         <span class="invalid-feedback" role="alert">
-                                            {{ $errors->first('adresse') }}
+                                            {{ $errors->first('phone') }}
                                         </span>
                                     @endif
                                 </div>

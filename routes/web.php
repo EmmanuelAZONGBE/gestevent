@@ -15,6 +15,7 @@ use App\Http\Controllers\OrganisateurController;
 use App\Http\Controllers\TypeEvenementController;
 use App\Http\Controllers\Frontend\EvenementController as FrontendEvenementController;
 use App\Http\Controllers\Frontend\ReclamationController as FrontendReclamationController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,3 +158,5 @@ Route::get('frontend_evenements/store', [FrontendEvenementController::class,'sto
 // Reclamations Frontend routes
 Route::get('/frontend_reclamations/create', [ReclamationController::class,'create'])->name('frontend_reclamations.create');
 Route::get('/frontend_reclamations/store', [ReclamationController::class,'store'])->name('frontend_reclamations.store');
+
+Route::resource('user_profile', ProfileController::class);

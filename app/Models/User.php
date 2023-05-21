@@ -27,13 +27,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'last_name',
-        'first_name',
-        'picture',
+        'nom',
+        'prenom',
+        'photo',
+        'telephone',
         'email',
-        'adresse',
         'password',
-        
     ];
 
     public function client()
@@ -43,15 +42,13 @@ class User extends Authenticatable
     }
 
     public function organisateur()
-
     {
-        return $this ->belongsTo(Organisateur::class);
+        return $this->hasOne(Organisateur::class);
     }
 
     public function prestataire()
-
     {
-        return $this ->belongsTo(Prestataire::class);
+        return $this->belongsTo(Prestataire::class);
     }
 
     /**

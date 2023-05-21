@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Organisateur;
 use App\Models\Prestataire;
-
+use App\Models\User;
 use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,22 +19,25 @@ class UserController extends Controller
     $validatedData = $request->validate([
         'last_name' => ['required', 'string', 'max:255'],
         'first_name' => ['required', 'string', 'max:255'],
-        'photo'=>['image|mimes:png,jpg,jpeg|max:2048'],
+        'photo'=>['image', 'mimes:png,jpg,jpeg', 'max:2048'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'adresse' => ['required', 'string', 'max:255'],
+        'phone' => ['required', 'string', 'max:40'],
         'password' => 'required:8',
         'password_confirmation' => 'required:8|same:password'
     ]);
 
-    $user = users::create([
-        'last_name' => $validatedData['last_name'],
-        'first_name' => $validatedData['first_name'],
-        'photo'=>$validatedData ['image|mimes:png,jpg,jpeg|max:2048'],
-        'email' => $validatedData['email'],
-        'adresse' => $validatedData['adresse'],
-        'password' => Hash::make($validatedData['password']),
-        'status' => $request['status'],
+    $user = User::create([
+        'nom' => $request->last_name,
+        'prenom' =>$request->first_name,
+        'photo'=>$this->uploads($request, 'photo'),
+        'email' => $request->email,
+        'telephone' => $request->phone,
+        'password' => Hash::make($request->password),
+        'status' => $request->status
     ]);
+
+    
+
 
     if ($request['status'] == 'client') {
         Client::create([

@@ -32,7 +32,7 @@
                                     <p>
                                         <label for="organisateur">Organisateur </label>
                                         <a href="{{ route('organisateurform') }}" style='padding:5px;'><input type="radio"
-                                                name="status" id="organisateur" value="organisateur"></a>
+                                                name="status" id="organisateur" value="organisateur" onclick="window.location.href =`{{ route('organisateurform') }}`;"></a>
                                     </p>
                                 </div>
 
@@ -51,8 +51,7 @@
                                 <div class="form-group">
                                     <label for="first_name">Prenom :</label>
                                     <input class="form-control {{ $errors->has('first_name') ? ' is-invalid' : '' }}"
-                                        value="{{ old('first_name') }}" type="text" name="first_name" id="first_name"
-                                        value="{{ old('first_name') }}" required>
+                                        value="{{ old('first_name') }}" type="text" name="first_name" id="first_name">
                                     @if ($errors->has('first_name'))
                                         <span class="invalid-feedback" role="alert">
                                             {{ $errors->first('first_name') }}
@@ -85,12 +84,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="adresse">Adresse :</label>
-                                    <input class="form-control {{ $errors->has('adresse') ? ' is-invalid' : '' }}"
-                                        type="adresse" name="adresse" id="adresse"value="{{ old('adresse') }}" required>
-                                    @if ($errors->has('adresse'))
+                                    <label for="phone">phone :</label>
+                                    <input class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}"
+                                        type="phone" name="phone" id="phone"value="{{ old('phone') }}" required>
+                                    @if ($errors->has('phone'))
                                         <span class="invalid-feedback" role="alert">
-                                            {{ $errors->first('adresse') }}
+                                            {{ $errors->first('phone') }}
                                         </span>
                                     @endif
                                 </div>

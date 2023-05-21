@@ -17,7 +17,6 @@ class Organisateur extends Model
         'adresse_compagnie',
         'type_evenement_organiser',
         'experience',
-
     ];
 
     public function user()
