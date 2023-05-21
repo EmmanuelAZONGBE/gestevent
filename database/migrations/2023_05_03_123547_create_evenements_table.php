@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('date');
             $table->integer('nombre_participant');
             $table->float('facture');
+            $table->enum('etat',['accepté','rejeté','en attente'])->default('en attente');
 
              // Clé étrangère pour la table organisateur
              $table->foreignIdFor(Organisateur::class)->constrained();

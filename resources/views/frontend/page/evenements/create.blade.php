@@ -2,20 +2,17 @@
 
 @section('content')
 
-<nav class="d-flex justify-content-center">
-    <div class="nav nav-tabs align-items-baseline justify-content-center" id="nav-tab" role="tablist">
-        <button class="nav-link active" id="nav-ContactForm-tab" data-bs-toggle="tab" data-bs-target="#nav-ContactForm" role="tab" aria-controls="nav-ContactForm" aria-selected="true">
-            <h5>Evenement</h5>
-        </button>
-    </div>
-</nav>
+<section class="ticket-section section-padding">
+    <div class="section-overlay"></div>
 
-    <div class="tab-content shadow-lg mt-5" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-ContactForm" role="tabpanel" aria-labelledby="nav-ContactForm-tab">
-            <div class="mt-3">
-                <form class="custom-form contact-form mb-5 mb-lg-0" action="{{ route('evenement.store') }}" method="post" role="form">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-10 mx-auto">
+                <form class="custom-form ticket-form mb-5 mb-lg-0" action="{{ route('evenement.store') }}" method="post" role="form">
+                    <h2 class="text-center mb-4">Get started here</h2>
                     @csrf
-                    <div class="contact-form-body">
+                    <div class="ticket-form-body">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <input type="text" name="nom" id="nom" class="form-control" placeholder="Inscrivez un nom" required>
@@ -71,9 +68,7 @@
                     </div>
                 </form>
             </div>
-        </div>
-
     </div>
-
+</section>
 
 @endsection

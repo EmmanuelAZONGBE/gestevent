@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('date');
             $table->string('message')->nullable();
             $table->text('description')->nullable();
+            $table->enum('etat',['accepté','rejeté','en attente'])->default('en attente');
             $table->timestamps();
         });
     }

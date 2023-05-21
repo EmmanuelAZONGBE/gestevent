@@ -11,10 +11,10 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\PrestataireController;
 use App\Http\Controllers\ReclamationController;
-
 use App\Http\Controllers\OrganisateurController;
 use App\Http\Controllers\TypeEvenementController;
 use App\Http\Controllers\Frontend\EvenementController as FrontendEvenementController;
+use App\Http\Controllers\Frontend\ReclamationController as FrontendReclamationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -137,10 +137,6 @@ Route::put('/reclamation/update/{id}', [ReclamationController::class,'update'])-
 Route::get('/reclamation/update{reclamation}', [ReclamationController::class,'update']);
 Route::delete('/reclamation/destroy/{id}', [ReclamationController::class,'destroy'])->name('reclamation.destroy');
 
-
-Route::get('frontend_evenements/create', [FrontendEvenementController::class,'create'])->name('frontend_evenements.create');
-
-
 // typeevenements routes
 
 Route::get('type/index', [TypeEvenementController::class,'index'])->name('type.index');
@@ -152,4 +148,12 @@ Route::post('type/update{typeevenement}', [TypeEvenementController::class,'updat
 Route::delete('type/destroy/{id}', [TypeEvenementController::class,'destroy'])->name('type.destroy');
 
 
-//frontend
+//frontend routes
+
+// Evenements Frontend routes
+Route::get('frontend_evenements/create', [FrontendEvenementController::class,'create'])->name('frontend_evenements.create');
+Route::get('frontend_evenements/store', [FrontendEvenementController::class,'store'])->name('frontend_evenements.store');
+
+// Reclamations Frontend routes
+Route::get('/frontend_reclamations/create', [ReclamationController::class,'create'])->name('frontend_reclamations.create');
+Route::get('/frontend_reclamations/store', [ReclamationController::class,'store'])->name('frontend_reclamations.store');

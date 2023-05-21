@@ -56,6 +56,7 @@ class ClientController extends Controller
             $request->validate([
                 'last_name' => 'required|string',
                 'first_name' => 'required|string',
+                'photo'=>'image|mimes:png,jpg,jpeg|max:2048',
                 'email' => 'required|string',
                 'adresse' => 'required|string',
                 'password' => 'required|string',
@@ -64,7 +65,7 @@ class ClientController extends Controller
             $user = users::create([
                 'last_name' => $request->last_name,
                 'first_name' => $request->first_name,
-                'picture' => $request->picture,
+                'photo' => $request->photo,
                 'adresse' => $request->adresse,
                 'email' => $request->email,
                 'password' => $request->password,

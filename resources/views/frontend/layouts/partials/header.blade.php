@@ -19,18 +19,18 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_3">Artists</a>
+                                <a class="nav-link click-scroll" href="#section_3">Lieu</a>
                             </li>
                             @if (Route::has('login'))
 
                             @auth
 
                             <li class="nav-item">
-                                <a class="nav-link click-scroll">Service</a>
+                                <a class="nav-link click-scroll">Progamme</a>
                             </li>
 
                           <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_6">Contact</a>
+                                <a class="nav-link click-scroll" href="#section_6">Reclamation</a>
                             </li>
 
                             <li class="nav-item">

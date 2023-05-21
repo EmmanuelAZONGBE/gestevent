@@ -19,6 +19,7 @@ class UserController extends Controller
     $validatedData = $request->validate([
         'last_name' => ['required', 'string', 'max:255'],
         'first_name' => ['required', 'string', 'max:255'],
+        'photo'=>['image|mimes:png,jpg,jpeg|max:2048'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'adresse' => ['required', 'string', 'max:255'],
         'password' => 'required:8',
@@ -28,6 +29,7 @@ class UserController extends Controller
     $user = users::create([
         'last_name' => $validatedData['last_name'],
         'first_name' => $validatedData['first_name'],
+        'photo'=>$validatedData ['image|mimes:png,jpg,jpeg|max:2048'],
         'email' => $validatedData['email'],
         'adresse' => $validatedData['adresse'],
         'password' => Hash::make($validatedData['password']),

@@ -42,7 +42,20 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="col-12">
+
+                                <div class="col-md-6">
+                                    <label for="photo">Photo :</label>
+                                    <input accept="image/png, image/jpeg, image/jpg," class="form-control {{ $errors->has('photo') ? ' is-invalid' : '' }}"
+                                        value="{{ old('photo') }}" type="file" name="photo" id="photo"
+                                        value="{{ old('photo') }}" required>
+                                    @if ($errors->has('photo'))
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $errors->first('photo') }}
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="col-md-6">
                                     <label for="email" class="form-label">Email</label>
                                     <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
                                         type="email" name="email" id="email" value="{{ old('email') }}" required>

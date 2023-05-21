@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('type_evenements', function (Blueprint $table) {
             $table->id();
             $table->string('libelle')->nullable();
+            $table->enum('etat',['accepté','rejeté','en attente'])->default('en attente');
             $table->timestamps();
         });
     }

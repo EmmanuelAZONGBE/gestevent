@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Reclamation;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ReclamationController extends Controller
 {
@@ -20,7 +21,7 @@ class ReclamationController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.page.reclamation.create');
     }
 
     /**
@@ -28,7 +29,15 @@ class ReclamationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'date' => 'required|string',
+            'message' => 'nullable|string',
+            'description' => 'nullable|string',
+        ]);
+
+        Reclamation::create($request->all());
+
+        return redirect()->route('frontend.page.index')->with('success', 'Reclamation created successfully.');
     }
 
     /**

@@ -44,7 +44,7 @@
                         <h2 class="text-white mb-4">About GestEvent</h2>
 
                         <p class="text-white">GestEvent est un platforme de gestion d'événement qui vise à simplifier la
-                            planification et l'organisation d'événement professionnels.</p>
+                            planification et lorganisation d'événement professionnels.</p>
 
 
 
@@ -90,7 +90,7 @@
             <div class="row justify-content-center">
 
                 <div class="col-12 text-center">
-                    <h2 class="mb-4">Meet Artists</h1>
+                    <h2 class="mb-4">Nos emplacement de festival</h1>
                 </div>
 
                 <div class="col-lg-5 col-12">
@@ -198,7 +198,7 @@
             <div class="row">
 
                 <div class="col-12 text-center">
-                    <h2 class="text-white mb-4">Event Schedule</h1>
+                    <h2 class="text-white mb-4">GestEvent Programme</h1>
 
                         <div class="table-responsive">
                             <table class="schedule-table table table-dark">
@@ -305,40 +305,49 @@
                             <button class="nav-link active" id="nav-ContactForm-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-ContactForm" type="button" role="tab"
                                 aria-controls="nav-ContactForm" aria-selected="false">
-                                <h5>Contact Form</h5>
+                                <h5>Reclamation Form</h5>
                             </button>
 
-                            <button class="nav-link" id="nav-ContactMap-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-ContactMap" type="button" role="tab"
-                                aria-controls="nav-ContactMap" aria-selected="false">
-                                <h5>Google Maps</h5>
-                            </button>
                         </div>
                     </nav>
 
                     <div class="tab-content shadow-lg mt-5" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-ContactForm" role="tabpanel"
                             aria-labelledby="nav-ContactForm-tab">
-                            <form class="custom-form contact-form mb-5 mb-lg-0" action="#" method="post"
+                            <form class="custom-form contact-form mb-5 mb-lg-0" action="{{ route('frontend_reclamations.store') }}" method="POST"
                                 role="form">
+                                @csrf
                                 <div class="contact-form-body">
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-12">
-                                            <input type="text" name="contact-name" id="contact-name"
-                                                class="form-control" placeholder="Full name" required>
+                                            <input placeholder="Entrez une date" class="form-control {{ $errors->has('date') ? ' is-invalid' : '' }}" value="{{ old('date') }}" type="date" name="date" id="date" required>
+                                            @if ($errors->has('date'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $errors->first('date') }}
+                                                </span>
+                                            @endif
                                         </div>
 
                                         <div class="col-lg-6 col-md-6 col-12">
-                                            <input type="email" name="contact-email" id="contact-email"
-                                                pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address"
-                                                required>
+                                            <input class="form-control {{ $errors->has('description') ? ' is-invalid' : '' }}"
+                                            value="{{ old('description') }}" type="text" name="description" id="description" required>
+                                        @if ($errors->has('description'))
+                                            <span class="invalid-feedback" role="alert">
+                                                {{ $errors->first('description') }}
+                                            </span>
+                                        @endif
                                         </div>
                                     </div>
 
-                                    <input type="text" name="contact-company" id="contact-company"
-                                        class="form-control" placeholder="Company" required>
+                                    <input placeholder="vôtre message" class="form-control {{ $errors->has('message') ? ' is-invalid' : '' }}"
+                                    value="{{ old('message') }}" type="text" name="message" id="message" required>
+                                        @if ($errors->has('message'))
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $errors->first('message') }}
+                                    </span>
+                                        @endif
 
-                                    <textarea name="contact-message" rows="3" class="form-control" id="contact-message" placeholder="Message"></textarea>
+
 
                                     <div class="col-lg-4 col-md-10 col-8 mx-auto">
                                         <button type="submit" class="form-control">Send message</button>
@@ -362,70 +371,5 @@
         </div>
     </section>
 
-
-    {{-- <button id="commencerButton">Commencer</button>
-
-                <div id="cadreQuestions" class="cadre-questions">
-                  <h2>Questions</h2>
-
-                  <label for="prestataire">
-                    <input type="radio" name="choix" id="prestataire"> Êtes-vous un prestataire ?
-                  </label>
-
-                  <label for="organisateur">
-                    <input type="radio" name="choix" id="organisateur"> Êtes-vous un organisateur ?
-                  </label>
-
-                  <button id="submitQuestions">Soumettre</button>
-                </div>
-
-                <script>
-                  var commencerButton = document.getElementById("commencerButton");
-                  var cadreQuestions = document.getElementById("cadreQuestions");
-                  var submitButton = document.getElementById("submitQuestions");
-
-                  commencerButton.addEventListener("click", function() {
-                    commencerButton.style.display = "none";
-                    cadreQuestions.classList.add("active");
-                    startTimer();
-                  });
-
-                  submitButton.addEventListener("click", function() {
-                    var prestataire = document.getElementById("prestataire").checked;
-                    var organisateur = document.getElementById("organisateur").checked;
-
-                    if (!prestataire && !organisateur) {
-                      // Aucun choix n'a été fait, rediriger vers la page client
-                      window.location.href = '/aucun-choix';
-                    } else if (prestataire) {
-                      // Rediriger vers la page du prestataire
-                      window.location.href = '/prestataire';
-                    } else if (organisateur) {
-                      // Rediriger vers la page de l'organisateur
-                      window.location.href = '/organisateur';
-                    }
-                  });
-
-                  function startTimer() {
-                    var secondsRemaining = 15;
-
-                    var countdown = setInterval(function() {
-                      secondsRemaining--;
-
-                      if (secondsRemaining <= 0) {
-                        clearInterval(countdown);
-                        resetForm();
-                      }
-                    }, 1000);
-                  }
-
-                  function resetForm() {
-                    commencerButton.style.display = "block";
-                    cadreQuestions.classList.remove("active");
-                    document.getElementById("prestataire").checked = false;
-                    document.getElementById("organisateur").checked = false;
-                  }
-                </script> --}}
-
-    </main>
+ </main>
 @endsection

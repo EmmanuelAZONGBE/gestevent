@@ -16,7 +16,8 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('description');
-            $table->string('picture')->nullable();
+            $table->enum('etat',['accepté','rejeté','en attente'])->default('en attente');
+            $table->string('photo')->nullable();
             $table->string('adresse');
             $table->timestamps();
         });

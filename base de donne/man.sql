@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 19 mai 2023 à 15:31
--- Version du serveur : 10.4.25-MariaDB
--- Version de PHP : 8.1.10
+-- Généré le : dim. 21 mai 2023 à 10:19
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,13 +34,6 @@ CREATE TABLE `clients` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `clients`
---
-
-INSERT INTO `clients` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, '2023-05-18 16:38:08', '2023-05-18 16:38:08');
-
 -- --------------------------------------------------------
 
 --
@@ -49,11 +42,12 @@ INSERT INTO `clients` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `evenements` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nom` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nom` varchar(255) DEFAULT NULL,
   `heure` time NOT NULL,
   `date` date NOT NULL,
   `nombre_participant` int(11) NOT NULL,
   `facture` double(8,2) NOT NULL,
+  `etat` enum('accepté','rejeté','en attente') NOT NULL DEFAULT 'en attente',
   `organisateur_id` bigint(20) UNSIGNED NOT NULL,
   `type_evenement_id` bigint(20) UNSIGNED NOT NULL,
   `lieu_id` bigint(20) UNSIGNED NOT NULL,
@@ -69,11 +63,11 @@ CREATE TABLE `evenements` (
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -85,10 +79,11 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `lieus` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `etat` enum('accepté','rejeté','en attente') NOT NULL DEFAULT 'en attente',
+  `photo` varchar(255) DEFAULT NULL,
+  `adresse` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -101,7 +96,7 @@ CREATE TABLE `lieus` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -110,25 +105,24 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(35, '2023_05_14_130925_sessions', 1),
-(162, '2014_10_12_000000_create_users_table', 2),
-(163, '2014_10_12_100000_create_password_reset_tokens_table', 2),
-(164, '2014_10_12_200000_add_two_factor_columns_to_users_table', 2),
-(165, '2019_08_19_000000_create_failed_jobs_table', 2),
-(166, '2019_12_14_000001_create_personal_access_tokens_table', 2),
-(167, '2023_04_18_093126_create_sessions_table', 2),
-(168, '2023_05_03_123134_create_organisateurs_table', 2),
-(169, '2023_05_03_123319_create_clients_table', 2),
-(170, '2023_05_03_123341_create_type_evenements_table', 2),
-(171, '2023_05_03_123401_create_prestataires_table', 2),
-(172, '2023_05_03_123415_create_lieus_table', 2),
-(173, '2023_05_03_123523_create_services_table', 2),
-(174, '2023_05_03_123547_create_evenements_table', 2),
-(175, '2023_05_03_123708_create_reclamations_table', 2),
-(176, '2023_05_03_123730_create__prestataire__service_table', 2),
-(177, '2023_05_03_123750_create__evenement__service_table', 2),
-(178, '2023_05_09_194945_create_notifications_table', 2),
-(179, '2023_05_09_214638_create_profiles_tables', 2);
+(37, '2014_10_12_000000_create_users_table', 1),
+(38, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(39, '2014_10_12_200000_add_two_factor_columns_to_users_table', 1),
+(40, '2019_08_19_000000_create_failed_jobs_table', 1),
+(41, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(42, '2023_04_18_093126_create_sessions_table', 1),
+(43, '2023_05_03_123134_create_organisateurs_table', 1),
+(44, '2023_05_03_123319_create_clients_table', 1),
+(45, '2023_05_03_123341_create_type_evenements_table', 1),
+(46, '2023_05_03_123401_create_prestataires_table', 1),
+(47, '2023_05_03_123415_create_lieus_table', 1),
+(48, '2023_05_03_123523_create_services_table', 1),
+(49, '2023_05_03_123547_create_evenements_table', 1),
+(50, '2023_05_03_123708_create_reclamations_table', 1),
+(51, '2023_05_03_123730_create__prestataire__service_table', 1),
+(52, '2023_05_03_123750_create__evenement__service_table', 1),
+(53, '2023_05_09_194945_create_notifications_table', 1),
+(54, '2023_05_09_214638_create_profiles_tables', 1);
 
 -- --------------------------------------------------------
 
@@ -137,11 +131,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `notifications` (
-  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notifiable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` char(36) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `notifiable_type` varchar(255) NOT NULL,
   `notifiable_id` bigint(20) UNSIGNED NOT NULL,
-  `data` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `data` text NOT NULL,
   `read_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -156,21 +150,14 @@ CREATE TABLE `notifications` (
 CREATE TABLE `organisateurs` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `disponible` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `compagnie` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `adresse_compagnie` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type_evenement_organiser` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `disponible` varchar(255) DEFAULT NULL,
+  `compagnie` varchar(255) NOT NULL,
+  `adresse_compagnie` varchar(255) NOT NULL,
+  `type_evenement_organiser` varchar(255) NOT NULL,
   `experience` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `organisateurs`
---
-
-INSERT INTO `organisateurs` (`id`, `user_id`, `disponible`, `compagnie`, `adresse_compagnie`, `type_evenement_organiser`, `experience`, `created_at`, `updated_at`) VALUES
-(1, 3, 'non', 'ZRRD', 'Abomey', 'mariage', 44, '2023-05-19 03:25:13', '2023-05-19 03:25:13');
 
 -- --------------------------------------------------------
 
@@ -179,8 +166,8 @@ INSERT INTO `organisateurs` (`id`, `user_id`, `disponible`, `compagnie`, `adress
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -192,11 +179,11 @@ CREATE TABLE `password_reset_tokens` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -211,18 +198,11 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `prestataires` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `societer` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `societer` varchar(255) DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `prestataires`
---
-
-INSERT INTO `prestataires` (`id`, `societer`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, NULL, 2, '2023-05-19 03:23:59', '2023-05-19 03:23:59');
 
 -- --------------------------------------------------------
 
@@ -232,12 +212,12 @@ INSERT INTO `prestataires` (`id`, `societer`, `user_id`, `created_at`, `updated_
 
 CREATE TABLE `profiles` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `picture` varchar(255) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `adresse` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -250,9 +230,10 @@ CREATE TABLE `profiles` (
 
 CREATE TABLE `reclamations` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `message` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date` varchar(255) NOT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `etat` enum('accepté','rejeté','en attente') NOT NULL DEFAULT 'en attente',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -265,8 +246,9 @@ CREATE TABLE `reclamations` (
 
 CREATE TABLE `services` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nom_service` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `descriptions` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom_service` varchar(255) DEFAULT NULL,
+  `descriptions` text DEFAULT NULL,
+  `etat` enum('accepté','rejeté','en attente') NOT NULL DEFAULT 'en attente',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -278,22 +260,13 @@ CREATE TABLE `services` (
 --
 
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` longtext NOT NULL,
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `sessions`
---
-
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('GDVI9b44oLvO7mhv1KgLhxVbZ34eeE5P5bWb0vHH', 4, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiRW9KblE1S3lPcHZIT3MxblVhTjZFMlh4ajBuNFFaY3htQXhqaU02WiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjQ7fQ==', 1684479814),
-('VUcKLRbTqpTHt3p3ArzXL4mSyNdT6WH1kMBn8Mkn', 4, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVWFvRG9OcTB4YVlyUHdVWWxnWlIyWnVjVVYwelFDWGFBZnpJbFdZdiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9yZWRpcmVjdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjQ7fQ==', 1684474346),
-('vZHzfZmrsmuIC0pdeGwjNzkmOG9bvmKTszRfbrQB', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicTR3VXEyWUViajZVTlJkbmM4dFBvT0hKUGRsZ1ZDUm9BOHcyM1NCTSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1684436799);
 
 -- --------------------------------------------------------
 
@@ -303,7 +276,8 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 
 CREATE TABLE `type_evenements` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `libelle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `libelle` varchar(255) DEFAULT NULL,
+  `etat` enum('accepté','rejeté','en attente') NOT NULL DEFAULT 'en attente',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -316,33 +290,24 @@ CREATE TABLE `type_evenements` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `statut` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `adresse` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `usertype` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `last_name` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `statut` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `adresse` varchar(255) DEFAULT NULL,
+  `usertype` varchar(255) DEFAULT '0',
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `two_factor_secret` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `two_factor_secret` text DEFAULT NULL,
+  `two_factor_recovery_codes` text DEFAULT NULL,
   `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `current_team_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `profile_photo_path` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `profile_photo_path` varchar(2048) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `users`
---
-
-INSERT INTO `users` (`id`, `last_name`, `first_name`, `statut`, `email`, `adresse`, `usertype`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'client', 'cleie', NULL, 'client@gmail.com', 'Abomey', '0', NULL, '$2y$10$KKv0.7QRzur6ZeaTuZ13V.l/MI/3mzSDxwtdeQtir3UYfzqRHfDg.', NULL, NULL, NULL, NULL, NULL, NULL, '2023-05-18 16:38:08', '2023-05-18 16:38:08'),
-(2, 'prestataire', 'prestataire', NULL, 'prestataire@gmail.com', 'Abomey', '0', NULL, '$2y$10$C6im61l0wlOkEslqELF2OO8dQs8zXdO1Xwk5DVxKFR0TcKb6k/E2u', NULL, NULL, NULL, NULL, NULL, NULL, '2023-05-19 03:23:59', '2023-05-19 03:23:59'),
-(3, 'organisateur', 'organisateur', NULL, 'organisateur@gmail.com', 'Abomey', '0', NULL, '$2y$10$SSGi73r8HY9ZjYf7WLE8W.9MLcAeRz0.xYQRwAaa1kN1WZv//yjWG', NULL, NULL, NULL, NULL, NULL, NULL, '2023-05-19 03:25:13', '2023-05-19 03:25:13'),
-(4, 'admin', 'admin', NULL, 'administrateur@gmail.com', 'Abomey', '1', NULL, '$2y$10$D3EeP4r1Utr.1jPlj5VRfeLVC2EaDWGgHPUeYjJOzDDhFelceaOiS', NULL, NULL, NULL, NULL, NULL, NULL, '2023-05-19 03:26:13', '2023-05-19 03:26:13');
 
 -- --------------------------------------------------------
 
@@ -515,7 +480,7 @@ ALTER TABLE `_prestataire__service`
 -- AUTO_INCREMENT pour la table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `evenements`
@@ -539,13 +504,13 @@ ALTER TABLE `lieus`
 -- AUTO_INCREMENT pour la table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT pour la table `organisateurs`
 --
 ALTER TABLE `organisateurs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
@@ -557,7 +522,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT pour la table `prestataires`
 --
 ALTER TABLE `prestataires`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `profiles`
@@ -587,7 +552,7 @@ ALTER TABLE `type_evenements`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `_evenement__service`

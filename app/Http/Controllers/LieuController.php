@@ -32,7 +32,7 @@ class LieuController extends Controller
             $request->validate([
                 'nom' => 'required',
                 'description' => 'nullable|string',
-                'picture' => 'required',
+                'photo'=>'image|mimes:png,jpg,jpeg|max:2048',
                 'adresse' => 'required',
             ]);
 
@@ -60,7 +60,7 @@ class LieuController extends Controller
             $validatedData = $request->validate([
                 'nom' => 'required',
                 'description' => 'required',
-                'picture' => 'picture',
+                'photo'=>'image|mimes:png,jpg,jpeg|max:2048',
                 'adresse' => 'required',
             ]);
 
@@ -68,8 +68,8 @@ class LieuController extends Controller
             $lieux->description = $validatedData['description'];
 
             if ($request->hasFile('uploads')) {
-                $file = $request->file('uploads')->store('picture');
-                $lieux->picture = $file;
+                $file = $request->file('uploads')->store('photo');
+                $lieux->photo = $file;
             }
 
             $lieux->adresse = $validatedData['adresse'];

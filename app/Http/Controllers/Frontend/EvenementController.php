@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Lieu;
-use App\Models\TypeEvenement;
 use App\Models\users;
+use App\Models\Evenement;
 use Illuminate\Http\Request;
+use App\Models\TypeEvenement;
+use App\Http\Controllers\Controller;
 
 class EvenementController extends Controller
 {
@@ -46,7 +47,7 @@ class EvenementController extends Controller
     public function store(Request $request)
     {
         //
-        if (clientPermission() == true) {
+        if (clientPermission() == true || auth()->user()->usertype == 1 ) {
             $request->validate([
                 'nom' => 'required',
                 'heure' => 'required',
@@ -73,9 +74,9 @@ class EvenementController extends Controller
 
             $evenement->save();
 
-            return redirect()->route('evenement.index')->with('success', 'L\'événement a été créé');
+            return redirect()->route('frontend.page.index')->with('success', 'L\'événement a été créé');
         } else {
-            return view('admin.page.index');
+            return view('frontend.page.index');
         }
     }
 

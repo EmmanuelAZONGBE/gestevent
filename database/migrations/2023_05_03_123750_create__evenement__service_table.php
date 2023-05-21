@@ -19,12 +19,12 @@ return new class extends Migration
             $table->integer('quantite')->nullable();
             $table->integer('note')->nullable();
             $table->integer('prix')->nullable();
-            
+            $table->foreignIdFor(Evenement::class)->constrained();
+            $table->foreignIdFor(Service::class)->constrained();
+            $table->foreignIdFor(Reclamation::class)->constrained();
+            $table->timestamps();
 
-                $table->foreignIdFor(Evenement::class)->constrained();
-                $table->foreignIdFor(Service::class)->constrained();
-                $table->foreignIdFor(Reclamation::class)->constrained();
-                $table->timestamps();
+
         });
     }
 

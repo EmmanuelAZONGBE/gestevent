@@ -60,6 +60,18 @@
                                     @endif
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="photo">Photo :</label>
+                                    <input accept="image/png, image/jpeg, image/jpg," class="form-control {{ $errors->has('photo') ? ' is-invalid' : '' }}"
+                                        value="{{ old('photo') }}" type="file" name="photo" id="photo"
+                                        value="{{ old('photo') }}" required>
+                                    @if ($errors->has('photo'))
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $errors->first('photo') }}
+                                        </span>
+                                    @endif
+                                </div>
+
 
                                 <div class="form-group">
                                     <label for="email">Email</label>
