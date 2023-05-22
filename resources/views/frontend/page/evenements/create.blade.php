@@ -10,8 +10,8 @@
 
             <div class="col-lg-6 col-10 mx-auto">
                 <form class="custom-form ticket-form mb-5 mb-lg-0" action="{{ route('evenement.store') }}" method="post" role="form">
-                    <h2 class="text-center mb-4">Get started here</h2>
                     @csrf
+                    <h2 class="text-center mb-4">Get started here</h2>
                     <div class="ticket-form-body">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">

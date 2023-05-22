@@ -66,8 +66,16 @@
                             <div class="form-group">
                                 <label for="type_evenement_id">Type d'événement:</label>
                                 <select name="type_evenement_id" id="type_evenement_id" class="form-control" required>
-                                    @foreach ($typeevenement as $typeevenements)
-                                        <option value="{{ $typeevenements->id }}">{{ $evenements->libelle->id === $lieu->id ? 'selected' : '' }}{{ $typeevenement->libelle }}</option>
+                                    @foreach ($typeevenements as $typeevenement)
+                                        <option value="{{ $typeevenements->id }}">{{ $evenements->libelle->id === $typeevenements->id ? 'selected' : '' }}{{ $typeevenement->libelle }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="organisateur_id">Organisateur:</label>
+                                <select name="organisateur_id" id="organisateur_id" class="form-control" required>
+                                    @foreach ($organisateurs as $organisateur)
+                                        <option value="{{ $organisateur->id }}">{{ $evenement->last_name->id === $organisateur->id }}{{ $evenement->first_name->id === $organisateur->id }}{{ $organisateur->last_name }}{{ $organisateur->first_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -75,7 +83,7 @@
                             <div class="col-md-12">
                                 <select name="lieu_id" id="lieu_id" class="form-control" name="lieu_id" required>
                                     @foreach ($lieux as $lieu)
-                                        <option value="{{ $lieu->id }}">{{ $evenement->libelle->id === $lieu->id ? 'selected' : '' }}{{ $lieu->libelle }}</option>
+                                        <option value="{{ $lieu->id }}">{{ $evenement->libelle->id === $lieu->id ? 'selected' : '' }}{{ $lieu->nom}}</option>
                                     @endforeach
                                 </select>
                                 <label for="lieu_id">Lieu :</label>

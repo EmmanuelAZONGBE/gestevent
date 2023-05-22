@@ -49,6 +49,7 @@ class EvenementController extends Controller
     public function store(Request $request)
     {
         //
+        //  dd($request);
         if (clientPermission() == true ) {
             $request->validate([
                 'nom' => 'required',

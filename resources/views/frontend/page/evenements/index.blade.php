@@ -24,7 +24,7 @@
                             <th>Date</th>
                             <th>Statut</th>
                             <th>Nombre de participant</th>
-                            <th>Facture</th>
+                            
                             <th>Organisateur</th>
                             <th>Type d'événement</th>
                             <th>Lieu</th>
@@ -37,7 +37,7 @@
                                 <td>{{ $evenement->nom }}</td>
                                 <td>{{ $evenement->heure }}</td>
                                 <td>{{ $evenement->date }}</td>
-                                <td>{{ $evenement->statut }}</td>
+                               
                                 <td>{{ $evenement->nombre_participant }}</td>
                                 <td>{{ $evenement->facture }}</td>
                                 <td>{{ $evenement->organisateur->first_name }} {{ $evenement->organisateur->last_name }}</td>

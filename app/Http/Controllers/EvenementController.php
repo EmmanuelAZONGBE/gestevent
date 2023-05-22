@@ -55,13 +55,13 @@ class EvenementController extends Controller
     public function store(Request $request)
     {
         //
+        //  dd($request);
         if (clientPermission() == true) {
             $request->validate([
                 'nom' => 'required',
                 'heure' => 'required',
                 'date' => 'required',
                 'nombre_participant' => 'required',
-                'facture' => 'required',
                 'organisateur_id' => 'required',
                 'type_evenement_id' => 'required',
                 'lieu_id' => 'required',
@@ -74,7 +74,7 @@ class EvenementController extends Controller
             $evenement->heure = $request->heure;
             $evenement->date = $request->date;
             $evenement->nombre_participant = $request->nombre_participant;
-            $evenement->facture = $request->facture;
+            
             $evenement->organisateur_id = $request->organisateur_id;
             $evenement->type_evenement_id = $request->type_evenement_id;
             $evenement->lieu_id = $request->lieu_id;
