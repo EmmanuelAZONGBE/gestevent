@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Notifications\DatabaseNotification;
-use Illuminate\Support\Facades\Notification;
+use App\Models\Lieu;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Notifications\DatabaseNotification;
 
 class HomeController extends Controller
 {
     //
     public function index()
-    {
-        return view('frontend.page.index');
+    { 
+        $lieux = Lieu::all();
+        return view('frontend.page.index',compact('lieux'));
     }
     public function redirect()
     {

@@ -92,102 +92,42 @@
                 <div class="col-12 text-center">
                     <h2 class="mb-4">Nos emplacement de festival</h1>
                 </div>
-
+                @foreach ($lieux as $lieu )
                 <div class="col-lg-5 col-12">
                     <div class="artists-thumb">
                         <div class="artists-image-wrap">
-                            <img src="{{ asset('storage/frontend/images/artists/joecalih-UmTZqmMvQcw-unsplash.jpg') }}"
-                                class="artists-image img-fluid">
+                            <img src="{{ asset('storage/'.$lieu->photo) }}"class="artists-image img-fluid">
                         </div>
-
+                        
                         <div class="artists-hover">
                             <p>
-                                <strong>Name:</strong>
-                                Madona
+                                <strong>Nom:</strong>
+                                {{ $lieu->nom }}
                             </p>
 
                             <p>
-                                <strong>Birthdate:</strong>
-                                August 16, 1958
+                                <strong>Prix :</strong>
+                                {{ $lieu->prix }}
                             </p>
 
                             <p>
-                                <strong>Music:</strong>
-                                Pop, R&amp;B
+                                <strong>Description:</strong>
+                                {{ $lieu->description }}
+                            </p>
+
+                            <p>
+                                <strong>Adresse:</strong>
+                                {{ $lieu->adresse }}
                             </p>
 
                             <hr>
 
-                            <p class="mb-0">
-                                <strong>Youtube Channel:</strong>
-                                <a href="#">Madona Official</a>
-                            </p>
+                           
                         </div>
+                        
                     </div>
                 </div>
-
-                <div class="col-lg-5 col-12">
-                    <div class="artists-thumb">
-                        <div class="artists-image-wrap">
-                            <img src="{{ asset('storage/frontend/images/artists/abstral-official-bdlMO9z5yco-unsplash.jpg') }}"
-                                class="artists-image img-fluid">
-                        </div>
-
-                        <div class="artists-hover">
-                            <p>
-                                <strong>Name:</strong>
-                                Rihana
-                            </p>
-
-                            <p>
-                                <strong>Birthdate:</strong>
-                                Feb 20, 1988
-                            </p>
-
-                            <p>
-                                <strong>Music:</strong>
-                                Country
-                            </p>
-
-                            <hr>
-
-                            <p class="mb-0">
-                                <strong>Youtube Channel:</strong>
-                                <a href="#">Rihana Official</a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="artists-thumb">
-                        <img src="{{ asset('storage/frontend/images/artists/soundtrap-rAT6FJ6wltE-unsplash.jpg') }}"
-                            class="artists-image img-fluid">
-
-                        <div class="artists-hover">
-                            <p>
-                                <strong>Name:</strong>
-                                Bruno Bros
-                            </p>
-
-                            <p>
-                                <strong>Birthdate:</strong>
-                                October 8, 1985
-                            </p>
-
-                            <p>
-                                <strong>Music:</strong>
-                                Pop
-                            </p>
-
-                            <hr>
-
-                            <p class="mb-0">
-                                <strong>Youtube Channel:</strong>
-                                <a href="#">Bruno Official</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </section>
