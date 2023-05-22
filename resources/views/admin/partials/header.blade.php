@@ -112,7 +112,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{route('profile.show')}}">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('user_profile.index') }}">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>

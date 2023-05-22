@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Client;
-use App\Models\Organisateur;
 use App\Models\Prestataire;
+
+use App\Models\Organisateur;
 use App\Models\User;
-use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -27,16 +28,16 @@ class UserController extends Controller
     ]);
 
     $user = User::create([
-        'nom' => $request->last_name,
-        'prenom' =>$request->first_name,
+        'last_name' => $request->last_name,
+        'first_name' =>$request->first_name,
         'photo'=>$this->uploads($request, 'photo'),
         'email' => $request->email,
-        'telephone' => $request->phone,
+        'phone' => $request->phone,
         'password' => Hash::make($request->password),
         'status' => $request->status
     ]);
 
-    
+
 
 
     if ($request['status'] == 'client') {

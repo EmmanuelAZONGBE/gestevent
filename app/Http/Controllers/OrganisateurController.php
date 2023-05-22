@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\users;
 use App\Models\Organisateur;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,9 +15,9 @@ class OrganisateurController extends Controller
      */
     public function index()
     {
-        if (organisateurPermission() == false || auth()->user()->usertype == 1) {
+        if (auth()->user()->usertype == 1) {
 
-            $organisateurs = users::join('organisateurs', 'organisateurs.user_id', '=', 'users.id')
+            $organisateurs = User::join('organisateurs', 'organisateurs.user_id', '=', 'users.id')
                 ->get();
             return view('admin.page.organisateur.index', compact('organisateurs'));
         } else {
@@ -45,12 +45,14 @@ class OrganisateurController extends Controller
     public function store(Request $request)
     {
 
-        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
-            $users = users::create([
+        if (organisateurPermission() == true ) {
+            $users = User::create([
                 'last_name' => $request->last_name,
                 'first_name' => $request->first_name,
                 'adresse' => $request->adresse,
                 'email' => $request->email,
+                'photo' => $request->photo,
+                'phone' => $request->phone,
                 'password' => $request->password,
                 'disponible' => $request->disponible,
                 'compagnie' => $request->compagnie,
@@ -87,17 +89,17 @@ class OrganisateurController extends Controller
             'password' => 'required:8',
             'password_confirmation' => 'required:8|same:password'
         ]);
-    
+
         $user = User::create([
-            'nom' => $request->last_name,
-            'prenom' =>$request->first_name,
+            'last_name' => $request->last_name,
+            'first_name' =>$request->first_name,
             'photo'=>$this->uploads($request, 'photo'),
             'email' => $request->email,
-            'telephone' => $request->phone,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'status' => $request->status
         ]);
-        
+
         Organisateur::create([
             'user_id' => $user->id,
             'disponible' => $request->disponible,
@@ -117,7 +119,7 @@ class OrganisateurController extends Controller
     public function show(Organisateur $organisateur)
     {
         if (organisateurPermission() == true || auth()->user()->usertype == 1) {
-            return view('organisateur.show', compact('organisateur'));
+            return view('admin.page.organisateur.show', compact('organisateur'));
         } else {
             return view('frontend.page.index');
         }
@@ -129,7 +131,7 @@ class OrganisateurController extends Controller
     public function edit(Organisateur $organisateur)
     {
         //
-        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+        if (organisateurPermission() == true ) {
             return view('admin.page.organisateur.edit', compact('organisateur'));
         } else {
             return view('frontend.page.index');
@@ -141,7 +143,7 @@ class OrganisateurController extends Controller
      */
     public function update(Request $request, Organisateur $organisateur)
     {
-        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+        if (organisateurPermission() == true ) {
             $request->validate([
                 'last_name' => 'required|string',
                 'first_name' => 'required|string',

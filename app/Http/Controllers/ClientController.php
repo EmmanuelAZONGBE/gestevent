@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
-use App\Models\users;
+use App\Models\User;
 
 
 use Illuminate\Http\Request;
@@ -57,18 +57,18 @@ class ClientController extends Controller
                 'last_name' => 'required|string',
                 'first_name' => 'required|string',
                 'photo'=>'image|mimes:png,jpg,jpeg|max:2048',
-                'email' => 'required|string',
+                'email' =>'required|string',
+                'phone' =>'required', 'string', 'max:40',
                 'adresse' => 'required|string',
-                'password' => 'required|string',
             ]);
 
-            $user = users::create([
+            $user = User::create([
                 'last_name' => $request->last_name,
                 'first_name' => $request->first_name,
                 'photo' => $request->photo,
+                'phone' => $request->phone,
                 'adresse' => $request->adresse,
                 'email' => $request->email,
-                'password' => $request->password,
             ]);
 
             $client = Client::create([
@@ -85,10 +85,13 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($client)
+    public function show(Client $clients)
     {
-        if (clientPermission() == true || auth()->user()->usertype == 1) {
-            return view('admin.page.client.show', compact('client'));
+
+        if (clientPermission() == false || auth()->user()->usertype == 1) {
+            $clients = Client::select('clients.*', 'users.id')
+                ->join('users', 'clients.user_id', '=', 'users.id');
+            return view('admin.page.client.show', compact('clients'));
         } else {
             return abort(403);
         }
@@ -110,15 +113,17 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Client $client)
     {
         if (clientPermission() == true || auth()->user()->usertype == 1) {
-            $client = Client::find($id);
+            $client = Client::find($client);
             $request->validate([
                 'last_name' => 'required|string',
                 'first_name' => 'required|string',
                 'email' => 'required|string',
+                'photo'=>'image|mimes:png,jpg,jpeg|max:2048',
                 'adresse' => 'required|string',
+                'phone' => 'required', 'string', 'max:40',
 
             ]);
 
@@ -127,6 +132,8 @@ class ClientController extends Controller
                 'first_name' => $request->first_name,
                 'adresse' => $request->adresse,
                 'email' => $request->email,
+                'phone' => $request->phone,
+                'photo' => $request->photo,
 
             ]);
 

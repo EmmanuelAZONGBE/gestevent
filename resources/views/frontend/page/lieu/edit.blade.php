@@ -29,19 +29,12 @@
                             <label class="form-group" for="description">Description</label>
                             <textarea name="description" id="description" class="form-control">{{ $lieux->description }}</textarea>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-floating">
-                                <input type="number" name="prix" id="prix" class="form-control"
-                                value="{{ $lieux->prix }}" >
-                                <label for="prix">Prix :</label>
-                            </div>
-                        </div
 
                         <div class="col-md-12">
                             <label class="form-group" for="photo">Photo :</label>
-                            <input type="file" name="photo" id="photo" class="form-control-file">
+                            <input type="file" name="uploads" id="uploads" class="form-control-file">
                             @if ($lieux->photo)
-                                <img src="{{ asset('/storage/' . $lieux->photo) }}" alt="Image du lieu" style="width: 100px;">
+                                <img src="{{ asset('storage/' . $lieux->photo) }}" alt="Image du lieu" style="width: 100px;">
                             @else
                                 Aucune image
                             @endif

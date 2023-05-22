@@ -28,15 +28,24 @@ class LieuController extends Controller
 
     public function store(Request $request)
     {
-        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+        if (organisateurPermission() == true ) {
             $request->validate([
                 'nom' => 'required',
+                'prix' => 'required',
                 'description' => 'nullable|string',
                 'photo'=>'image|mimes:png,jpg,jpeg|max:2048',
                 'adresse' => 'required',
             ]);
 
-            Lieu::create($request->all());
+            $photo = $request->photo->store('lieu');
+
+            Lieu::create([
+                'nom'=> $request->nom,
+                'prix'=> $request->prix,
+                'description' => $request->description,
+                'photo'=>$photo,
+                'adresse' => $request->adresse,
+            ]);
 
 
             return redirect()->route('lieu.index')->with('success', 'lieu created successfully.');
@@ -47,7 +56,7 @@ class LieuController extends Controller
 
     public function edit(Lieu $lieux)
     {
-        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+        if (organisateurPermission() == true ) {
             return view('admin.page.lieu.edit', compact('lieux'));
         }else{
             return view('admin.page.index');
@@ -56,23 +65,23 @@ class LieuController extends Controller
 
     public function update(Request $request, Lieu $lieux)
     {
-        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+        if (organisateurPermission() == true ) {
             $validatedData = $request->validate([
                 'nom' => 'required',
                 'description' => 'required',
+                'prix' => 'required',
                 'photo'=>'image|mimes:png,jpg,jpeg|max:2048',
                 'adresse' => 'required',
             ]);
 
             $lieux->nom = $validatedData['nom'];
+            $lieux->prix = $validatedData['prix'];
             $lieux->description = $validatedData['description'];
-
-            if ($request->hasFile('uploads')) {
-                $file = $request->file('uploads')->store('photo');
-                $lieux->photo = $file;
-            }
-
             $lieux->adresse = $validatedData['adresse'];
+            if($request->photo != null){
+                $photo = $request->photo->store('lieu');
+                $lieux->photo = $photo;    
+            }
             $lieux->save();
 
             return redirect()->route('lieu.index');

@@ -24,7 +24,7 @@
                                 <label for="last_name" class="form-label">Nom </label>
                                 <input class="form-control {{ $errors->has('last_name') ? ' is-invalid' : '' }}"
                                     value="{{ old('last_name') }}" type="text" name="last_name" id="last_name"
-                                    value="{{ old('last_name') }}" required>
+                                     required>
                                 @if ($errors->has('last_name'))
                                     <span class="invalid-feedback" role="alert">
                                         {{ $errors->first('last_name') }}
@@ -35,14 +35,14 @@
                                 <label for="first_name" class="form-label">Prenom</label>
                                 <input class="form-control {{ $errors->has('first_name') ? ' is-invalid' : '' }}"
                                     value="{{ old('first_name') }}" type="text" name="first_name" id="first_name"
-                                    value="{{ old('first_name') }}" required>
+                                     required>
                                 @if ($errors->has('first_name'))
                                     <span class="invalid-feedback" role="alert">
                                         {{ $errors->first('first_name') }}
                                     </span>
                                 @endif
                             </div>
-                          
+
                             <div class="col-6">
                                 <label for="email" class="form-label">Email</label>
                                 <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" type="email"

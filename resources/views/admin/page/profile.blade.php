@@ -2,11 +2,11 @@
 
 @section ('content')
 <div class="pagetitle">
-    <h1>Profil de l'utilisateur</h1>
+    <h1>Profil de l utilisateur</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
-        <li class="breadcrumb-item active">Profil de l'utilisateur</li>
+        <li class="breadcrumb-item active">Profil de l utilisateur</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -19,12 +19,12 @@
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
             <img src="{{ Storage::url($user->photo) }}" alt="Profile" class="rounded-circle ">
-            <h2>{{ $user->prenom }} {{ $user->nom }} </h2>
+            <h2>{{ $user->first_name }} {{ $user->last_name }} </h2>
             <div class="social-links mt-2">
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              <a href="www.twitter.com" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="www.facebook.com" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="www.instagram.com" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="www.linkedin.com" class="linkedin"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
         </div>
@@ -48,11 +48,11 @@
 
               @if ($user->organisateur)
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#organisateur-edit">Editer l'organisateur</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#organisateur-edit">Editer l organisateur</button>
                 </li>
               @endif
 
-              
+
               <li class="nav-item">
                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Changer le mot de passe</button>
               </li>
@@ -61,22 +61,22 @@
             <div class="tab-content pt-2">
 
               <div class="tab-pane fade show active profile-overview" id="profile-overview">
-               
+
                 <h5 class="card-title">Profil Detail</h5>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label ">Nom </div>
-                  <div class="col-lg-9 col-md-8"> {{ $user->nom }}</div>
+                  <div class="col-lg-9 col-md-8"> {{ $user->last_name }}</div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Prenom(s)</div>
-                    <div class="col-lg-9 col-md-8">{{ $user->prenom }}</div>
+                    <div class="col-lg-9 col-md-8">{{ $user->first_name }}</div>
                   </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Phone</div>
-                  <div class="col-lg-9 col-md-8">{{ $user->telephone }}</div>
+                  <div class="col-lg-9 col-md-8">{{ $user->phone }}</div>
                 </div>
 
                 <div class="row">
@@ -91,8 +91,8 @@
                 <!-- Profile Edit Form -->
                 <form action="{{ route('user_profile.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                 
-                
+
+
                     <div class="row mb-3">
                         <label for="photo" class="col-md-4 col-lg-3 col-form-label">Photo de profil</label>
                         <div class="col-md-8 col-lg-9">
@@ -107,7 +107,7 @@
                   <div class="row mb-3">
                     <label for="last_name" class="col-md-4 col-lg-3 col-form-label">Nom</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="last_name" type="text" class="{{ $errors->has('last_name') ? ' is-invalid' : '' }}  form-control" id="last_name" value="{{ $user->nom }}">
+                      <input name="last_name" type="text" class="{{ $errors->has('last_name') ? ' is-invalid' : '' }}  form-control" id="last_name" value="{{ $user->last_name}}">
                       @if ($errors->has('last_name'))
                           <span class="invalid-feedback" role="alert">
                               {{ $errors->first('last_name') }}
@@ -118,7 +118,7 @@
                   <div class="row mb-3">
                     <label for="first_name" class="col-md-4 col-lg-3 col-form-label">Prenoms</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="first_name" type="text" class="{{ $errors->has('first_name') ? ' is-invalid' : '' }}  form-control" id="first_name" value="{{ $user->prenom }}">
+                      <input name="first_name" type="text" class="{{ $errors->has('first_name') ? ' is-invalid' : '' }}  form-control" id="first_name" value="{{ $user->first_name }}">
                       @if ($errors->has('first_name'))
                           <span class="invalid-feedback" role="alert">
                               {{ $errors->first('first_name') }}
@@ -130,7 +130,7 @@
                   <div class="row mb-3">
                     <label for="phone" class="col-md-4 col-lg-3 col-form-label">Téléphone</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="phone" type="text" class="{{ $errors->has('phone') ? ' is-invalid' : '' }} form-control" id="phone" value="{{ $user->telephone}}">
+                      <input name="phone" type="text" class="{{ $errors->has('phone') ? ' is-invalid' : '' }} form-control" id="phone" value="{{ $user->phone}}">
                       @if ($errors->has('phone'))
                           <span class="invalid-feedback" role="alert">
                               {{ $errors->first('phone') }}
@@ -164,9 +164,9 @@
                   <!-- Profile Edit Form -->
                   <form action="{{ route('user_profile.store')}}" method="POST" enctype="multipart/form-data">
                       @csrf
-                  
-                  
-                     
+
+
+
                     <div class="row mb-3">
                       <label for="disponible" class="col-md-4 col-lg-3 col-form-label">Disponible</label>
                       <div class="col-md-8 col-lg-9">
@@ -213,7 +213,7 @@
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="experience" class="col-md-4 col-lg-3 col-form-label">Nombre d'années d'expérience</label>
+                      <label for="experience" class="col-md-4 col-lg-3 col-form-label">Nombre d années d expérience</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="experience" type="number" class="{{ $errors->has('experience') ? ' is-invalid' : '' }} form-control" id="experience" value="{{ $user->organisateur->experience }}">
                         @if ($errors->has('experience'))
@@ -228,11 +228,12 @@
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Enregistrer les changement</button>
                     </div>
-                  </form><!-- End Profile Edit Form -->
+                  </form>
+                  <!-- End Profile Edit Form -->
 
                 </div>
               @endif
-    
+
               <div class="tab-pane fade pt-3" id="profile-change-password">
                 <!-- Change Password Form -->
                 <form action="{{ route('user_profile.store')}}" method="POST">

@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Modifier un type d'évènement</h5>
 
-                    <form action="{{ route('type.update', $typeevenement) }}" method="POST">
+                    <form action="{{ url('type.update', $typeevenement) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div>

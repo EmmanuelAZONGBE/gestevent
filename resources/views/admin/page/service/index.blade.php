@@ -27,7 +27,7 @@
                     </thead>
                     <tbody>
                     <tbody>
-                        @forelse ($service as $service)
+                        @forelse ($services as $service)
                             <tr class="table-info">
                                 <td scope="row">{{ $service->id }}</td>
                                 <td> {{ $service->nom_service }} </td>

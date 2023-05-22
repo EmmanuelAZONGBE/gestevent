@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('lieus', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
+            $table->string('prix')->nullable();
             $table->string('description');
             $table->enum('etat',['accepté','rejeté','en attente'])->default('en attente');
             $table->string('photo')->nullable();

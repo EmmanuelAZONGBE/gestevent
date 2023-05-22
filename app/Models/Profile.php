@@ -11,10 +11,11 @@ class Profile extends Model
     protected $fillable = [
         'last_name',
         'first_name',
-        'picture',
+        'phone',
+        'photo',
         'email',
         'adresse',
         'password',
-        
+
     ];
 }

@@ -19,7 +19,7 @@ class User extends Authenticatable
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
-    use TwoFactorAuthenticatable;
+    use TwoFactorAuthenticatable;  
 
     /**
      * The attributes that are mass assignable.
@@ -27,29 +27,32 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nom',
-        'prenom',
-        'photo',
-        'telephone',
+        'last_name',
+        'first_name',
+        'adresse',
         'email',
+        'phone',
+        'photo',
         'password',
     ];
 
-    public function client()
+public function client()
 
-    {
-        return $this ->belongsTo(Client::class);
-    }
+{
+    return $this ->belongsTo(Client::class);
+}
 
-    public function organisateur()
-    {
-        return $this->hasOne(Organisateur::class);
-    }
+public function organisateur()
 
-    public function prestataire()
-    {
-        return $this->belongsTo(Prestataire::class);
-    }
+{
+    return $this ->belongsTo(Organisateur::class);
+}
+
+public function prestataire()
+
+{
+    return $this ->belongsTo(Prestataire::class);
+}
 
     /**
      * The attributes that should be hidden for serialization.
@@ -80,5 +83,5 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
-    
+
 }

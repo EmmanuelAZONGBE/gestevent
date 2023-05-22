@@ -19,7 +19,6 @@
                     <thead>
                         <tr>
                             <th scope="col"> Nom</th>
-
                             <th scope="col"> Compagnie </th>
                             <th scope="col"> Adresse de la compagnie</th>
                             <th scope="col"> Type evenement organiser </th>
@@ -37,7 +36,7 @@
                             <td> {{ $organisateur->experience }} </td>
                             <td>
 
-                                <a class="btn btn-info btn-sm btn-rounded " id="logincss" title="look"
+                                {{--  <a class="btn btn-info btn-sm btn-rounded " id="logincss" title="look"
                                     href="{{ route('organisateur.show', $organisateur->id) }}" data-bs-toggle="tooltip">
                                     <i class="bi bi-eye"></i>
                                      </a>
@@ -45,7 +44,7 @@
                                 <a class="btn btn-success btn-sm btn-rounded " title="update"
                                     href="{{ route('organisateur.edit', $organisateur->id) }}" data-bs-toggle="tooltip">
                                     <i class="bi bi-pencil"></i>
-                                </a>
+                                </a>  --}}
                                 <form action="{{ route('organisateur.destroy', $organisateur->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')

@@ -27,29 +27,22 @@
                                     <div class="form-floating">
                                         <input type="text" name="nom" id="nom" class="form-control"
                                             value="{{ old('nom') }}" required>
-                                        <label for="nom">Nom :</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-floating">
-                                        <input type="number" name="prix" id="prix" class="form-control"
-                                            value="{{ old('prix') }}" required>
-                                        <label for="prix">Prix :</label>
+                                        <label for="nom">Nom</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
                                         <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
-                                        <label for="description">Description :</label>
+                                        <label for="description">Description</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="photo" class="form-label">Photo :</label>
-                                    <input class="form-control {{ $errors->has('photo') ? ' is-invalid' : '' }}" type="file"
-                                        name="photo" id="photo" value="{{ old('photo') }}" required>
-                                    @if ($errors->has('photo'))
+                                    <label for="picture" class="form-label">Photo</label>
+                                    <input class="form-control {{ $errors->has('picture') ? ' is-invalid' : '' }}" type="file"
+                                        name="picture" id="picture" value="{{ old('picture') }}" required>
+                                    @if ($errors->has('picture'))
                                         <span class="invalid-feedb­ack" role="alert">
-                                            {{ $errors->first('photo') }}
+                                            {{ $errors->first('picture') }}
                                         </span>
                                     @endif
                                 </div>
@@ -57,7 +50,7 @@
                                     <div class="form-floating">
                                         <input type="text" name="adresse" id="adresse" class="form-control"
                                             value="{{ old('adresse') }}">
-                                        <label for="adresse">Adresse :</label>
+                                        <label for="adresse">Adresse</label>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Ajouter</button>

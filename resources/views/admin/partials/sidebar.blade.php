@@ -199,7 +199,7 @@
                   </a>
                   <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                       <li>
-                          @if (clientPermission() == false && organisateurPermission() == false && auth()->user()->usertype == 0)
+                          @if (clientPermission() == false && organisateurPermission() == false && auth()->user()->usertype == 0 && prestatairePermission() == false)
                               <a href="{{ route('evenement.create') }}">
                                   <i class="bi bi-circle"></i>
                                   <span>Ajouter un événement</span>
@@ -207,7 +207,7 @@
                           @endif
                       </li>
                       <li>
-                          @if (clientPermission() == true || organisateurPermission() == true || auth()->user()->usertype == 1)
+                          @if (clientPermission() == true || organisateurPermission() == true || auth()->user()->usertype == 1 || prestatairePermission() == true)
                               <a href="{{ route('evenement.index') }}">
                                   <i class="bi bi-circle"></i>
                                   <span>Liste des événements</span>
@@ -268,12 +268,12 @@
           <!-- End Profile Page Nav -->
 
 
-          <li class="nav-item">
+          {{--  <li class="nav-item">
               <a class="nav-link collapsed" href="pages-contact.html">
                   <i class="bi bi-envelope"></i>
                   <span>Contact</span>
               </a>
-          </li>
+          </li>  --}}
           <!-- End Contact Page Nav -->
 
       </ul>

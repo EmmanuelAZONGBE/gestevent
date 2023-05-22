@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\PrestataireController;
@@ -14,8 +15,7 @@ use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\OrganisateurController;
 use App\Http\Controllers\TypeEvenementController;
 use App\Http\Controllers\Frontend\EvenementController as FrontendEvenementController;
-use App\Http\Controllers\Frontend\ReclamationController as FrontendReclamationController;
-use App\Http\Controllers\ProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +37,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::resource('user_profile', ProfileController::class);
 
 route::get('/logout',[LoginController::class,'logout']);
 
@@ -66,8 +68,8 @@ Route::get('/client/index', [ClientController::class,'index'])->name('client.ind
 Route::get('/client/create', [ClientController::class,'create'])->name('client.create');
 Route::post('/client/store', [ClientController::class,'store'])->name('client.store');
 Route::get('/client/edit/{id}', [ClientController::class,'edit'])->name('client.edit');
-Route::put('update/{id}', [ClientController::class,'update'])->name('client.update');
-Route::get('client/{client}', [ClientController::class, 'show'])->name('client.show');
+Route::put('update/{client}', [ClientController::class,'update'])->name('client.update');
+Route::get('/client/show', [ClientController::class,'show'])->name('client.show');
 Route::delete('/client/destroy/{id}', [ClientController::class,'destroy'])->name('client.destroy');
 
 
@@ -159,4 +161,4 @@ Route::get('frontend_evenements/store', [FrontendEvenementController::class,'sto
 Route::get('/frontend_reclamations/create', [ReclamationController::class,'create'])->name('frontend_reclamations.create');
 Route::get('/frontend_reclamations/store', [ReclamationController::class,'store'])->name('frontend_reclamations.store');
 
-Route::resource('user_profile', ProfileController::class);
+

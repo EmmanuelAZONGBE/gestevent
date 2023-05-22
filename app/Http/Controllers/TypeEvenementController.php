@@ -9,13 +9,25 @@ class TypeEvenementController extends Controller
 {
     public function index()
     {
-        $typeevenements = TypeEvenement::all();
+        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+            $typeevenements = TypeEvenement::all();
         return view('admin.page.type.index', compact('typeevenements'));
+        }
+        else
+        {
+            return view('admin.page.index');
+        }
+
     }
 
     public function create()
     {
-        return view('admin.page.type.create');
+        if (organisateurPermission() == true || auth()->user()->usertype == 0) {
+            return view('admin.page.type.create');
+        }else{
+            return view('admin.page.index');
+        }
+
     }
 
     public function store(Request $request)

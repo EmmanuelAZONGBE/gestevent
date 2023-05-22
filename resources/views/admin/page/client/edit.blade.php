@@ -18,8 +18,8 @@
                         <div class="col-md-12">
                             <label for="last_name" class="form-label">Nom</label>
                             <input class="form-control {{ $errors->has('last_name') ? ' is-invalid' : '' }}"
-                                value="{{ old('last_name') ?? $client->last_name }}" type="text" name="last_name"
-                                id="last_name">
+                                 type="text" name="last_name"
+                                value="{{ $client->user->last_name }}" id="last_name">
                             @if ($errors->has('last_name'))
                                 <span class="invalid-feedback" role="alert">
                                     {{ $errors->first('last_name') }}
@@ -29,7 +29,7 @@
                         <div class="col-md-6">
                             <label for="first_name" class="form-label">Prenom</label>
                             <input class="form-control {{ $errors->has('first_name') ? ' is-invalid' : '' }}"
-                                value="{{ old('first_name') ?? $client->first_name }}" type="text" name="first_name"
+                                value="{{ $client->user->first_name }}" type="text" name="first_name"
                                 id="first_name">
                             @if ($errors->has('first_name'))
                                 <span class="invalid-feedback" role="alert">
@@ -41,7 +41,7 @@
                         <div class="col-12">
                             <label for="email" class="form-label">Email</label>
                             <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" type="email"
-                                name="email" id="email" value="{{ old('email') ?? $client->email }}">
+                                name="email" id="email" value="{{ $client->user->email }}">
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
                                     {{ $errors->first('email') }}
@@ -51,7 +51,7 @@
                         <div class="col-12">
                             <label for="adresse" class="form-label">Adresse</label>
                             <input class="form-control {{ $errors->has('adresse') ? ' is-invalid' : '' }}" type="adresse"
-                                name="adresse" id="adresse" value="{{ old('adresse') ?? $client->adresse }}">
+                                name="adresse" id="adresse" value="{{ $client->user->adresse }}">
                             @if ($errors->has('adresse'))
                                 <span class="invalid-feedback" role="alert">
                                     {{ $errors->first('adresse') }}

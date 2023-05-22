@@ -15,7 +15,7 @@
                     <div class="ticket-form-body">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
-                                <input type="text" name="nom" id="nom" class="form-control" placeholder="Inscrivez un nom" required>
+                                <input type="text" name="nom" id="nom" class="form-control" placeholder="Ecrivez le nom de l'evenement" required>
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-12">
@@ -32,13 +32,12 @@
                             </div>
                         </div>
 
-                        <input type="fille" name="facture" id="facture" class="form-control" placeholder="Télécharger le fichier" required>
 
                         <div class="form-group">
                             <label for="organisateur_id">Organisateur:</label>
                             <select name="organisateur_id" id="organisateur_id" class="form-control" required>
                                 @foreach ($organisateurs as $organisateur)
-                                <option value="{{ $organisateur->id }}">{{ $organisateur->last_name }}{{ $organisateur->first_name }}</option>
+                                <option value="{{ $organisateur->id }}">{{ $organisateur->last_name }} {{ $organisateur->first_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -56,7 +55,7 @@
                             <label for="lieu_id">Lieu:</label>
                             <select name="lieu_id" id="lieu_id" class="form-control" required>
                                 @foreach ($lieux as $lieu)
-                                <option value="{{ $lieu->id }}">{{ $lieu->libelle }}</option>
+                                <option value="{{ $lieu->id }}">{{ $lieu->nom }}</option>
                                 @endforeach
                             </select>
                         </div>

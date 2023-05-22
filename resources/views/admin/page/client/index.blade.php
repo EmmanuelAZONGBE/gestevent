@@ -29,15 +29,15 @@
                                 <td> {{ $client->user->last_name }} </td>
                                 <td> {{ $client->user->first_name }}</td>
                                 <td>
-                                    <a class="btn btn-success btn-sm btn-rounded " id="logincss" title="look"
+                                    {{--  <a class="btn btn-success btn-sm btn-rounded " id="logincss" title="look"
                                         href="{{ route('client.show', $client->id) }}" data-bs-toggle="tooltip">
                                         <i class="bi bi-eye"></i>
                                     </a>
                                     <a class="btn btn-success btn-sm btn-rounded " id="logincss" title="update "
                                         href="{{ route('client.edit', $client->id) }}" data-bs-toggle="tooltip">
                                         <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <form action="{{ url('/destroy', $client->id) }}"  method="POST">
+                                    </a>  --}}
+                                    <form action="{{ route('client.destroy', $client->id) }}"  method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button  class="btn btn-danger btn-sm btn-rounded " title="Remove"

@@ -9,11 +9,16 @@ class Lieu extends Model
 {
     use HasFactory;
     protected $fillable = [
-            'status',
-             'nom',
+        'nom',
+        'prix',
         'description',
-        'picture',
-        'adresse'
+        'etat',
+        'photo',
+        'adresse',
+    ];
+
+    protected $casts = [
+        'etat' => 'string',
     ];
 
 

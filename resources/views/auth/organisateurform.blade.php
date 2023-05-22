@@ -43,7 +43,7 @@
                                     @endif
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <label for="photo">Photo :</label>
                                     <input accept="image/png, image/jpeg, image/jpg," class="form-control {{ $errors->has('photo') ? ' is-invalid' : '' }}"
                                         value="{{ old('photo') }}" type="file" name="photo" id="photo"
@@ -55,13 +55,24 @@
                                     @endif
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <label for="email" class="form-label">Email</label>
                                     <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
                                         type="email" name="email" id="email" value="{{ old('email') }}" required>
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
                                             {{ $errors->first('email') }}
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="adresse" class="form-label">Adresse</label>
+                                    <input class="form-control {{ $errors->has('adresse') ? ' is-invalid' : '' }}"
+                                        type="adresse" name="adresse" id="adresse" value="{{ old('adresse') }}" required>
+                                    @if ($errors->has('adresse'))
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $errors->first('adresse') }}
                                         </span>
                                     @endif
                                 </div>
@@ -100,6 +111,7 @@
                                         </span>
                                     @endif
                                 </div>
+
                                 <div class="col-md-6">
                                     <label for="adresse_compagnie" class="form-label">Adresse de la compagnie </label>
                                     <input

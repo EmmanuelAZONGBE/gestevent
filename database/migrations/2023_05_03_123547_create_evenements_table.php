@@ -21,7 +21,6 @@ return new class extends Migration
             $table->time('heure');
             $table->date('date');
             $table->integer('nombre_participant');
-            $table->float('facture');
             $table->enum('etat',['accepté','rejeté','en attente'])->default('en attente');
 
              // Clé étrangère pour la table organisateur

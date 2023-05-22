@@ -40,10 +40,7 @@
                             value="{{ $prestataire->email }}">
 
                     </div>
-                    <div class="col-md-6">
-                        <label for="societer" class="form-label">Sociéter : </label>
-                        <input class="form-control " value="{{ $prestataire->societer }}" type="text" name="first_name"
-                        id="societer">
+                   
 
                     <div class="col-12">
                         <label for="adresse" class="form-label">Address </label>

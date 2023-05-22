@@ -6,7 +6,7 @@ use App\Models\Evenement;
 use App\Models\Lieu;
 
 use App\Models\TypeEvenement;
-
+use App\Models\User;
 use App\Models\users;
 use Illuminate\Http\Request;
 
@@ -18,7 +18,7 @@ class EvenementController extends Controller
      */
     public function index()
     {
-        if (clientPermission() == true) {
+        if (clientPermission() == true || auth()->user()->usertype == 1 || organisateurPermission() == true || prestatairePermission() == true) {
             //récupère tous les évènements a partire de la base de donnée et les passe à la vue
             $evenement = Evenement::all();
             return view('admin.page.evenement.index', ['evenement' => $evenement]);
@@ -35,7 +35,7 @@ class EvenementController extends Controller
     {
         if (clientPermission() == true) {
 
-            $organisateurs = users::join('organisateurs', 'organisateurs.user_id', '=', 'users.id')
+            $organisateurs = User::join('organisateurs', 'organisateurs.user_id', '=', 'users.id')
                 ->get();
             $typeevenements = TypeEvenement::all();
             $lieux = Lieu::all();
@@ -94,7 +94,7 @@ class EvenementController extends Controller
     public function show($id)
     {
         //
-        if (clientPermission() == true) {
+        if (clientPermission() == true || auth()->user()->usertype == 1 || organisateurPermission() == true) {
             $evenement = Evenement::findOrFail($id);
             return view('evenement.show', ['evenement' => $evenement]);
         } else {
@@ -107,7 +107,7 @@ class EvenementController extends Controller
      */
     public function edit($id)
     {
-        if (clientPermission() == true) {
+        if (clientPermission() ==true || auth()->user()->usertype == 1 || organisateurPermission() == false) {
             $evenement = Evenement::findOrFail($id);
             return view('admin.page.evenement.edit', ['evenement' => $evenement]);
         } else {
@@ -121,7 +121,7 @@ class EvenementController extends Controller
     public function update(Request $request, $id)
     {
         //
-        if (clientPermission() == true) {
+        if (clientPermission() == true || auth()->user()->usertype == 1 || organisateurPermission() == false) {
 
             $request->validate([
                 'nom' => 'required',
@@ -160,8 +160,7 @@ class EvenementController extends Controller
      */
     public function destroy($id)
     {
-        //
-        if (clientPermission() == true) {
+        if (clientPermission() == true || auth()->user()->usertype == 1 || organisateurPermission() == false) {
             Evenement::findOrFail($id)->delete();
             return redirect()->route('evenement.index')->with('success', 'L\'événement a été créé');
         } else {

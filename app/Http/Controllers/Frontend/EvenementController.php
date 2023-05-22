@@ -8,6 +8,7 @@ use App\Models\Evenement;
 use Illuminate\Http\Request;
 use App\Models\TypeEvenement;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class EvenementController extends Controller
 {
@@ -24,14 +25,15 @@ class EvenementController extends Controller
      */
     public function create()
     {
-        if (clientPermission() == true || auth()->user()->usertype == 1) {
+        if (clientPermission() == true ) {
 
-            $organisateurs = users::join('organisateurs', 'organisateurs.user_id', '=', 'users.id')
+            $organisateurs = User::join('organisateurs', 'organisateurs.user_id', '=', 'users.id')
                 ->get();
             $typeevenements = TypeEvenement::all();
             $lieux = Lieu::all();
-
-            return view('frontend.page.evenements.create', [
+            // dd($lieux);
+            return view('frontend.page.evenements.create', 
+            [
                 'organisateurs' => $organisateurs,
                 'typeevenements' => $typeevenements,
                 'lieux' => $lieux,
@@ -47,13 +49,12 @@ class EvenementController extends Controller
     public function store(Request $request)
     {
         //
-        if (clientPermission() == true || auth()->user()->usertype == 1 ) {
+        if (clientPermission() == true ) {
             $request->validate([
                 'nom' => 'required',
                 'heure' => 'required',
                 'date' => 'required',
                 'nombre_participant' => 'required',
-                'facture' => 'required',
                 'organisateur_id' => 'required',
                 'type_evenement_id' => 'required',
                 'lieu_id' => 'required',
@@ -66,7 +67,6 @@ class EvenementController extends Controller
             $evenement->heure = $request->heure;
             $evenement->date = $request->date;
             $evenement->nombre_participant = $request->nombre_participant;
-            $evenement->facture = $request->facture;
             $evenement->organisateur_id = $request->organisateur_id;
             $evenement->type_evenement_id = $request->type_evenement_id;
             $evenement->lieu_id = $request->lieu_id;

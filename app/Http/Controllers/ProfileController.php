@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Organisateur;
 use App\Models\User;
+use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         if(!$user) return back();
-        
+
         return view('admin.page.profile', compact('user'));
     }
 
@@ -36,7 +37,7 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $user = User::findOrFail(Auth::id());
-       
+
         if($request->has('password')){
             $request->validate([
                 'password' => 'required:8',
@@ -74,14 +75,14 @@ class ProfileController extends Controller
             ]);
 
             $user->update([
-                'nom' => $request->last_name,
-                'prenom' => $request->first_name,
+                'last_name' => $request->last_name,
+                'first_name' => $request->first_name,
                 'photo'=> $request->photo ? $this->uploads($request, 'photo') : $user->photo,
                 'email' => $request->email,
-                'telephone' => $request->phone,
+                'phone' => $request->phone,
             ]);
         }
-    
+
        return back();
     }
 

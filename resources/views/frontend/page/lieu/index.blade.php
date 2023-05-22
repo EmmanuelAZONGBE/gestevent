@@ -19,7 +19,6 @@
                         <tr>
                             <th>ID</th>
                             <th>Nom</th>
-                            <th>prix</th>
                             <th>Description</th>
                             <th>Adresse</th>
                             <th>Photo</th>
@@ -31,17 +30,19 @@
                             <tr>
                                 <td>{{ $lieu->id }}</td>
                                 <td>{{ $lieu->nom }}</td>
-                                <td>{{ $lieu->prix }}</td>
                                 <td>{{ $lieu->description }}</td>
                                 <td>{{ $lieu->adresse }}</td>
                                 <td>
                                     @if ($lieu->photo)
-                                        <img src="{{ asset('/storage/'.$lieu->photo) }}" alt="photo du lieu" style="width: 100px;">
+                                        <img src="{{ asset('storage/'.$lieu->photo) }}" alt="photo du lieu" style="width: 100px;">
                                     @else
                                         Aucune photo
                                     @endif
                                 </td>
                                 <td>
+                                    <a class="btn btn-info btn-sm btn-rounded" id="logincss" title="look" href="{{ route('lieu.show', $lieu->id) }}" data-bs-toggle="tooltip">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
                                     <a class="btn btn-success btn-sm btn-rounded" title="update" href="{{ route('lieu.edit', $lieu->id) }}" data-bs-toggle="tooltip">
                                         <i class="bi bi-pencil"></i>
                                     </a>

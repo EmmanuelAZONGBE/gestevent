@@ -14,10 +14,10 @@
 
         <div class="container">
             <h1>Détails de l'organisateur</h1>
-            <p><strong>Nom :</strong> {{ $organisateur->users->last_name }}</p>
-            <p><strong>Prénom :</strong> {{ $organisateur->users->first_name }}</p>
-            <p><strong>Adresse :</strong> {{ $organisateur->users->adresse }}</p>
-            <p><strong>Email :</strong> {{ $organisateur->users->email }}</p>
+            <p><strong>Nom :</strong> {{ $organisateur->users }}</p>
+            <p><strong>Prénom :</strong> {{ $organisateur->users }}</p>
+            <p><strong>Adresse :</strong> {{ $organisateur->users }}</p>
+            <p><strong>Email :</strong> {{ $organisateur->users }}</p>
             <p><strong>Compagnie :</strong> {{ $organisateur->compagnie }}</p>
             <p><strong>Adresse de la compagnie :</strong> {{ $organisateur->adresse_compagnie }}</p>
             <p><strong>Type d'événement organisé :</strong> {{ $organisateur->type_evenement_organiser }}</p>
