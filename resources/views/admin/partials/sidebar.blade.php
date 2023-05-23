@@ -13,7 +13,7 @@
           <!-- End Dashboard Nav -->
 
 
-          @if (auth()->user()->usertype == 1 )
+          @if (auth()->user()?->usertype == 1)
               <li class="nav-item">
                   <a class="nav-link collapsed" data-bs-target="#client-nav" data-bs-toggle="collapse">
                       <i class="bi bi-person"></i>
@@ -44,7 +44,7 @@
 
 
 
-          @if (auth()->user()->usertype == 1)
+          @if (auth()->user()?->usertype == 1)
               <li class="nav-item">
                   <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse">
                       <i class="bi bi-gem"></i>
@@ -75,7 +75,7 @@
 
 
 
-          @if (auth()->user()->usertype == 1 || organisateurPermission() == true)
+          @if (auth()->user()?->usertype == 1 || organisateurPermission() == true)
               <li class="nav-item">
                   <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse">
                       <i class="bi bi-bar-chart"></i>
@@ -102,7 +102,7 @@
 
 
 
-          @if (auth()->user()->usertype == 1 || prestatairePermission() == true || organisateurPermission() == true)
+          @if (auth()->user()?->usertype == 1 || prestatairePermission() == true || organisateurPermission() == true)
               <li class="nav-item">
                   <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse">
                       <i class="bi bi-tools"></i>
@@ -121,7 +121,7 @@
                       </li>
 
                       <li>
-                          @if (organisateurPermission() == true || prestatairePermission() == true || auth()->user()->usertype == 1)
+                          @if (organisateurPermission() == true || prestatairePermission() == true || auth()->user()?->usertype == 1)
                               <a href="{{ route('service.index') }}">
                                   <i class="bi bi-circle"></i>
                                   <span>Liste des services</span>
@@ -135,7 +135,7 @@
 
 
 
-          @if (auth()->user()->usertype == 1 || organisateurPermission() == true)
+          @if (auth()->user()?->usertype == 1 || organisateurPermission() == true)
               <li class="nav-item">
                   <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse">
                       <i class="bi bi-geo-alt"></i>
@@ -164,7 +164,7 @@
 
 
 
-          @if (auth()->user()->usertype == 1 || organisateurPermission() == true)
+          @if (auth()->user()?->usertype == 1 || organisateurPermission() == true)
               <li class="nav-item">
                   <a class="nav-link collapsed" data-bs-target="#type-evenement-nav" data-bs-toggle="collapse">
                       <i class="bi bi-tag"></i>
@@ -199,7 +199,7 @@
                   </a>
                   <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                       <li>
-                          @if (clientPermission() == false && organisateurPermission() == false && auth()->user()->usertype == 0 && prestatairePermission() == false)
+                          @if (clientPermission() == false && organisateurPermission() == false && auth()->user()?->usertype == 0 && prestatairePermission() == false)
                               <a href="{{ route('evenement.create') }}">
                                   <i class="bi bi-circle"></i>
                                   <span>Ajouter un événement</span>
@@ -207,7 +207,7 @@
                           @endif
                       </li>
                       <li>
-                          @if (clientPermission() == true || organisateurPermission() == true || auth()->user()->usertype == 1 || prestatairePermission() == true)
+                          @if (clientPermission() == true || organisateurPermission() == true || auth()->user()?->usertype == 1 || prestatairePermission() == true)
                               <a href="{{ route('evenement.index') }}">
                                   <i class="bi bi-circle"></i>
                                   <span>Liste des événements</span>
@@ -223,7 +223,7 @@
 
 
 
-          @if (auth()->user()->usertype == 1 ||
+          @if (auth()->user()?->usertype == 1 ||
                   clientPermission() == true ||
                   organisateurPermission() == true ||
                   prestatairePermission() == true)

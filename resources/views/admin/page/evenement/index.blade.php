@@ -23,18 +23,29 @@
                     </thead>
                     <tbody>
                         @foreach ($evenement as $evenement)
+
                             <tr>
                                 <td>{{ $evenement->nom }}</td>
                                 <td>{{ $evenement->heure }}</td>
                                 <td>{{ $evenement->date }}</td>
                                 <td>{{ $evenement->statut }}</td>
-                                <td>{{ $evenement->organisateur->first_name }} {{ $evenement->organisateur->last_name }}
-                                </td>
-                                <td>
-                                    @if ($evenement->type_evenement)
-                                        {{ $evenement->type_evenement->libelle }}
+                                @foreach ($organisateurs as $organisateur)
+                                 @if($organisateur ->id == $evenement->organisateur_id)
+                                    <td>
+                                        {{ $organisateur->first_name }}
+                                        {{ $organisateur->last_name }}
+                                    </td>
                                     @endif
+                                @endforeach
+                                @if ($evenement->type_evenement)
+                                <td>
+
+                                        {{ $evenement->type_evenement->libelle }}
+
                                 </td>
+                                @else
+                                <td>...</td>
+                                @endif
                                 <td>{{ $evenement->lieu->nom }}</td>
                                 <td>
                                     <form action="{{ route('evenement.destroy', $evenement->id) }}" method="POST">

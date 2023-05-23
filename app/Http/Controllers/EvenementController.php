@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evenement;
 use App\Models\Lieu;
-
+use App\Models\Organisateur;
 use App\Models\TypeEvenement;
 use App\Models\User;
 use App\Models\users;
@@ -21,7 +21,10 @@ class EvenementController extends Controller
         if (clientPermission() == true || auth()->user()->usertype == 1 || organisateurPermission() == true || prestatairePermission() == true) {
             //récupère tous les évènements a partire de la base de donnée et les passe à la vue
             $evenement = Evenement::all();
-            return view('admin.page.evenement.index', ['evenement' => $evenement]);
+            $organisateurs = User::join('organisateurs', 'organisateurs.user_id', '=', 'users.id')
+                ->get();
+            // dd($evenement);
+            return view('admin.page.evenement.index', ['evenement' => $evenement,'organisateurs' => $organisateurs]);
         } else {
             return view('admin.page.index');
         }
@@ -95,7 +98,7 @@ class EvenementController extends Controller
     {
         //
         if (clientPermission() == true ) {
-            $evenement = Evenement::findOrFail($id);
+            $evenement = Evenement::find($id);
             return view('evenement.show', ['evenement' => $evenement]);
         } else {
             return view('admin.page.index');
@@ -107,13 +110,19 @@ class EvenementController extends Controller
      */
     public function edit($id)
     {
-        if (clientPermission() ==true) {
-            $evenement = Evenement::findOrFail($id);
-            return view('admin.page.evenement.edit', ['evenement' => $evenement]);
+        if (clientPermission() == true) {
+            $evenement = Evenement::find($id);
+            //cette ligne pour récupérer les types d'événements
+            $typeevenements = TypeEvenement::all();
+            //cette ligne pour récupérer les organisateur
+            $organisateurs = Organisateur::all();
+             // Passage de la variable $typeevenements et organisateurs à la vue
+            return view('admin.page.evenement.edit', ['evenement' => $evenement, 'typeevenements' => $typeevenements,'organisateurs'=>$organisateurs]);
         } else {
             return view('admin.page.index');
         }
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -163,7 +172,7 @@ class EvenementController extends Controller
         if (clientPermission() == true ) {
             $evenement = Evenement::find($id);
             $evenement->delete();
-            return redirect()->route('evenement.index')->with('success', 'L\'événement a été créé');
+            return redirect()->route('evenement.index')->with('success', 'L\'événement a été supprimer');
         } else {
             return view('admin.page.index');
         }

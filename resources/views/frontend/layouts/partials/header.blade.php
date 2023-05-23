@@ -15,15 +15,16 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_2">About</a>
+                                <a class="nav-link click-scroll" href="#section_2">Apropos</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_3">Lieu</a>
-                            </li>
+
                             @if (Route::has('login'))
 
                             @auth
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="#section_3">Lieu</a>
+                            </li>
 
                             <li class="nav-item">
                                 <a class="nav-link click-scroll">Progamme</a>

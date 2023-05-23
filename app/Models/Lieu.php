@@ -21,8 +21,6 @@ class Lieu extends Model
         'etat' => 'string',
     ];
 
-
-
     public function evenement()
 
     {

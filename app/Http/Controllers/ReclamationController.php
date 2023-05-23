@@ -24,6 +24,7 @@ class ReclamationController extends Controller
 
     public function store(Request $request)
     {
+        
         $request->validate([
             'date' => 'required|string',
             'message' => 'nullable|string',

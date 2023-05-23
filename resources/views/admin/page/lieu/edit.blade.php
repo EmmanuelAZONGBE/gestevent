@@ -17,22 +17,23 @@
             <div class="card col-lg-6">
                 <div class="card-body">
                     <h5 class="card-title">Modifier un Lieux</h5>
-                    <form action="{{ url('/update', $lieux->id) }}" method="POST" enctype="multipart/form-data">
+
+                    <form action="{{ route('lieu.update', $lieu->id ) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
+                        @method('put')
                         <div class="col-md-12">
                             <label for="nom">Nom</label>
                             <input type="text" name="nom" id="nom" class="form-control"
-                                value="{{ $lieux->nom }}">
+                                value="{{ $lieu->nom }}">
                         </div>
                         <div class="col-md-12">
                             <label class="form-group" for="description">Description</label>
-                            <textarea name="description" id="description" class="form-control">{{ $lieux->description }}</textarea>
+                            <textarea name="description" id="description" class="form-control">{{ $lieu->description }}</textarea>
                         </div>
                         <div class="col-md-12">
                             <div class="form-floating">
                                 <input type="number" name="prix" id="prix" class="form-control"
-                                value="{{ $lieux->prix }}" >
+                                value="{{ $lieu->prix }}" >
                                 <label for="prix">Prix :</label>
                             </div>
                         </div
@@ -40,8 +41,8 @@
                         <div class="col-md-12">
                             <label class="form-group" for="photo">Photo :</label>
                             <input type="file" name="photo" id="photo" class="form-control-file">
-                            @if ($lieux->photo)
-                                <img src="{{ asset('/storage/' . $lieux->photo) }}" alt="Image du lieu" style="width: 100px;">
+                            @if ($lieu->photo)
+                                <img src="{{ asset('/storage/' . $lieu->photo) }}" alt="Image du lieu" style="width: 100px;">
                             @else
                                 Aucune image
                             @endif
@@ -49,7 +50,7 @@
                         <div class="col-md-12">
                             <label class="form-group" for="adresse">Adresse</label>
                             <input type="text" name="adresse" id="adresse" class="form-control"
-                                value="{{ $lieux->adresse }}">
+                                value="{{ $lieu->adresse }}">
                         </div>
                         <div class="text center">
                             <button type="submit" class="btn btn-primary">Actualiser</button>

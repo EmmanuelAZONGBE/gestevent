@@ -9,6 +9,7 @@ class LieuController extends Controller
 {
     public function index()
     {
+
         if (organisateurPermission() == true || auth()->user()->usertype == 1) {
             $lieux = Lieu::all();
             return view('admin.page.lieu.index', compact('lieux'));
@@ -19,6 +20,7 @@ class LieuController extends Controller
 
     public function create()
     {
+
         if (organisateurPermission() == true ) {
             return view('admin.page.lieu.create');
         }else{
@@ -28,6 +30,7 @@ class LieuController extends Controller
 
     public function store(Request $request)
     {
+
         if (organisateurPermission() == true ) {
             $request->validate([
                 'nom' => 'required',
@@ -56,9 +59,10 @@ class LieuController extends Controller
 
     public function edit($id)
     {
+
         if (organisateurPermission() == true ) {
-            $lieux = Lieu::find($id);
-            return view('admin.page.lieu.edit', compact('lieux'));
+            $lieu = Lieu::find($id);
+            return view('admin.page.lieu.edit', compact('lieu'));
         }else{
             return view('admin.page.index');
         }
@@ -66,21 +70,20 @@ class LieuController extends Controller
 
     public function update(Request $request,$id)
     {
-        // dd($id);
         if (organisateurPermission() == true ) {
-            $lieux = Lieu::find($id);
+            $lieu = Lieu::find($id);
 
 
-            $lieux->nom = $request->nom;
-            $lieux->prix = $request->prix;
-            $lieux->description = $request->description;
-            $lieux->adresse = $request->adresse;
-            $lieux->photo = $request->photo;
+            $lieu->nom = $request->nom;
+            $lieu->prix = $request->prix;
+            $lieu->description = $request->description;
+            $lieu->adresse = $request->adresse;
+            $lieu->photo = $request->photo;
             if($request->photo != null){
                 $photo = $request->photo->store('lieu');
-                $lieux->photo = $photo;
+                $lieu->photo = $photo;
             }
-            $lieux->save();
+            $lieu->save();
 
             return redirect()->route('lieu.index')->with('success', 'lieu updated successfully.');
         } else {
@@ -90,13 +93,19 @@ class LieuController extends Controller
 
     public function destroy($id)
     {
-        //dd($id);
         if (organisateurPermission() == true) {
-            $lieux = Lieu::find($id);
-            $lieux->delete();
-            return redirect()->route('lieu.index')->with('success', 'lieu deleted successfully.');
+            $lieu = Lieu::find($id);
+
+            // Supprimer les événements associés au lieu
+            $lieu->evenement()->delete();
+
+            // Supprimer le lieu lui-même
+            $lieu->delete();
+
+            return redirect()->route('lieu.index')->with('success', 'Lieu supprimé avec succès.');
         } else {
             return view('admin.page.index');
         }
     }
+
 }

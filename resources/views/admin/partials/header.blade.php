@@ -97,7 +97,7 @@
         <!-- End Messages Nav -->
 
         <li class="nav-item dropdown pe-3">
-
+            @auth
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->last_name}} {{ Auth::user()->first_name}}</span>
           </a>
@@ -143,6 +143,8 @@
 
           </ul>
           <!-- End Profile Dropdown Items -->
+          @endauth
+
         </li>
         <!-- End Profile Nav -->
 
