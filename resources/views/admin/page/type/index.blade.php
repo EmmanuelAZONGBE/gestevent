@@ -38,7 +38,7 @@
                                     <form action="{{ route('type.destroy', $typeevenement->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-sm btn-rounded "
+                                        <button class="btn btn-danger btn-sm btn-rounded" onclick="return confirm('Vous êtes sûres ???')"
                                             title="Remove" data-bs-toggle="tooltip">
                                             <i class="bi bi-trash"></i>
                                         </button>

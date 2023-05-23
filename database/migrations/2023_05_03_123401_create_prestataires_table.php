@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('prestataires', function (Blueprint $table) {
             $table->id();
-            $table->string('societer')->nullable();
+            
             $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();
 

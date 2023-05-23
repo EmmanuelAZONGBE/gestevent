@@ -20,7 +20,7 @@ class ClientController extends Controller
         if (clientPermission() == false || auth()->user()->usertype == 1) {
             $clients = Client::select('clients.*', 'users.id')
                 ->join('users', 'clients.user_id', '=', 'users.id')
-               // ->where('clients.user_id', $userId) // Restreint les clients à l'utilisateur connecté
+                // ->where('clients.user_id', $userId) // Restreint les clients à l'utilisateur connecté
                 ->paginate(7); // Ajoutez paginate() avec le nombre d'éléments que vous souhaitez afficher par page
 
             return view('admin.page.client.index', compact('clients'));
@@ -40,11 +40,8 @@ class ClientController extends Controller
         if (clientPermission() == true) {
             return view('admin.page.client.create');
         } else {
-            return abort (403);
+            return abort(403);
         }
-
-
-
     }
 
     /**
@@ -56,9 +53,9 @@ class ClientController extends Controller
             $request->validate([
                 'last_name' => 'required|string',
                 'first_name' => 'required|string',
-                'photo'=>'image|mimes:png,jpg,jpeg|max:2048',
-                'email' =>'required|string',
-                'phone' =>'required', 'string', 'max:40',
+                'photo' => 'image|mimes:png,jpg,jpeg|max:2048',
+                'email' => 'required|string',
+                'phone' => 'required', 'string', 'max:40',
                 'adresse' => 'required|string',
             ]);
 
@@ -78,9 +75,8 @@ class ClientController extends Controller
 
             return redirect()->route('client.index')->with('success', 'Le client a été ajouté avec succès.');
         } else {
-            return abort (403);
+            return abort(403);
         }
-
     }
     /**
      * Display the specified resource.
@@ -113,7 +109,7 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,Client $client)
+    public function update(Request $request, Client $client)
     {
         if (clientPermission() == true || auth()->user()->usertype == 1) {
             $client = Client::find($client);
@@ -121,7 +117,7 @@ class ClientController extends Controller
                 'last_name' => 'required|string',
                 'first_name' => 'required|string',
                 'email' => 'required|string',
-                'photo'=>'image|mimes:png,jpg,jpeg|max:2048',
+                'photo' => 'image|mimes:png,jpg,jpeg|max:2048',
                 'adresse' => 'required|string',
                 'phone' => 'required', 'string', 'max:40',
 
@@ -149,9 +145,10 @@ class ClientController extends Controller
     {
 
 
-        if (clientPermission() == true || auth()->user()->usertype == 1) {
+        if (clientPermission() == true) {
 
-            Client::findOrFail($id)->delete();
+            $client = Client::find($id);
+            $client->delete();
 
             // Redirige vers la liste des clients
             return redirect()->route('client.index')->with('success', 'Client supprimé avec succès.');
@@ -160,4 +157,3 @@ class ClientController extends Controller
         };
     }
 }
-

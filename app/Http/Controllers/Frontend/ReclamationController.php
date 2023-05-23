@@ -37,7 +37,7 @@ class ReclamationController extends Controller
 
         Reclamation::create($request->all());
 
-        return redirect()->route('frontend.page.index')->with('success', 'Reclamation created successfully.');
+        return redirect()->route('admin.page.reclamation.index')->with('success', 'Reclamation created successfully.');
     }
 
     /**

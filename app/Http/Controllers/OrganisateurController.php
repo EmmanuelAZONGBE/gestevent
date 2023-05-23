@@ -185,7 +185,8 @@ class OrganisateurController extends Controller
     {
         if (organisateurPermission() == true || auth()->user()->usertype == 1) {
 
-           Organisateur::findOrFail($id)->delete();
+           $organisateur=Organisateur::find($id);
+           $organisateur->delete();
             return redirect()->route('organisateur.index')->with('success', '  a été supprimé avec succès.');
         } else {
             return view('frontend.page.index');

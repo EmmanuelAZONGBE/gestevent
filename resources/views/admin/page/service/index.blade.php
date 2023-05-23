@@ -37,7 +37,7 @@
                                     <form action="{{ route('service.destroy', $service->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-sm btn-rounded " title="Remove"
+                                        <button class="btn btn-danger btn-sm btn-rounded" onclick="return confirm('Vous êtes sûres ???')"  title="Remove"
                                             data-bs-toggle="tooltip">
                                             <i class="bi bi-trash"></i>
                                         </button>

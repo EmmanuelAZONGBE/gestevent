@@ -81,7 +81,7 @@ Route::post('/evenement/store', [EvenementController::class,'store'])->name('eve
 Route::get('/evenement/edit/{id}', [EvenementController::class,'edit'])->name('evenement.edit');
 Route::put('/evenement/update/{id}', [EvenementController::class,'update'])->name('evenement.update');
 Route::post('/evenement/update{evenement}', [EvenementController::class,'update']);
-Route::get('/evenement/destroy/{id}', [EvenementController::class,'destroy'])->name('evenement.destroy');
+Route::delete('/evenement/destroy/{id}', [EvenementController::class,'destroy'])->name('evenement.destroy');
 Route::get('/evenement/show', [EvenementController::class,'show'])->name('evenement.show');
 
 
@@ -121,12 +121,19 @@ Route::post('/organisateur/storeLogin', [OrganisateurController::class,'storeLog
 //Route::resource('profile', ProfileController::class);
 
 Route::get('/lieu/index', [LieuController::class,'index'])->name('lieu.index');
+
 Route::get('/lieu/create', [LieuController::class,'create'])->name('lieu.create');
+
 Route::post('/lieu/store', [LieuController::class,'store'])->name('lieu.store');
+
 Route::get('/lieu/edit/{id}', [LieuController::class,'edit'])->name('lieu.edit');
-Route::put('/lieu/update/{id}', [LieuController::class,'update'])->name('lieu.update');
-Route::get('/lieu/update{lieu}', [LieuController::class,'update']);
+
+Route::post('/lieu/update/{id}', [LieuController::class,'update'])->name('lieu.update');
+
+Route::put('/lieu/update{id}', [LieuController::class,'update'])->name('lieu.update');
+
 Route::delete('/lieu/destroy/{id}', [LieuController::class,'destroy'])->name('lieu.destroy');
+
 Route::get('/lieu/show', [LieuController::class,'show'])->name('lieu.show');
 
 

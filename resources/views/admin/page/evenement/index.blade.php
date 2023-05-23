@@ -40,16 +40,13 @@
                                     <form action="{{ route('evenement.destroy', $evenement->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm btn-rounded " title="Remove"
+                                        <button type="submit" class="btn btn-danger btn-sm btn-rounded" onclick="return confirm('Vous êtes sûres ???')" title="Remove"
                                             data-bs-toggle="tooltip">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
 
-                                    <a class="btn btn-success btn-sm btn-rounded " id="logincss" title="look"
-                                        href="{{ route('evenement.show', $evenement->id) }}" data-bs-toggle="tooltip">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
+
 
                                     <a class="btn btn-success btn-sm btn-rounded " id="logincss" title="edit"
                                         href="{{ route('evenement.edit', $evenement->id) }}" data-bs-toggle="tooltip">

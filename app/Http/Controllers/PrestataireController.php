@@ -77,9 +77,10 @@ class PrestataireController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Prestataire $prestataire)
+    public function edit($id)
     {
         if (prestatairePermission() == true ) {
+            $prestataire=Prestataire::find($id);
             return view('admin.page.prestataire.edit', compact('prestataire'));
         } else {
             return view('frontend.page.index');
@@ -89,16 +90,17 @@ class PrestataireController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Prestataire $prestataire)
+    public function update(Request $request, $id)
     {
         if (prestatairePermission() == true ) {
+            $prestataire=Prestataire::find($id);
             $request->validate([
                 'last_name' => 'required|string',
                 'first_name' => 'required|string',
                 'photo' => 'nullable|file',
                 'email' => 'required',
                 'adresse' => 'nullable|string',
-                
+
             ]);
 
             $prestataire->users()->update([
@@ -121,7 +123,8 @@ class PrestataireController extends Controller
     public function destroy($id)
     {
         if (prestatairePermission() == true || auth()->user()->usertype == 1) {
-            Prestataire::findOrFail($id)->delete();
+            $prestataire=Prestataire::find($id);
+            $prestataire->delete();
             return redirect()->route('prestataire.index')->with('success', 'Prestataire supprimé avec succès');
         } else {
             return abort(401);

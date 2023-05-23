@@ -4,11 +4,11 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>créer un reclamation</h1>
+        <h1>Mpodification</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Liste des reclamations</a></li>
-                <li class="breadcrumb-item active">Liste un reclamation</li>
+                <li class="breadcrumb-item"><a href="index.html"></a></li>
+                <li class="breadcrumb-item active"></li>
             </ol>
         </nav>
     </div>

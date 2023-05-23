@@ -61,17 +61,19 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Service $service)
+    public function edit($id)
     {
+        $service=Service::find($id);
         return view('admin.page.service.edit',compact('service'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,Service $service )
+    public function update(Request $request,$id )
     {
         //
+        $service=Service::find($id);
         $request->validate([
             'nom_service'=>'required',
             'descriptions'=>'required',
@@ -92,7 +94,8 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        Service::findOrFail($id)->delete();
+        $service=Service::find($id);
+        $service->delete();
        return redirect()->route('service.index')->with('success','le service à été supprimer');
     }
 }

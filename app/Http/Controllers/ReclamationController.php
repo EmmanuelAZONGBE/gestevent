@@ -35,13 +35,15 @@ class ReclamationController extends Controller
         return redirect()->route('reclamation.index')->with('success', 'Reclamation created successfully.');
     }
 
-    public function edit(Reclamation $reclamation)
+    public function edit($id)
     {
+        $reclamation=Reclamation::find($id);
         return view('admin.page.reclamation.edit', compact('reclamation'));
     }
 
-    public function update(Request $request, Reclamation $reclamation)
+    public function update(Request $request,$id)
     {
+        $reclamation=Reclamation::find($id);
         $request->validate([
             'date' => 'required|string',
             'message' => 'nullable|string',
@@ -55,7 +57,8 @@ class ReclamationController extends Controller
 
     public function destroy($id)
     {
-        Reclamation::findOrFail($id)->delete();
+        $reclamation=Reclamation::find($id);
+        $reclamation->delete();
 
         return redirect()->route('reclamation.index')->with('success', 'Reclamation deleted successfully.');
     }

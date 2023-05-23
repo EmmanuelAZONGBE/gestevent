@@ -40,10 +40,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="btn btn-info btn-sm btn-rounded" id="logincss" title="look" href="{{ route('lieu.show', $lieu->id) }}" data-bs-toggle="tooltip">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <a class="btn btn-success btn-sm btn-rounded" title="update" href="{{ route('lieu.edit', $lieu->id) }}" data-bs-toggle="tooltip">
+                                    <a class="btn btn-success btn-sm btn-rounded" title="update" href="{{ route('lieu.edit', $lieu) }}" data-bs-toggle="tooltip">
                                         <i class="bi bi-pencil"></i>
                                     </a>
                                     <form action="{{ route('lieu.destroy', $lieu->id) }}" method="POST" style="display: inline-block;">

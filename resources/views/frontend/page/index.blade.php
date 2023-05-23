@@ -98,7 +98,7 @@
                         <div class="artists-image-wrap">
                             <img src="{{ asset('storage/'.$lieu->photo) }}"class="artists-image img-fluid">
                         </div>
-                        
+
                         <div class="artists-hover">
                             <p>
                                 <strong>Nom:</strong>
@@ -122,9 +122,9 @@
 
                             <hr>
 
-                           
+
                         </div>
-                        
+
                     </div>
                 </div>
                 @endforeach

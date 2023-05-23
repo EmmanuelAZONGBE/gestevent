@@ -41,13 +41,15 @@ class TypeEvenementController extends Controller
         return redirect()->route('type.index')->with('success', 'Reclamation created successfully.');
     }
 
-    public function edit(TypeEvenement $typeevenement)
+    public function edit($id)
     {
+        $typeevenement=TypeEvenement::find($id);
         return view('admin.page.type.edit', compact('typeevenement'));
     }
 
-    public function update(Request $request, TypeEvenement $typeevenement)
+    public function update(Request $request,$id)
     {
+        $typeevenement=TypeEvenement::find($id);
         $request->validate([
             'libelle' => 'required|string',
         ]);
@@ -59,7 +61,8 @@ class TypeEvenementController extends Controller
 
     public function destroy($id)
     {
-        TypeEvenement::findOrFail($id)->delete();
+        $typeevenement=TypeEvenement::find($id);
+        $typeevenement->delete();
 
         return redirect()->route('type.index')->with('success', 'Reclamation deleted successfully.');
     }

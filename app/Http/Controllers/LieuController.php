@@ -54,37 +54,35 @@ class LieuController extends Controller
         }
     }
 
-    public function edit(Lieu $lieux)
+    public function edit($id)
     {
         if (organisateurPermission() == true ) {
+            $lieux = Lieu::find($id);
             return view('admin.page.lieu.edit', compact('lieux'));
         }else{
             return view('admin.page.index');
         }
     }
 
-    public function update(Request $request, Lieu $lieux)
+    public function update(Request $request,$id)
     {
+        // dd($id);
         if (organisateurPermission() == true ) {
-            $validatedData = $request->validate([
-                'nom' => 'required',
-                'description' => 'required',
-                'prix' => 'required',
-                'photo'=>'image|mimes:png,jpg,jpeg|max:2048',
-                'adresse' => 'required',
-            ]);
+            $lieux = Lieu::find($id);
 
-            $lieux->nom = $validatedData['nom'];
-            $lieux->prix = $validatedData['prix'];
-            $lieux->description = $validatedData['description'];
-            $lieux->adresse = $validatedData['adresse'];
+
+            $lieux->nom = $request->nom;
+            $lieux->prix = $request->prix;
+            $lieux->description = $request->description;
+            $lieux->adresse = $request->adresse;
+            $lieux->photo = $request->photo;
             if($request->photo != null){
                 $photo = $request->photo->store('lieu');
-                $lieux->photo = $photo;    
+                $lieux->photo = $photo;
             }
             $lieux->save();
 
-            return redirect()->route('lieu.index');
+            return redirect()->route('lieu.index')->with('success', 'lieu updated successfully.');
         } else {
             return view('admin.page.index');
         }
@@ -92,9 +90,11 @@ class LieuController extends Controller
 
     public function destroy($id)
     {
-        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
-            Lieu::findOrFail($id)->delete();
-            return redirect()->route('lieu.index');
+        //dd($id);
+        if (organisateurPermission() == true) {
+            $lieux = Lieu::find($id);
+            $lieux->delete();
+            return redirect()->route('lieu.index')->with('success', 'lieu deleted successfully.');
         } else {
             return view('admin.page.index');
         }

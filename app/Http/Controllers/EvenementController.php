@@ -74,7 +74,7 @@ class EvenementController extends Controller
             $evenement->heure = $request->heure;
             $evenement->date = $request->date;
             $evenement->nombre_participant = $request->nombre_participant;
-            
+
             $evenement->organisateur_id = $request->organisateur_id;
             $evenement->type_evenement_id = $request->type_evenement_id;
             $evenement->lieu_id = $request->lieu_id;
@@ -94,7 +94,7 @@ class EvenementController extends Controller
     public function show($id)
     {
         //
-        if (clientPermission() == true || auth()->user()->usertype == 1 || organisateurPermission() == true) {
+        if (clientPermission() == true ) {
             $evenement = Evenement::findOrFail($id);
             return view('evenement.show', ['evenement' => $evenement]);
         } else {
@@ -107,7 +107,7 @@ class EvenementController extends Controller
      */
     public function edit($id)
     {
-        if (clientPermission() ==true || auth()->user()->usertype == 1 || organisateurPermission() == false) {
+        if (clientPermission() ==true) {
             $evenement = Evenement::findOrFail($id);
             return view('admin.page.evenement.edit', ['evenement' => $evenement]);
         } else {
@@ -121,7 +121,7 @@ class EvenementController extends Controller
     public function update(Request $request, $id)
     {
         //
-        if (clientPermission() == true || auth()->user()->usertype == 1 || organisateurPermission() == false) {
+        if (clientPermission() == true) {
 
             $request->validate([
                 'nom' => 'required',
@@ -160,8 +160,9 @@ class EvenementController extends Controller
      */
     public function destroy($id)
     {
-        if (clientPermission() == true || auth()->user()->usertype == 1 || organisateurPermission() == false) {
-            Evenement::findOrFail($id)->delete();
+        if (clientPermission() == true ) {
+            $evenement = Evenement::find($id);
+            $evenement->delete();
             return redirect()->route('evenement.index')->with('success', 'L\'événement a été créé');
         } else {
             return view('admin.page.index');
