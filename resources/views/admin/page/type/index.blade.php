@@ -16,18 +16,18 @@
         <div class="row ">
             <div class="col-lg-6 mx-lg-auto">
                 <h5>Type Evenements</h5>
-                <table class="table">
+                <table class="table table-bordered border-primary">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Libelle</th>
+
+                            <th>Nom </th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($typeevenements as $typeevenement)
                             <tr>
-                                <td>{{ $typeevenement->id }}</td>
+
                                 <td>{{ $typeevenement->libelle }}</td>
                                 <td>
                                     <a class="btn btn-success btn-sm btn-rounded "

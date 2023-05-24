@@ -226,3 +226,4 @@ Route::get('/frontend_reclamations/create', [ReclamationController::class,'creat
 Route::post('/frontend_reclamations/store', [ReclamationController::class,'store'])->name('frontend_reclamations.store');
 
 
+//

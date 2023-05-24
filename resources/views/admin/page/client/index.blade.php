@@ -15,7 +15,7 @@
             <div class="card-body">
                 <h5 class="card-title">Liste des clients</h5>
                 <!-- Dark Table -->
-                <table class="table table-dark">
+                <table class="table table-bordered border-primary">
                     <thead>
                         <tr>
                             <th scope="col"> Nom </th>

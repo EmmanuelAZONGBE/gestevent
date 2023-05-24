@@ -21,35 +21,38 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="nom" name="nom" value="{{ $evenement->nom }}" required autofocus>
+                        <div class="row mb-3">
+
+                            <div class=" form-floating">
+
                                 <label for="nom">Nom :</label>
+                                <input type="text" class="form-control" id="nom" name="nom" value="{{ $evenement->nom }}" required autofocus>
+
                             </div>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="row mb-3">
                             <div class="form-floating">
                                 <input type="time" name="heure" id="heure" class="form-control" name="heure" value="{{ $evenement->heure }}" required>
                                 <label for="heure">Heure :</label>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="row mb-3">
                             <div class="form-floating">
                                 <input type="date" name="date" id="date" name="date" class="form-control" value="{{ $evenement->date }}" required>
                                 <label for="date">Date :</label>
                             </div>
                         </div>
 
-                        <div class="col-12">
+                        <div class="row mb-3">
                             <div class="form-floating">
                                 <input type="text" name="statut" id="statut" name="statut" class="form-control" required>
                                 <label for="statut"> Statut :</label>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="row mb-3">
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <input type="number" name="nombre_participant" id="nombre_participant" name="nombre_participant" class="form-control" value="{{ $evenement->nombre_participant }}" required>
@@ -57,7 +60,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+
+                        <div class="row mb-3">
                             <label for="type_evenement_id">Type d'événement:</label>
                             <select name="type_evenement_id" id="type_evenement_id" class="form-control" required>
                                 @foreach ($typeevenements as $typeevenement)
@@ -67,8 +71,9 @@
                                 @endforeach
                             </select>
                         </div>
+                        
 
-                        <div class="form-group">
+                        <div class="row mb-3">
                             <label for="organisateur_id">Organisateur:</label>
                             <select name="organisateur_id" id="organisateur_id" class="form-control" required>
                                 @foreach ($organisateurs as $organisateur)
@@ -80,7 +85,8 @@
                             </select>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="row mb-3">
+                            <label for="lieu_id">Lieu :</label>
                             <select name="lieu_id" id="lieu_id" class="form-control" required>
                                 @isset($lieux)
                                 @foreach ($lieux as $lieu)
@@ -90,10 +96,10 @@
                                 @endforeach
                                 @endisset
                             </select>
-                            <label for="lieu_id">Lieu :</label>
+
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="row mb-3">
                             <select id="statut" class="form-control" name="statut" required>
                                 <option value="en_attente" {{ $evenement->statut == 'en_attente' ? 'selected' : '' }}>
                                     En attente</option>

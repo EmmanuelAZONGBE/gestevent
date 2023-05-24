@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Liste des evenements</h5>
-                <table class="table">
+                <table class="table table-bordered border-primary">
                     <thead>
                         <tr>
                             <th>Nom</th>

@@ -15,13 +15,13 @@
         <div class="card-body">
             <h5 class="card-title">Liste des prestataires</h5>
             <!-- Dark Table -->
-            <table class="table table-dark">
+             <table class="table table-bordered border-primary">
                 <thead>
                     <tr>
-                        <th scope="col"> Nom </th>
-                        <th scope="col"> prenom </th>
-                        <th scope="col"> Email </th>
-                        <th scope="col"> Adresse </th>
+                        <th > Nom </th>
+                        <th > prenom </th>
+                        <th > Email </th>
+                        <th > Action </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,15 +30,14 @@
                         <td> {{ $prestataire->last_name }} </td>
                         <td> {{ $prestataire->first_name }}</td>
                         <td> {{ $prestataire->email }} </td>
-                        <td> {{ $prestataire->adresse }} </td>
                         <td>
-                            {{-- <a class="btn btn-info btn-sm btn-rounded " id="logincss" title="look"
+                            {{--  <a class="btn btn-info btn-sm btn-rounded " id="logincss" title="look"
                                     href="{{ route('prestataire.show', $prestataire->id) }}" data-bs-toggle="tooltip">
                             <i class="bi bi-eye"></i>
                             </a>
                             <a class="btn btn-success btn-sm btn-rounded " title="update " href="{{ route('prestataire.edit', $prestataire->id) }}" data-bs-toggle="tooltip">
                                 <i class="bi bi-pencil"></i>
-                            </a> --}}
+                            </a>  --}}
                             <form action="{{ route('prestataire.destroy', $prestataire->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
