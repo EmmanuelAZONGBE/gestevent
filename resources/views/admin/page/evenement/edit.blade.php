@@ -46,13 +46,6 @@
                         </div>
 
                         <div class="row mb-3">
-                            <div class="form-floating">
-                                <input type="text" name="statut" id="statut" name="statut" class="form-control" required>
-                                <label for="statut"> Statut :</label>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <input type="number" name="nombre_participant" id="nombre_participant" name="nombre_participant" class="form-control" value="{{ $evenement->nombre_participant }}" required>
@@ -62,16 +55,16 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="type_evenement_id">Type d'événement:</label>
-                            <select name="type_evenement_id" id="type_evenement_id" class="form-control" required>
+                            <label for="typeevenement_id">Type d'événement:</label>
+                            <select name="typeevenement_id" id="typeevenement_id" class="form-control" required>
                                 @foreach ($typeevenements as $typeevenement)
-                                <option value="{{ $typeevenement->id }}" {{ $evenement->type_evenement_id == $typeevenement->id ? 'selected' : '' }}>
+                                <option value="{{ $typeevenement->id }}" {{ $evenement->typeevenement_id == $typeevenement->id ? 'selected' : '' }}>
                                     {{ $typeevenement->libelle }}
                                 </option>
                                 @endforeach
                             </select>
                         </div>
-                        
+
 
                         <div class="row mb-3">
                             <label for="organisateur_id">Organisateur:</label>
@@ -95,18 +88,6 @@
                                 </option>
                                 @endforeach
                                 @endisset
-                            </select>
-
-                        </div>
-
-                        <div class="row mb-3">
-                            <select id="statut" class="form-control" name="statut" required>
-                                <option value="en_attente" {{ $evenement->statut == 'en_attente' ? 'selected' : '' }}>
-                                    En attente</option>
-                                <option value="valide" {{ $evenement->statut == 'valide' ? 'selected' : '' }}>Validé
-                                </option>
-                                <option value="annule" {{ $evenement->statut == 'annule' ? 'selected' : '' }}>Annulé
-                                </option>
                             </select>
 
                         </div>

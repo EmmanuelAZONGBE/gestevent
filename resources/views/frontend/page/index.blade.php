@@ -132,6 +132,8 @@
 </section>
 @endauth
 
+
+@auth
 <section class="schedule-section section-padding" id="section_4">
     <div class="container">
         <div class="row">
@@ -160,6 +162,7 @@
                                     <th scope="row">Day 1</th>
 
                                     <td class="table-background-image-wrap " style='background-image : url({{ asset('/storage/.$lieu->photo') }})'>
+                                        
                                         <h3>Pop Night</h3>
 
                                         <p class="mb-2">5:00 - 7:00 PM</p>
@@ -231,7 +234,7 @@
         </div>
     </div>
 </section>
-
+@endauth
 
 
 @auth
@@ -240,7 +243,7 @@
         <div class="row">
 
             <div class="col-lg-8 col-12 mx-auto">
-                <h2 class="text-center mb-4">Interested? Let's talk</h2>
+                <h2 class="text-center mb-4">Interested? Let s talk</h2>
 
                 <nav class="d-flex justify-content-center">
                     <div class="nav nav-tabs align-items-baseline justify-content-center" id="nav-tab" role="tablist">

@@ -7,7 +7,6 @@ use App\Models\Lieu;
 use App\Models\Organisateur;
 use App\Models\TypeEvenement;
 use App\Models\User;
-use App\Models\users;
 use Illuminate\Http\Request;
 
 
@@ -21,10 +20,15 @@ class EvenementController extends Controller
         if (clientPermission() == true || auth()->user()->usertype == 1 || organisateurPermission() == true || prestatairePermission() == true) {
             //récupère tous les évènements a partire de la base de donnée et les passe à la vue
             $evenement = Evenement::all();
+            $typeevenements = TypeEvenement::all();
+            $lieux = Lieu::all();
             $organisateurs = User::join('organisateurs', 'organisateurs.user_id', '=', 'users.id')
                 ->get();
             // dd($evenement);
-            return view('admin.page.evenement.index', ['evenement' => $evenement,'organisateurs' => $organisateurs]);
+            return view('admin.page.evenement.index', [
+                'evenement' => $evenement, 'organisateurs' => $organisateurs, 'typeevenements' => $typeevenements,
+                'lieux' => $lieux
+            ]);
         } else {
             return view('admin.page.index');
         }
@@ -47,6 +51,7 @@ class EvenementController extends Controller
                 'organisateurs' => $organisateurs,
                 'typeevenements' => $typeevenements,
                 'lieux' => $lieux,
+
             ]);
         } else {
             return view('admin.page.index');
@@ -66,7 +71,7 @@ class EvenementController extends Controller
                 'date' => 'required',
                 'nombre_participant' => 'required',
                 'organisateur_id' => 'required',
-                'type_evenement_id' => 'required',
+                'typeevenement_id' => 'required',
                 'lieu_id' => 'required',
 
             ]);
@@ -79,7 +84,7 @@ class EvenementController extends Controller
             $evenement->nombre_participant = $request->nombre_participant;
 
             $evenement->organisateur_id = $request->organisateur_id;
-            $evenement->type_evenement_id = $request->type_evenement_id;
+            $evenement->typeevenement_id = $request->typeevenement_id;
             $evenement->lieu_id = $request->lieu_id;
 
 
@@ -97,7 +102,7 @@ class EvenementController extends Controller
     public function show($id)
     {
         //
-        if (clientPermission() == true ) {
+        if (clientPermission() == true) {
             $evenement = Evenement::find($id);
             return view('evenement.show', ['evenement' => $evenement]);
         } else {
@@ -116,8 +121,9 @@ class EvenementController extends Controller
             $typeevenements = TypeEvenement::all();
             //cette ligne pour récupérer les organisateur
             $organisateurs = Organisateur::all();
-             // Passage de la variable $typeevenements et organisateurs à la vue
-            return view('admin.page.evenement.edit', ['evenement' => $evenement, 'typeevenements' => $typeevenements,'organisateurs'=>$organisateurs]);
+            $lieux = Lieu::all();
+            // Passage de la variable $typeevenements et organisateurs à la vue
+            return view('admin.page.evenement.edit', ['evenement' => $evenement, 'typeevenements' => $typeevenements, 'organisateurs' => $organisateurs, 'lieux' => $lieux]);
         } else {
             return view('admin.page.index');
         }
@@ -152,7 +158,7 @@ class EvenementController extends Controller
             $evenement->nombre_participant = $request->nombre_participant;
             $evenement->facture = $request->facture;
             $evenement->organisateur_id = $request->organisateur_id;
-            $evenement->type_evenement_id = $request->type_evenement_id;
+            $evenement->typeevenement_id = $request->typeevenement_id;
             $evenement->lieu_id = $request->lieu_id;
             $evenement->client_id = $request->client_id;
 
@@ -167,9 +173,11 @@ class EvenementController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy($id)
     {
-        if (clientPermission() == true ) {
+
+        if (clientPermission() == true) {
             $evenement = Evenement::find($id);
             $evenement->delete();
             return redirect()->route('evenement.index')->with('success', 'L\'événement a été supprimer');
@@ -177,19 +185,32 @@ class EvenementController extends Controller
             return view('admin.page.index');
         }
     }
-    // public function enCours()
-    // {
-    //     //récupère tous les évènement ayant une date et une heure
-    //     $evenement = Evenement::where('date', '=', date('Y-m-d'))->where('heure', '<=', date('H:i'))->get();
-    //     return view('admin.page.evenement.index', ['evenement' => $evenement]);
-    // }
 
-    // public function enAttente()
-    // {
-    //     //récupère tous les évènement ayant une date et une heure
-    //     $evenement = Evenement::where('date', '>', date('Y-m-d'))->orWhere(function ($query) {
-    //         $query->where('date', '=', date('Y-m-d'))->where('heure', '>', date('H:i'));
-    //     })->get();
-    //     return view('admin.page.evenement.index', ['evenement' => $evenement]);
-    // }
+    public function accepter($id)
+    {
+        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+            $evenement = Evenement::find($id);
+            // Mettre à jour le statut "état" de l'événement pour le marquer comme accepté
+            $evenement->etat = "Accepté";
+            $evenement->save();
+
+            return back()->with('success', 'Publication acceptée');
+        } else {
+            return view('admin.page.index');
+        }
+    }
+
+    public function rejeter($id)
+    {
+        if (organisateurPermission() == true ||auth()->user()->usertype == 1) {
+            $evenement = Evenement::find($id);
+            // Mettre à jour le statut "état" de l'événement pour le marquer comme accepté
+            $evenement->etat = "Accepté";
+            $evenement->save();
+
+            return back()->with('success', 'Publication acceptée');
+        } else {
+            return view('admin.page.index');
+        }
+    }
 }

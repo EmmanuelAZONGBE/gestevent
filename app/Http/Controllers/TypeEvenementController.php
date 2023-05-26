@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TypeEvenement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TypeEvenementController extends Controller
 {
@@ -20,9 +21,19 @@ class TypeEvenementController extends Controller
 
     }
 
-    public function create()
+    public function create(Request $request)
     {
         if (organisateurPermission() == true || auth()->user()->usertype == 0) {
+
+            $validator = Validator::make($request->all(),[
+                'libelle' => 'required|string',
+                'etat' => 'nullable|in:accepté,rejeté,en attente',
+            ]);
+
+            $typeevenement = new TypeEvenement();
+            $typeevenement->libelle = $request->input('libelle');
+            $typeevenement->etat = $request->input('etat', 'en attente');
+            $typeevenement->save();
             return view('admin.page.type.create');
         }else{
             return view('admin.page.index');
@@ -34,11 +45,12 @@ class TypeEvenementController extends Controller
     {
         $request->validate([
             'libelle' => 'required|string',
+            'etat' => 'nullable'
         ]);
 
         TypeEvenement::create($request->all());
 
-        return redirect()->route('type.index')->with('success', 'Reclamation created successfully.');
+        return redirect()->route('type.index');
     }
 
     public function edit($id)
