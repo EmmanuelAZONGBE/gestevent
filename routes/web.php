@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NouvelleNotification;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\UserController;
@@ -49,6 +50,9 @@ route::get('/organisateur/forme',function(){
 
 
 route::get('/',[HomeController::class,'index']);
+
+Route::get('/notifications/index', [NouvelleNotification::class, 'index'])->name('notifications.index');
+
 
 
 route::get('/redirect',[HomeController::class,'redirect']);
