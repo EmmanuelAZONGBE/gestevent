@@ -2,9 +2,14 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Auth\Events\Login;
 use Illuminate\Pagination\Paginator;
+
+
+use Illuminate\Support\Facades\Event;
+
+use Illuminate\Support\ServiceProvider;
+use App\Notifications\NouvelleNotification;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,8 +26,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
-        Paginator::useBootstrapFive();
-        Paginator::useBootstrapFour();
+        Paginator::useBootstrapThree();
+
+        $this->app->booted(function () {
+            // Écouter l'événement Login
+            Event::listen(Login::class, function ($event) {
+                $user = $event->user;
+                $user->notify(new NouvelleNotification($user));
+            });
+        });
     }
+
 }
+

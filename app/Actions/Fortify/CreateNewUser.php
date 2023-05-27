@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
-use App\Notifications\NouvelleNotification;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Support\Facades\Notification;
 

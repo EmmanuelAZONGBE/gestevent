@@ -15,11 +15,12 @@
             <div class="card-body">
                 <h5 class="card-title">Liste des clients</h5>
                 <!-- Dark Table -->
-                <table class="table table-dark">
+                <table class="table table-bordered border-primary">
                     <thead>
                         <tr>
                             <th scope="col"> Nom </th>
-                            <th scope="col"> prenom </th>
+                            <th scope="col"> Prenom </th>
+                            <th scope="col"> Email </th>
                             <th scope="col"> Action </th>
                         </tr>
                     </thead>
@@ -28,6 +29,7 @@
                             <tr>
                                 <td> {{ $client->user->last_name }} </td>
                                 <td> {{ $client->user->first_name }}</td>
+                                <td> {{ $client->user->email }}</td>
                                 <td>
                                     {{--  <a class="btn btn-success btn-sm btn-rounded " id="logincss" title="look"
                                         href="{{ route('client.show', $client->id) }}" data-bs-toggle="tooltip">

@@ -6,7 +6,9 @@ use App\Models\Lieu;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\Evenement;
+use App\Notifications\NouvelleNotification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Notifications\DatabaseNotification;
@@ -17,6 +19,7 @@ class HomeController extends Controller
     public function index()
     {
         if (organisateurPermission() == true || clientPermission() == true || prestatairePermission() == true || auth()->user()?->usertype == 1) {
+
             $lieux = Lieu::all();
             // dd($lieux);
             $evenement = Evenement::all();
@@ -35,4 +38,7 @@ class HomeController extends Controller
     {
         return view('frontend.layouts.welcome');
     }
+
+
+
 }

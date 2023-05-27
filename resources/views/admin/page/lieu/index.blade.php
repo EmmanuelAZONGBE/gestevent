@@ -14,10 +14,10 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Liste des Lieux</h5>
-                <table class="table">
+                <table class="table table-bordered border-primary">
                     <thead>
                         <tr>
-                            <th>ID</th>
+
                             <th>Nom</th>
                             <th>prix</th>
                             <th>Description</th>
@@ -29,12 +29,12 @@
                     <tbody>
                         @forelse ($lieux as $lieu)
                             <tr>
-                                <td>{{ $lieu->id }}</td>
+
                                 <td>{{ $lieu->nom }}</td>
                                 <td>{{ $lieu->prix }}</td>
                                 <td>{{ $lieu->description }}</td>
                                 <td>{{ $lieu->adresse }}</td>
-                                <td>
+                                <td scope="row">
                                     @if ($lieu->photo)
                                         <img src="{{ asset('/storage/'.$lieu->photo) }}" alt="photo du lieu" style="width: 100px;">
                                     @else

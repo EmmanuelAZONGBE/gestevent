@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NouvelleNotification;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\UserController;
@@ -50,6 +51,10 @@ route::get('/organisateur/forme',function(){
 
 route::get('/',[HomeController::class,'index']);
 
+Route::get('/notifications/index', [NouvelleNotification::class, 'index'])->name('notifications.index');
+
+
+
 route::get('/redirect',[HomeController::class,'redirect']);
 
 //partie view admin
@@ -98,11 +103,13 @@ Route::get('/evenement/edit/{id}', [EvenementController::class,'edit'])->name('e
 
 Route::put('/evenement/update/{id}', [EvenementController::class,'update'])->name('evenement.update');
 
-Route::post('/evenement/update{evenement}', [EvenementController::class,'update']);
-
 Route::delete('/evenement/destroy/{id}', [EvenementController::class,'destroy'])->name('evenement.destroy');
 
 Route::get('/evenement/show', [EvenementController::class,'show'])->name('evenement.show');
+
+Route::post('/evenement/accepter/{id}', [EvenementController::class, 'accepter'])->name('evenement.accepter');
+
+Route::post('/evenement/rejeter/{id}', [EvenementController::class, 'rejeter'])->name('evenement.rejeter');
 
 
 
@@ -116,8 +123,6 @@ Route::post('/service/store', [ServiceController::class,'store'])->name('service
 Route::get('/service/edit/{id}', [ServiceController::class,'edit'])->name('service.edit');
 
 Route::put('/service/update/{id}', [ServiceController::class,'update'])->name('service.update');
-
-Route::post('/service/update{service}', [ServiceController::class,'update']);
 
 Route::delete('/service/destroy/{id}', [ServiceController::class,'destroy'])->name('service.destroy');
 
@@ -136,8 +141,6 @@ Route::get('/prestataire/edit/{id}', [PrestataireController::class,'edit'])->nam
 
 Route::put('/prestataire/update/{id}', [PrestataireController::class,'update'])->name('prestataire.update');
 
-Route::post('/prestataire/update{prestataire}', [PrestataireController::class,'update']);
-
 Route::delete('/prestataire/destroy/{id}', [PrestataireController::class,'destroy'])->name('prestataire.destroy');
 
 Route::get('/prestataire/show', [PrestataireController::class,'show'])->name('prestataire.show');
@@ -153,8 +156,6 @@ Route::post('/organisateur/store', [OrganisateurController::class,'store'])->nam
 Route::get('/organisateur/edit/{id}', [OrganisateurController::class,'edit'])->name('organisateur.edit');
 
 Route::put('/organisateur/update/{id}', [OrganisateurController::class,'update'])->name('organisateur.update');
-
-Route::post('/organisateur/update{organisateur}', [OrganisateurController::class,'update']);
 
 Route::delete('/organisateur/destroy/{id}', [OrganisateurController::class,'destroy'])->name('organisateur.destroy');
 
@@ -209,8 +210,6 @@ Route::get('type/edit/{id}', [TypeEvenementController::class,'edit'])->name('typ
 
 Route::put('type/update/{id}', [TypeEvenementController::class,'update'])->name('type.update');
 
-Route::post('type/update{typeevenement}', [TypeEvenementController::class,'update']);
-
 Route::delete('type/destroy/{id}', [TypeEvenementController::class,'destroy'])->name('type.destroy');
 
 
@@ -226,3 +225,4 @@ Route::get('/frontend_reclamations/create', [ReclamationController::class,'creat
 Route::post('/frontend_reclamations/store', [ReclamationController::class,'store'])->name('frontend_reclamations.store');
 
 
+//
