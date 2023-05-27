@@ -78,4 +78,31 @@ class TypeEvenementController extends Controller
 
         return redirect()->route('type.index')->with('success', 'Reclamation deleted successfully.');
     }
+    public function accepter($id)
+    {
+        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+            $typeevenement = TypeEvenement::find($id);
+            // Mettre à jour le statut "état" de l'événement pour le marquer comme accepté
+            $typeevenement->etat = "Accepté";
+            $typeevenement->save();
+
+            return back()->with('success', 'Publication acceptée');
+        } else {
+            return view('admin.page.index');
+        }
+    }
+
+    public function rejeter($id)
+    {
+        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+            $typeevenement = TypeEvenement::find($id);
+            // Mettre à jour le statut "état" du TypeEvenement pour le marquer comme rejeté
+            $typeevenement->etat = "Rejeté";
+            $typeevenement->save();
+
+            return back()->with('success', 'Publication rejetée');
+        } else {
+            return view('admin.page.index');
+        }
+    }
 }

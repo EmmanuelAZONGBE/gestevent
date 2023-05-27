@@ -54,19 +54,7 @@
 
                                     <input type="submit" value="Log In" class="btn btn-block btn-primary">
 
-                                    <span class="d-block text-left my-4 text-muted"><a href="{{ route('register') }}">&mdash; or login with &mdash;</a></span>
-
-                                    <div class="social-login">
-                                        <a href="#" class="facebook">
-                                            <span class="icon-facebook mr-3"></span>
-                                        </a>
-                                        <a href="#" class="twitter">
-                                            <span class="icon-twitter mr-3"></span>
-                                        </a>
-                                        <a href="#" class="google">
-                                            <span class="icon-google mr-3"></span>
-                                        </a>
-                                    </div>
+                                    <span class="d-block text-left my-4 text-muted"><a href="{{ route('register') }}">&mdash; or Sign Up with &mdash;</a></span>
                                 </form>
                             </div>
                         </div>
