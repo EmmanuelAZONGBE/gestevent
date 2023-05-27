@@ -92,13 +92,20 @@
                                 <i class="bi bi-pencil"></i>
                             </a>
                             @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
-                            <a href="{{ route('evenement.accepter', $evenement->id) }}" title="Accepter" class="btn btn-info btn-sm btn-rounded" onclick="return confirm('Etes-vous sûr ?')">
-                                <i class="bi bi-check"></i>
-                            </a>
+                            <form action="{{ route('evenement.accepter', $evenement->id) }}" method="post">
+                                @csrf
+                                <button type="submit" title="Accepter" class="btn btn-info btn-sm btn-rounded" onclick="return confirm('Etes-vous sûr ?')">
+                                    <i class="bi bi-check"></i>
+                                </button>
+                            </form>
 
-                            <a href="{{ route('evenement.rejeter', $evenement->id) }}" title="Rejeter" class="btn btn-success btn-sm btn-rounded" onclick="return confirm('Etes-vous sûr ?')">
-                                <i class="bi bi-x"></i>
-                            </a>
+                            <form action="{{ route('evenement.rejeter', $evenement->id) }}" method="post">
+                                @csrf
+                                <button type="submit" title="Rejeter" class="btn btn-success btn-sm btn-rounded" onclick="return confirm('Etes-vous sûr ?')">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            </form>
+
                             @endif
                         </td>
                     </tr>

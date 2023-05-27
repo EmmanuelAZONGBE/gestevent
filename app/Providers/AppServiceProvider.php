@@ -27,14 +27,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapThree();
-
-        $this->app->booted(function () {
-            // Écouter l'événement Login
-            Event::listen(Login::class, function ($event) {
-                $user = $event->user;
-                $user->notify(new NouvelleNotification($user));
-            });
-        });
     }
 
 }

@@ -162,7 +162,6 @@
                                     <th scope="row">Day 1</th>
 
                                     <td class="table-background-image-wrap " style='background-image : url({{ asset('/storage/.$lieu->photo') }})'>
-                                        
                                         <h3>Pop Night</h3>
 
                                         <p class="mb-2">5:00 - 7:00 PM</p>

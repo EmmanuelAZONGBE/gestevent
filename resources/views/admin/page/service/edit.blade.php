@@ -27,22 +27,20 @@
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="nom_service" placeholder="nome servie"
                                         name="nom_service" value="{{ $service->nom_service }}">
-                                    <label for="nom_service">Nom service</label>
+                                    <label for="nom_service">Nom service :</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
                                     <textarea class="form-control" placeholder="Address" id="descriptions" style="height: 100px;">{{ $service->descriptions }}</textarea>
-                                    <label for="descriptions">Description</label>
+                                    <label for="descriptions">Description :</label>
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <label class="toggle-switch toggle-switch-dark">
-                                        <input name="etat" type="checkbox" @checked($service->etat)>
-                                        <span class="toggle-slider round"></span>
-                                    </label>
+                                    <input class="form-control" placeholder="le prix du service proposer" id="prix" name="prix" value="{{ $service->prix }}">
+                                    <label for="prix">Prix :</label>
                                 </div>
                             </div>
 
