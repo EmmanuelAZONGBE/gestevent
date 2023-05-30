@@ -46,7 +46,7 @@
                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editer le profil</button>
               </li>
 
-              @if ($user->organisateur)
+              @if ($organisateur)
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#organisateur-edit">Editer l organisateur</button>
                 </li>
@@ -158,7 +158,7 @@
                 </form><!-- End Profile Edit Form -->
 
               </div>
-              @if ($user->organisateur)
+              @if ($organisateur)
                 <div class="tab-pane fade profile-edit pt-3" id="organisateur-edit">
 
                   <!-- Profile Edit Form -->
@@ -170,7 +170,7 @@
                     <div class="row mb-3">
                       <label for="disponible" class="col-md-4 col-lg-3 col-form-label">Disponible</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="disponible" type="text" class="{{ $errors->has('disponible') ? ' is-invalid' : '' }}  form-control" id="disponible" value="{{ $user->organisateur->disponible }}">
+                        <input name="disponible" type="text" class="{{ $errors->has('disponible') ? ' is-invalid' : '' }}  form-control" id="disponible" value="{{ $organisateur->disponible }}">
                         @if ($errors->has('disponible'))
                             <span class="invalid-feedback" role="alert">
                                 {{ $errors->first('disponible') }}
@@ -181,7 +181,7 @@
                     <div class="row mb-3">
                       <label for="compagnie" class="col-md-4 col-lg-3 col-form-label">Compagnie</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="compagnie" type="text" class="{{ $errors->has('compagnie') ? ' is-invalid' : '' }}  form-control" id="compagnie" value="{{ $user->organisateur->compagnie }}">
+                        <input name="compagnie" type="text" class="{{ $errors->has('compagnie') ? ' is-invalid' : '' }}  form-control" id="compagnie" value="{{ $organisateur->compagnie }}">
                         @if ($errors->has('compagnie'))
                             <span class="invalid-feedback" role="alert">
                                 {{ $errors->first('compagnie') }}
@@ -193,7 +193,7 @@
                     <div class="row mb-3">
                       <label for="adresse_compagnie" class="col-md-4 col-lg-3 col-form-label">Adresse compagnie</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="adresse_compagnie" type="text" class="{{ $errors->has('adresse_compagnie') ? ' is-invalid' : '' }} form-control" id="adresse_compagnie" value="{{ $user->organisateur->adresse_compagnie }}">
+                        <input name="adresse_compagnie" type="text" class="{{ $errors->has('adresse_compagnie') ? ' is-invalid' : '' }} form-control" id="adresse_compagnie" value="{{ $organisateur->adresse_compagnie }}">
                         @if ($errors->has('adresse_compagnie'))
                             <span class="invalid-feedback" role="alert">
                                 {{ $errors->first('adresse_compagnie') }}
@@ -204,7 +204,7 @@
                     <div class="row mb-3">
                       <label for="type_evenement_organiser" class="col-md-4 col-lg-3 col-form-label">Evénéments déjà organisés</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="type_evenement_organiser" type="text" class="{{ $errors->has('type_evenement_organiser') ? ' is-invalid' : '' }} form-control" id="type_evenement_organiser" value="{{ $user->organisateur->type_evenement_organiser }}">
+                        <input name="type_evenement_organiser" type="text" class="{{ $errors->has('type_evenement_organiser') ? ' is-invalid' : '' }} form-control" id="type_evenement_organiser" value="{{ $organisateur->type_evenement_organiser }}">
                         @if ($errors->has('type_evenement_organiser'))
                             <span class="invalid-feedback" role="alert">
                                 {{ $errors->first('type_evenement_organiser') }}
@@ -215,7 +215,7 @@
                     <div class="row mb-3">
                       <label for="experience" class="col-md-4 col-lg-3 col-form-label">Nombre d années d expérience</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="experience" type="number" class="{{ $errors->has('experience') ? ' is-invalid' : '' }} form-control" id="experience" value="{{ $user->organisateur->experience }}">
+                        <input name="experience" type="number" class="{{ $errors->has('experience') ? ' is-invalid' : '' }} form-control" id="experience" value="{{ $organisateur->experience }}">
                         @if ($errors->has('experience'))
                             <span class="invalid-feedback" role="alert">
                                 {{ $errors->first('experience') }}

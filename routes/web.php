@@ -16,7 +16,7 @@ use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\OrganisateurController;
 use App\Http\Controllers\TypeEvenementController;
 use App\Http\Controllers\Frontend\EvenementController as FrontendEvenementController;
-
+use App\Http\Controllers\PanierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +37,13 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    
+Route::resource('paniers',PanierController::class);
+
+
 });
+Route::get('paniers/downloadPDF/{id}', [PanierController::class, 'downloadPDF'])->name('paniers.downloadPDF');
+
 
 Route::resource('user_profile', ProfileController::class);
 
@@ -132,6 +138,16 @@ Route::post('/service/accepter/{id}', [ServiceController::class, 'accepter'])->n
 
 Route::post('/service/rejeter/{id}', [ServiceController::class, 'rejeter'])->name('service.rejeter');
 
+Route::post('/service/ajout_panier/{id}',[ServiceController::class,'ajout_panier'])->name('service.ajout_panier');
+
+Route::get('/service/show_panier',[ServiceController::class,'show_panier'])->name('service.show_panier');
+
+Route::get('/service/retir_panier',[ServiceController::class,'retir_panier'])->name('service.retir_panier');
+
+Route::get('/service/print_pdf/{id}',[ServiceController::class,'print_pdf'])->name('service.print_pdf');
+
+
+
 
 // prestataire routes
 
@@ -148,6 +164,7 @@ Route::put('/prestataire/update/{id}', [PrestataireController::class,'update'])-
 Route::delete('/prestataire/destroy/{id}', [PrestataireController::class,'destroy'])->name('prestataire.destroy');
 
 Route::get('/prestataire/show', [PrestataireController::class,'show'])->name('prestataire.show');
+
 
 
 // organisateur routes
@@ -226,7 +243,6 @@ Route::delete('type/destroy/{id}', [TypeEvenementController::class,'destroy'])->
 Route::post('/type/accepter/{id}', [TypeEvenementController::class, 'accepter'])->name('type.accepter');
 
 Route::post('/type/rejeter/{id}', [TypeEvenementController::class, 'rejeter'])->name('type.rejeter');
-
 
 //frontend routes
 

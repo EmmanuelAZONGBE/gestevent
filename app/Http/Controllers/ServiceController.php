@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\Lieu;
 use App\Models\Service;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Darryldecode\Cart\Cart as CartCart;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -146,7 +151,7 @@ class ServiceController extends Controller
         $service = Service::find($id);
         if (!$service) {
             // Si le service n'est pas trouvé, retourner une réponse d'erreur
-            return redirect()->back()->with('success','Service non trouvé');
+            return redirect()->back()->with('success', 'Service non trouvé');
         }
         $service->delete();
         // Retourner une réponse appropriée
@@ -169,7 +174,7 @@ class ServiceController extends Controller
 
     public function rejeter($id)
     {
-        if (organisateurPermission() == true ||auth()->user()->usertype == 1) {
+        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
             $service = service::find($id);
             // Mettre à jour le statut "état" de l'événement pour le marquer comme accepté
             $service->etat = "Accepté";
@@ -180,4 +185,80 @@ class ServiceController extends Controller
             return view('admin.page.index');
         }
     }
+
+    // public function ajout_panier(Request $request, $id)
+
+    // {
+    //     if (Auth::id()) {
+    //         $user = Auth::user();
+    //         dd($user);
+    //         $service = Service::find($id);
+    //         // $quantiter = $request->input('quantiter');
+    //         // dd($service);
+    //         $cart= new Cart();
+
+    //         $cart ->last_name=$user->last_name;
+
+    //         $cart ->first_name=$user->first_name;
+
+    //         $cart ->email=$user->email;
+
+    //         $cart ->phone=$user->phone;
+
+    //         $cart ->user_id=$user->id;
+
+    //         $cart ->nom_service=$service->nom_service;
+
+    //         $cart ->prix=$service->prix * $request->quantiter;
+
+    //         $cart ->descriptions=$service->descriptions;
+
+    //         $cart ->quantiter=$request->quantiter;
+
+    //         $cart ->service_id=$service->id;
+
+
+    //         // $cart->save;
+    //         // dd($cart);
+
+    //         return redirect()->back();
+
+
+    //     } else {
+    //         return redirect('login');
+    //     }
+    // }
+
+    // public function show_panier()
+    // {
+    //     if (Auth::id()) { $id=Auth::user()->id;
+
+    //         $cart= Cart::where('user_id','=','$id')->get();
+
+    //         return view('admin.page.service.show_panier',compact('cart'));
+    //     }
+    //     else
+    //     {
+    //         return redirect('login');
+    //     }
+
+    // }
+
+    // public function retir_panier($id)
+    // {
+    //     $cart=Cart::find($id);
+
+    //     $cart->delete();
+
+    //     return redirect()->back();
+    // }
+
+    // public function print_pdf($id)
+    // {
+    //     $cart=Cart::find($id);
+    //     $lieux=Lieu::find($id);
+    //     $pdf = PDF::loadView('admin.page.service.pdf',compact('cart','lieux'));
+
+    //     return $pdf->download('show_panier.pdf');
+    // }
 }

@@ -22,9 +22,9 @@
                                 <a class="nav-link click-scroll" href="#section_3"> Lieu </a>
                             </li>
 
-                            <li class="nav-item">
+                            {{--  <li class="nav-item">
                                 <a class="nav-link click-scroll" href="#section_4"> Progamme </a>
-                            </li>
+                            </li>  --}}
 
                             @if (Route::has('login'))
 
@@ -35,22 +35,22 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="btn btn-primary" id="logincss" href="{{ url('/redirect')}}"> Dash </a>
+                                <a class="btn btn-primary" id="logincss" href="{{ url('/redirect')}}"> Tableau de bors </a>
                             </li>
 
 
                             <li class="nav-item">
-                                <a class="btn btn-rouned btn-info" id="logincss" href="{{ url('/logout')}}"> Log Out </a>
+                                <a class="btn btn-rouned btn-info" id="logincss" href="{{ url('/logout')}}"> Déconnection </a>
                             </li>
 
                             @else
 
                             <li class="nav-item">
-                                <a class="btn btn-primary" id="logincss" href="{{ route('login') }}"> Login </a>
+                                <a class="btn btn-primary" id="logincss" href="{{ route('login') }}"> Connexion </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="btn btn-success" href="{{ route('register') }}"> Register </a>
+                                <a class="btn btn-success" href="{{ route('register') }}"> Inscription </a>
                             </li>
                             @endauth
 

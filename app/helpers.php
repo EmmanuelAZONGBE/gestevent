@@ -1,8 +1,10 @@
 <?php
 
+
 use App\Models\Client;
-use App\Models\Organisateur;
+use App\Models\Panier;
 use App\Models\Prestataire;
+use App\Models\Organisateur;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Contracts\Permission;
 
@@ -42,4 +44,8 @@ function organisateurPermission()
     }
 }
 
+function cart()
+{
+    return Panier::where('user_id', Auth::id())->count();
+}
 

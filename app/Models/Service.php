@@ -14,4 +14,9 @@ class Service extends Model
         'prix',
     ];
 
+
+    public function paniers()
+    {
+        return $this->hasMany(Panier::class);
+    }
 }

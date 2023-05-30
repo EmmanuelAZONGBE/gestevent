@@ -19,7 +19,6 @@
                     <option value="">Choisissez un état</option>
                     <option value="accepté">Accepté</option>
                     <option value="rejeté">Rejeté</option>
-                    <option value="en_attente">En attente</option>
                 </select>
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
@@ -69,7 +68,7 @@
                         <td>{{ $lieu->adresse }}</td>
                         <td scope="row">
                             @if ($lieu->photo)
-                            <img src="{{ asset('/storage/'.$lieu->photo) }}" alt="photo du lieu" style="width: 100px;">
+                            <img src="{{ Storage::url($lieu->photo) }}" alt="photo du lieu" style="width: 100px;">
                             @else
                             Aucune photo
                             @endif

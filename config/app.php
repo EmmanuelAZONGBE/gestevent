@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Darryldecode\Cart\Facades\CartFacade;
+use Darryldecode\Cart\CartServiceProvider;
 
 return [
 
@@ -154,11 +156,18 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+    
+
+    
+
+
 
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
          * Package Service Providers...
          */
+        CartServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -170,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -184,6 +194,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'cart'=>CartFacade::class,
+        'PDF'=> Barryvdh\DomPDF\Facade::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 

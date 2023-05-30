@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,16 +15,19 @@ class UserTableSeeder extends Seeder
     public function run(): void
     {
         //
-        DB::table('users')->insert([
-            'last_name'=>'DOSSA',
+        $users = [
+
+           [ 'last_name'=>'DOSSA',
             'first_name'=>'Firmin',
             'statut'=>'client',
             'phone'=>'78142569',
             'email'=>'firmin@gmail.com',
             'adresse'=>'Cotonou',
             'usertype'=>'0',
-        ]);
-        DB::table('users')->insert([
+            'password' =>'azertyuiop'
+        ],
+
+        [
             'last_name'=>'DOSSOUSA',
             'first_name'=>'Rufin',
             'statut'=>'client',
@@ -31,8 +35,10 @@ class UserTableSeeder extends Seeder
             'email'=>'rufin@gmail.com',
             'adresse'=>'Parakou',
             'usertype'=>'0',
-        ]);
-        DB::table('users')->insert([
+            'password' =>'azertyuiop'
+            ],
+
+            [
             'last_name'=>'GOHOUN',
             'first_name'=>'Akides',
             'statut'=>'client',
@@ -40,8 +46,10 @@ class UserTableSeeder extends Seeder
             'email'=>'akides@gmail.com',
             'adresse'=>'Calavi',
             'usertype'=>'0',
-        ]);
-        DB::table('users')->insert([
+            'password' =>'azertyuiop'
+            ],
+
+            [
             'last_name'=>'MIGAN',
             'first_name'=>'Chadrack',
             'statut'=>'client',
@@ -49,8 +57,10 @@ class UserTableSeeder extends Seeder
             'email'=>'firmin@gmail.com',
             'adresse'=>'Natitingou',
             'usertype'=>'0',
-        ]);
-        DB::table('users')->insert([
+            'password' =>'azertyuiop'
+            ],
+
+            [
             'last_name'=>'KOUASSI',
             'first_name'=>'Esther',
             'statut'=>'prestataire',
@@ -58,8 +68,10 @@ class UserTableSeeder extends Seeder
             'email'=>'esther@gmail.com',
             'adresse'=>'Djougou',
             'usertype'=>'0',
-        ]);
-        DB::table('users')->insert([
+            'password' =>'azertyuiop'
+            ],
+
+            [
             'last_name'=>'ADNANE',
             'first_name'=>'Nano',
             'statut'=>'prestataire',
@@ -67,8 +79,10 @@ class UserTableSeeder extends Seeder
             'email'=>'nano@gmail.com',
             'adresse'=>'Porto-Novo',
             'usertype'=>'0',
-        ]);
-        DB::table('users')->insert([
+            'password' =>'azertyuiop'
+            ],
+
+            [
             'last_name'=>'CADNEL',
             'first_name'=>'Moryl',
             'statut'=>'prestataire',
@@ -76,8 +90,10 @@ class UserTableSeeder extends Seeder
             'email'=>'moryl@gmail.com',
             'adresse'=>'Cotonou',
             'usertype'=>'0',
-        ]);
-        DB::table('users')->insert([
+            'password' =>'azertyuiop'
+            ],
+
+            [
             'last_name'=>'YEPKE',
             'first_name'=>'Jeremie',
             'statut'=>'prestataire',
@@ -85,8 +101,10 @@ class UserTableSeeder extends Seeder
             'email'=>'jeremie@gmail.com',
             'adresse'=>'Cotonou',
             'usertype'=>'0',
-        ]);
-        DB::table('users')->insert([
+            'password' =>'azertyuiop'
+            ],
+
+            [
             'last_name'=>'ATTOLOU',
             'first_name'=>'Bohr',
             'statut'=>'prestataire',
@@ -94,8 +112,10 @@ class UserTableSeeder extends Seeder
             'email'=>'bohr@gmail.com',
             'adresse'=>'Parakou',
             'usertype'=>'0',
-        ]);
-        DB::table('users')->insert([
+            'password' =>'azertyuiop'
+            ],
+
+            [
             'last_name'=>'AZONHIN',
             'first_name'=>'Tesla',
             'statut'=>'organisateur',
@@ -103,8 +123,10 @@ class UserTableSeeder extends Seeder
             'email'=>'tesla@gmail.com',
             'adresse'=>'Porto-Novo',
             'usertype'=>'0',
-        ]);
-        DB::table('users')->insert([
+            'password' =>'azertyuiop'
+            ],
+
+            [
             'last_name'=>'AFFOUDA',
             'first_name'=>'Gisele',
             'statut'=>'organisateur',
@@ -112,8 +134,10 @@ class UserTableSeeder extends Seeder
             'email'=>'gisele@gmail.com',
             'adresse'=>'Djougou',
             'usertype'=>'0',
-        ]);
-        DB::table('users')->insert([
+            'password' =>'azertyuiop'
+            ],
+
+            [
             'last_name'=>'AGBAGLI',
             'first_name'=>'Jean',
             'statut'=>'organisateur',
@@ -121,8 +145,10 @@ class UserTableSeeder extends Seeder
             'email'=>'jean@gmail.com',
             'adresse'=>'Natitingou',
             'usertype'=>'0',
-        ]);
-        DB::table('users')->insert([
+            'password' =>'azertyuiop'
+            ],
+
+            [
             'last_name'=>'Admin',
             'first_name'=>'Admin',
             'statut'=>'',
@@ -130,6 +156,9 @@ class UserTableSeeder extends Seeder
             'email'=>'firmin@gmail.com',
             'adresse'=>'Cotonou',
             'usertype'=>'1',
-        ]);
+            'password' =>'azertyuiop'
+            ],
+        ];
+        User::insert($users);
     }
 }

@@ -133,8 +133,8 @@
 @endauth
 
 
-@auth
-<section class="schedule-section section-padding" id="section_4">
+
+{{--  <section class="schedule-section section-padding" id="section_4">
     <div class="container">
         <div class="row">
 
@@ -233,7 +233,7 @@
         </div>
     </div>
 </section>
-@endauth
+  --}}
 
 
 @auth

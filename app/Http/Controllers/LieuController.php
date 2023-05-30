@@ -40,7 +40,7 @@ class LieuController extends Controller
                 'adresse' => 'required',
             ]);
 
-            $photo = $request->photo->store('lieu');
+            $photo =  $this->uploads($request, 'photo');
 
             Lieu::create([
                 'nom' => $request->nom,
@@ -80,7 +80,7 @@ class LieuController extends Controller
             $lieu->adresse = $request->adresse;
             $lieu->photo = $request->photo;
             if ($request->photo != null) {
-                $photo = $request->photo->store('lieu');
+                $photo =  $this->uploads($request, 'photo');
                 $lieu->photo = $photo;
             }
             $lieu->save();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Lieu;
 use App\Models\User;
 use App\Models\Client;
