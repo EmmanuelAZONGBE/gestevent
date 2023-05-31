@@ -123,7 +123,7 @@ class ServiceController extends Controller
         // }
 
         // Valider les données de la requête
-        $validatedData = $request->validate([
+        $request->validate([
             'nom_service' => 'nullable|string',
             'descriptions' => 'nullable|string',
             'prix' => 'nullable|string',
@@ -131,13 +131,10 @@ class ServiceController extends Controller
         ]);
 
         // Mettre à jour les champs du service avec les données validées
-        $service->nom_service = $validatedData['nom_service'];
-        $service->descriptions = $validatedData['descriptions'];
-        $service->prix = $validatedData['prix'];
-        $service->etat = $validatedData['etat'];
-
-        // Enregistrer les modifications dans la base de données
-        $service->save();
+        $service->update($request->all());
+        // Retourne une réponse appropriée
+        
+        return view('admin.page.service.create');
 
         // Retourner une réponse appropriée
         return redirect()->route('service.index')->with('success', 'le service a été mise à jours avec succes.');

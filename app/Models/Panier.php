@@ -11,14 +11,12 @@ class Panier extends Model
     
     protected $fillable = [
         'service_id',
-        'nom_service',
-        'quantiter',
+        'nom_service',        
         'descriptions',
         'prix'
     ];
 
     protected $casts = [
-        'quantiter' => 'integer',
         'prix' => 'integer'
     ];
 

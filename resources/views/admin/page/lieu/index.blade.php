@@ -68,7 +68,8 @@
                         <td>{{ $lieu->adresse }}</td>
                         <td scope="row">
                             @if ($lieu->photo)
-                            <img src="{{ Storage::url($lieu->photo) }}" alt="photo du lieu" style="width: 100px;">
+                            <img src="{{ Storage::url($lieu->photo) }}" alt="photo du lieu" style="border-radius: 5px;
+                            max-width: 60px;">
                             @else
                             Aucune photo
                             @endif

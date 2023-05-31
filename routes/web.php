@@ -42,7 +42,10 @@ Route::resource('paniers',PanierController::class);
 
 
 });
-Route::get('paniers/downloadPDF/{id}', [PanierController::class, 'downloadPDF'])->name('paniers.downloadPDF');
+Route::get('panier/downloadPDF/{id}', [PanierController::class, 'downloadPDF'])->name('panier.downloadPDF');
+
+Route::get('panier/sendMessage/{id}', [PanierController::class, 'sendMessage'])->name('panier.sendMessage');
+
 
 
 Route::resource('user_profile', ProfileController::class);

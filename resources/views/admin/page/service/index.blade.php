@@ -51,7 +51,6 @@
                 <thead>
                     <tr>
                         <th scope="col"> Nom du service </th>
-                        <th scope="col"> Ajouter </th>
                         <th scope="col"> Description </th>
                         <th scope="col"> Prix </th>
                         <th scope="col">Etat</th>
@@ -64,19 +63,19 @@
                     <tr class="service-row">
                         <td> {{ $service->nom_service }} </td>
                         <td>
-                                <form action="{{ route('paniers.store') }}" method="POST">
-                                    @csrf
-                                    <input  name="service_id" value="{{ $service->id }}" type="hidden">
-                                    <button type="submit" class="add_btn">
-                                     Ajouter au panier 
-                                    </button>
-                                </form>
-
+                            
+                            <form action="{{ route('paniers.store') }}" method="POST">
+                                @csrf
+                                <input  name="service_id" value="{{ $service->id }}" type="hidden">
+                                <button type="submit" class="add_btn">
+                                 Ajouter au panier 
+                                </button>
+                            </form>
                         </td>
                         <td> {{ $service->descriptions }} </td>
                         <td> {{ $service->prix }} </td>
                         <td class="service-etat">{{ $service->etat }}</td>
-
+                        
                         <td>
                             <form action="{{ route('service.destroy', $service->id) }}" class="rounded-circle "method="POST">
                                 @csrf
@@ -101,7 +100,7 @@
                             </form>
                             @endif
                         </td>
-
+                        
                         <td>
                             <a class="btn btn-success btn-sm btn-rounded " title="update" href="{{ route('service.edit', $service->id) }}" data-bs-toggle="tooltip">
                                 <i class="bi bi-pencil"></i>

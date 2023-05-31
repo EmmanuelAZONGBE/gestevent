@@ -85,12 +85,12 @@
                                     </button>
                                 </form>
 
-                                <form action="{{ route('reclamation.rejeter', $reclamation->id) }}" method="post">
-                                    @csrf
-                                    <button type="submit" title="Rejeter" class="btn btn-success btn-sm btn-rounded" onclick="return confirm('Etes-vous sûr ?')">
-                                        <i class="bi bi-x"></i>
-                                    </button>
-                                </form>
+                                    <form action="{{ route('reclamation.rejeter', $reclamation->id) }}" method="post">
+                                        @csrf
+                                        <button type="submit" title="Rejeter" class="btn btn-success btn-sm btn-rounded" onclick="return confirm('Etes-vous sûr ?')">
+                                            <i class="bi bi-x"></i>
+                                        </button>
+                                    </form>
 
                                 @endif
                             </td>

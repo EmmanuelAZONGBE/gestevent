@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lieu;
 use App\Models\Panier;
-use Barryvdh\DomPDF\PDF;
 
+use App\Models\Evenement;
+use Barryvdh\DomPDF\Facade;
 use Illuminate\Http\Request;
+use App\Models\TypeEvenement;
+use Barryvdh\DomPDF\PDF as PDF;
+use Illuminate\Support\Facades\Auth;
 
 class PanierController extends Controller
 {
@@ -14,6 +19,8 @@ class PanierController extends Controller
      */
     public function index()
     {
+        $id=Auth::user()->id;
+        $panier=Panier::where('user_id','=',$id)->get();
         $paniers = Panier::select(
             'paniers.*',
             'services.prix as prix'
@@ -77,13 +84,25 @@ class PanierController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Panier $panier)
+    public function destroy($id)
     {
-        //
+        $panier = Panier::select(
+            'paniers.*',
+            'services.prix as prix'
+        )
+            ->join('services', 'services.id', '=', 'paniers.service_id')
+            ->where('paniers.user_id', auth()->id())
+            ->get();
+        $panier->delete();
+
+        return redirect()->back('admin.page.panier.index')->with('success', 'Supprimer avec succes');
     }
 
     public function downloadPDF($id)
     {
+        
+        $evenement = Evenement::all();
+        $lieux = Lieu::all();
         $paniers = Panier::select(
             'paniers.*',
             'services.prix as prix'
@@ -92,8 +111,30 @@ class PanierController extends Controller
             ->where('paniers.user_id', auth()->id())
             ->get();
 
-        $pdf = PDF::loadView('admin.page.panier.pdf', compact('paniers'));
+        $pdf = PDF::loadView('admin.page.panier.pdf', [
+            'evenement' => $evenement, 'paniers' => $paniers,
+            'lieux' => $lieux
+        ]);
 
         return $pdf->download('paniers.pdf');
+    }
+    
+    public function sendMessage($id)
+    {
+        dd($id);
+        $evenement = Evenement::all();
+        $lieux = Lieu::all();
+        $paniers = Panier::select(
+            'paniers.*',
+            'services.prix as prix'
+        )
+            ->join('services', 'services.id', '=', 'paniers.service_id')
+            ->where('paniers.user_id', auth()->id())
+            ->get();
+
+        return view('admin.page.panier.sendMessage', [
+            'evenement' => $evenement, 'paniers' => $paniers,
+            'lieux' => $lieux
+        ]);
     }
 }

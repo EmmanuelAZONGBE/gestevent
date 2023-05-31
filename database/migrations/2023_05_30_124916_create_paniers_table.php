@@ -15,7 +15,6 @@ return new class extends Migration
         Schema::create('paniers', function (Blueprint $table) {
             $table->id();
             $table->string('nom_service')->nullable();
-            $table->string('quantiter')->nullable();
             $table->string('prix')->nullable();
             $table->string('descriptions')->nullable();
             $table->string('user_id')->nullable();
