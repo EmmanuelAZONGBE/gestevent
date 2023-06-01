@@ -3,22 +3,23 @@
 use App\Events\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NouvelleNotification;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\PanierController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\NouvelleNotification;
 use App\Http\Controllers\PrestataireController;
 use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\OrganisateurController;
 use App\Http\Controllers\TypeEvenementController;
 use App\Http\Controllers\Frontend\EvenementController as FrontendEvenementController;
-use App\Http\Controllers\PanierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -263,4 +264,7 @@ Route::get('/frontend_reclamations/create', [ReclamationController::class,'creat
 Route::post('/frontend_reclamations/store', [ReclamationController::class,'store'])->name('frontend_reclamations.store');
 
 
-//
+//contact
+Route::get('/contact/index', [ContactController::class,'index'])->name('contact.index');
+Route::get('/contact/thankyou', [ContactController::class,'thankYou'])->name('contact.thankyou');
+Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.send');

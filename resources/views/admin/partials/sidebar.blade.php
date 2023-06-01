@@ -269,7 +269,7 @@
 
       <li class="nav-heading">Contact et message</li>
       <li class="nav-item">
-          <a class="nav-link collapsed" href="">
+          <a class="nav-link collapsed" href="{{ route('contact.index') }}">
               <i class="bi bi-envelope"></i>
               <span>Contact</span>
           </a>
@@ -277,19 +277,13 @@
       <!-- End contact Page Nav -->
 
       <li class="nav-item">
-          <a class="nav-link collapsed" onclick="redirectTochatify()">
-              <i class="bi bi-chat-dots"></i>
-              <span>Message</span>
-          </a>
-          <script>
-            function redirectTochatify() {
-                window.location.href = "http://127.0.0.1:8000/chatify"
-                }
-        </script>
+        <a class="nav-link collapsed" href="#" onclick="redirectTochatify()">
+            <i class="bi bi-chat-dots"></i>
+            <span>Message</span>
+        </a>
+    </li>
 
-      </li>
-
-      <!-- End message Page Nav -->
+<!-- End message Page Nav -->
 
       </ul>
 

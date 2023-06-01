@@ -6,9 +6,9 @@ use App\Models\Lieu;
 use App\Models\Panier;
 
 use App\Models\Evenement;
-use Barryvdh\DomPDF\Facade;
+
 use Illuminate\Http\Request;
-use App\Models\TypeEvenement;
+
 use Barryvdh\DomPDF\PDF as PDF;
 use Illuminate\Support\Facades\Auth;
 
