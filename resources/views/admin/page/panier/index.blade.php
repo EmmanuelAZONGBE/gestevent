@@ -43,7 +43,7 @@
                             $prix = str_replace(' Fcfa', '', $panier->service->prix);
                             $totalPrix += floatval($prix);
                         ?>
-                
+
                 @endforeach
             </tbody>
         </table>
@@ -53,9 +53,14 @@
         <div>
             <a href="{{ route('panier.downloadPDF', ['id' => $panier->id]) }}" class="btn btn-primary">Télécharger PDF</a>
         </div>
-        <div>
-            <a href="{{ url('panier.sendMessage', ['id' => $panier->id]) }}" class="btn btn-info">Envoyer le message</a>
-        </div>
+
+        <button onclick="redirectTochatify()" class="btn btn-info">Accéder à la messagerie</button>
+        <script>
+            function redirectTochatify() {
+                window.location.href = "http://127.0.0.1:8000/chatify";
+            }
+
+        </script>
 
     </div>
 </section>

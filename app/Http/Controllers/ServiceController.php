@@ -117,11 +117,6 @@ class ServiceController extends Controller
         // Trouver le service par son identifiant
         $service = Service::find($id);
 
-        // if (!$service) {
-        //     // Si le service n'est pas trouvé, retourner une réponse d'erreur
-        //     return redirect()->route(['success' => 'Service non trouvé'], 404);
-        // }
-
         // Valider les données de la requête
         $request->validate([
             'nom_service' => 'nullable|string',
@@ -132,13 +127,11 @@ class ServiceController extends Controller
 
         // Mettre à jour les champs du service avec les données validées
         $service->update($request->all());
-        // Retourne une réponse appropriée
-        
-        return view('admin.page.service.create');
 
         // Retourner une réponse appropriée
-        return redirect()->route('service.index')->with('success', 'le service a été mise à jours avec succes.');
+        return redirect()->route('service.index')->with('success', 'Le service a été mis à jour avec succès.');
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -100,7 +100,7 @@ class PanierController extends Controller
 
     public function downloadPDF($id)
     {
-        
+
         $evenement = Evenement::all();
         $lieux = Lieu::all();
         $paniers = Panier::select(
@@ -118,23 +118,5 @@ class PanierController extends Controller
 
         return $pdf->download('paniers.pdf');
     }
-    
-    public function sendMessage($id)
-    {
-        dd($id);
-        $evenement = Evenement::all();
-        $lieux = Lieu::all();
-        $paniers = Panier::select(
-            'paniers.*',
-            'services.prix as prix'
-        )
-            ->join('services', 'services.id', '=', 'paniers.service_id')
-            ->where('paniers.user_id', auth()->id())
-            ->get();
 
-        return view('admin.page.panier.sendMessage', [
-            'evenement' => $evenement, 'paniers' => $paniers,
-            'lieux' => $lieux
-        ]);
-    }
 }

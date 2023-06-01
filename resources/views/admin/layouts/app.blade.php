@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -82,7 +85,9 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('admin/assets/js/main.js') }}"></script>
-
+    <script src="{{ asset('admin/assets/js/pusher.js')}}"></script>
+    <script src="{{ asset('admin/assets/js/echo.js')}}"></script>
+    <script src="{{ asset('admin/assets/js/redirectTochatify.js')}}"></script>
 </body>
 
 </html>

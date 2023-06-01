@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\Message;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NouvelleNotification;
 use App\Http\Controllers\HomeController;
@@ -37,7 +39,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    
+
 Route::resource('paniers',PanierController::class);
 
 
@@ -46,7 +48,10 @@ Route::get('panier/downloadPDF/{id}', [PanierController::class, 'downloadPDF'])-
 
 Route::get('panier/sendMessage/{id}', [PanierController::class, 'sendMessage'])->name('panier.sendMessage');
 
-
+Route::post('/send-message', function (Request $request) {
+    event(new App\Events\Message($request->first_name, $request->last_name, $request->message));
+    return ['success' => true];
+});
 
 Route::resource('user_profile', ProfileController::class);
 
