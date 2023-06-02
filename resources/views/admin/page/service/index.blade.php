@@ -51,6 +51,9 @@
                 <thead>
                     <tr>
                         <th scope="col"> Nom du service </th>
+                        @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
+                        <th scope="col"> Panier </th>
+                        @endif
                         <th scope="col"> Description </th>
                         <th scope="col"> Prix </th>
                         <th scope="col">Etat</th>
@@ -62,6 +65,7 @@
                     @forelse ($services as $service)
                     <tr class="service-row">
                         <td> {{ $service->nom_service }} </td>
+                        @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
                         <td>
 
                             <form action="{{ route('paniers.store') }}" method="POST">
@@ -72,6 +76,7 @@
                                 </button>
                             </form>
                         </td>
+                        @endif
                         <td> {{ $service->descriptions }} </td>
                         <td> {{ $service->prix }} </td>
                         <td class="service-etat">{{ $service->etat }}</td>

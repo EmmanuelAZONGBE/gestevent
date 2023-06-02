@@ -16,12 +16,12 @@
         <h2>Informations de l'utilisateur</h2>
         <p><strong>Nom :</strong> {{ $panier->user->last_name}}</p>
         <p><strong>Numéro :</strong> {{ $panier->user->phone }}</p>
-        <p><strong>Adresse :</strong> {{ $panier->user->email }}</p>
-        <p><strong>Adresse :</strong> {{ $panier->user->adresse }}</p>
+        <p><strong>Adresse mail:</strong> {{ $panier->user->email }}</p>
+        <p><strong>Adresse  :</strong> {{ $panier->user->adresse }}</p>
         <p><strong>Identifiant :</strong> {{ $panier->user_id }}</p>
 
         <h2>Informations de l événement</h2>
-        <p><strong>Nom de l événement :</strong> {{ $$panier->evenement->nom }}</p>
+        <p><strong>Nom de l événement :</strong> {{ $panier->evenement->nom }}</p>
 
         <h2>Photo du lieu de l événement</h2>
         <img src="{{ Storage::url($lieu->photo) }}" alt="photo du lieu" style="width: 100px;">
@@ -46,6 +46,9 @@
                 </tr>
                 @endforeach
             </tbody>
+            <kkiapay-widget sandbox="true" amount="1" key="140d90edbfc500615a953f33ec4c7a660b93e0a6"
+            callback="https://kkiapay-redirect.com" />
         </table>
 </section>
+<script src="https://cdn.kkiapay.me/k.js">
 @endsection

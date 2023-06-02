@@ -42,9 +42,9 @@ Route::middleware([
     })->name('dashboard');
 
 Route::resource('paniers',PanierController::class);
-
-
 });
+Route::delete('panier/destroy/{id}', [PanierController::class, 'destroy'])->name('panier.destroy');
+
 Route::get('panier/downloadPDF/{id}', [PanierController::class, 'downloadPDF'])->name('panier.downloadPDF');
 
 Route::get('panier/sendMessage/{id}', [PanierController::class, 'sendMessage'])->name('panier.sendMessage');
@@ -122,9 +122,9 @@ Route::delete('/evenement/destroy/{id}', [EvenementController::class,'destroy'])
 
 Route::get('/evenement/show', [EvenementController::class,'show'])->name('evenement.show');
 
-Route::post('/evenement/accepter/{id}', [EvenementController::class, 'accepter'])->name('evenement.accepter');
+// Route::post('/evenement/accepter/{id}', [EvenementController::class, 'accepter'])->name('evenement.accepter');
 
-Route::post('/evenement/rejeter/{id}', [EvenementController::class, 'rejeter'])->name('evenement.rejeter');
+// Route::post('/evenement/rejeter/{id}', [EvenementController::class, 'rejeter'])->name('evenement.rejeter');
 
 
 
@@ -212,9 +212,9 @@ Route::delete('/lieu/destroy/{id}', [LieuController::class,'destroy'])->name('li
 
 Route::get('/lieu/show', [LieuController::class,'show'])->name('lieu.show');
 
-Route::post('/lieu/accepter/{id}', [LieuController::class, 'accepter'])->name('lieu.accepter');
+// Route::post('/lieu/accepter/{id}', [LieuController::class, 'accepter'])->name('lieu.accepter');
 
-Route::post('/lieu/rejeter/{id}', [LieuController::class, 'rejeter'])->name('lieu.rejeter');
+// Route::post('/lieu/rejeter/{id}', [LieuController::class, 'rejeter'])->name('lieu.rejeter');
 
 // Route::resource('/reclamations', ReclamationController::class);
 
@@ -230,9 +230,9 @@ Route::put('/reclamation/update/{id}', [ReclamationController::class,'update'])-
 
 Route::delete('/reclamation/destroy/{id}', [ReclamationController::class,'destroy'])->name('reclamation.destroy');
 
-Route::post('/reclamation/accepter/{id}', [ReclamationController::class, 'accepter'])->name('reclamation.accepter');
+// Route::post('/reclamation/accepter/{id}', [ReclamationController::class, 'accepter'])->name('reclamation.accepter');
 
-Route::post('/reclamation/rejeter/{id}', [ReclamationController::class, 'rejeter'])->name('reclamation.rejeter');
+// Route::post('/reclamation/rejeter/{id}', [ReclamationController::class, 'rejeter'])->name('reclamation.rejeter');
 
 
 // typeevenements routes
@@ -249,9 +249,9 @@ Route::put('type/update/{id}', [TypeEvenementController::class,'update'])->name(
 
 Route::delete('type/destroy/{id}', [TypeEvenementController::class,'destroy'])->name('type.destroy');
 
-Route::post('/type/accepter/{id}', [TypeEvenementController::class, 'accepter'])->name('type.accepter');
+// Route::post('/type/accepter/{id}', [TypeEvenementController::class, 'accepter'])->name('type.accepter');
 
-Route::post('/type/rejeter/{id}', [TypeEvenementController::class, 'rejeter'])->name('type.rejeter');
+// Route::post('/type/rejeter/{id}', [TypeEvenementController::class, 'rejeter'])->name('type.rejeter');
 
 //frontend routes
 

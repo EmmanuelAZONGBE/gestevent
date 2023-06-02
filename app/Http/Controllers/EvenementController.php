@@ -150,7 +150,7 @@ class EvenementController extends Controller
                 'client_id' => 'required',
             ]);
 
-            $evenement = Evenement::findOrFail($id);
+            $evenement = Evenement::find($id);
 
             $evenement->nom = $request->nom;
             $evenement->heure = $request->heure;
@@ -186,31 +186,31 @@ class EvenementController extends Controller
         }
     }
 
-    public function accepter($id)
-    {
-        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
-            $evenement = Evenement::find($id);
-            // Mettre à jour le statut "état" de l'événement pour le marquer comme accepté
-            $evenement->etat = "Accepté";
-            $evenement->save();
+    // public function accepter($id)
+    // {
+    //     if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+    //         $evenement = Evenement::find($id);
+    //         // Mettre à jour le statut "état" de l'événement pour le marquer comme accepté
+    //         $evenement->etat = "Accepté";
+    //         $evenement->save();
 
-            return back()->with('success', 'Publication acceptée');
-        } else {
-            return view('admin.page.index');
-        }
-    }
+    //         return back()->with('success', 'Publication acceptée');
+    //     } else {
+    //         return view('admin.page.index');
+    //     }
+    // }
 
-    public function rejeter($id)
-    {
-        if (organisateurPermission() == true ||auth()->user()->usertype == 1) {
-            $evenement = Evenement::find($id);
-            // Mettre à jour le statut "état" de l'événement pour le marquer comme accepté
-            $evenement->etat = "Accepté";
-            $evenement->save();
+    // public function rejeter($id)
+    // {
+    //     if (organisateurPermission() == true ||auth()->user()->usertype == 1) {
+    //         $evenement = Evenement::find($id);
+    //         // Mettre à jour le statut "état" de l'événement pour le marquer comme accepté
+    //         $evenement->etat = "Accepté";
+    //         $evenement->save();
 
-            return back()->with('success', 'Publication acceptée');
-        } else {
-            return view('admin.page.index');
-        }
-    }
+    //         return back()->with('success', 'Publication acceptée');
+    //     } else {
+    //         return view('admin.page.index');
+    //     }
+    // }
 }

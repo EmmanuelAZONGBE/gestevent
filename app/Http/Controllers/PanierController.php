@@ -19,8 +19,8 @@ class PanierController extends Controller
      */
     public function index()
     {
-        $id=Auth::user()->id;
-        $panier=Panier::where('user_id','=',$id)->get();
+        $id = Auth::user()->id;
+        $panier = Panier::where('user_id', '=', $id)->get();
         $paniers = Panier::select(
             'paniers.*',
             'services.prix as prix'
@@ -86,17 +86,17 @@ class PanierController extends Controller
      */
     public function destroy($id)
     {
-        $panier = Panier::select(
-            'paniers.*',
-            'services.prix as prix'
-        )
-            ->join('services', 'services.id', '=', 'paniers.service_id')
-            ->where('paniers.user_id', auth()->id())
-            ->get();
+        $panier = Panier::find($id);
+        if (!$panier) {
+            return redirect()->back()->with('error', 'Le panier spécifié n\'existe pas.');
+        }
+
         $panier->delete();
 
-        return redirect()->back('admin.page.panier.index')->with('success', 'Supprimer avec succes');
+        return redirect()->back()->with('success', 'Supprimé avec succès.')->with('panier', $panier);
     }
+
+
 
     public function downloadPDF($id)
     {
@@ -118,5 +118,4 @@ class PanierController extends Controller
 
         return $pdf->download('paniers.pdf');
     }
-
 }

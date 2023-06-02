@@ -10,11 +10,10 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    { 
+    {
         Schema::create('type_evenements', function (Blueprint $table) {
             $table->id();
             $table->string('libelle')->nullable();
-            $table->enum('etat',['accepté','rejeté','en attente'])->default('en attente');
             $table->timestamps();
         });
     }

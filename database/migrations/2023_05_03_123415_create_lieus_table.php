@@ -17,10 +17,9 @@ return new class extends Migration
             $table->string('nom');
             $table->string('prix')->nullable();
             $table->string('description');
-            $table->enum('etat',['accepté','rejeté','en attente'])->default('en attente');
             $table->string('photo')->nullable();
             $table->string('adresse');
-            
+
             $table->timestamps();
         });
     }

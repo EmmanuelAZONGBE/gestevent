@@ -10,7 +10,7 @@
         <div class="card-body">
             <h5 class="card-title">Liste des evenements</h5>
 
-            <div class="col-xxl-2 col-lg-6">
+            {{--  <div class="col-xxl-2 col-lg-6">
                 <select class="form-control select2" name="etat" id="etatFilter">
                     <option value="">Choisissez un état</option>
                     <option value="accepté">Accepté</option>
@@ -41,7 +41,7 @@
                     });
 
                 </script>
-            </div>
+            </div>  --}}
             <br>
             <table class="table table-bordered border-primary">
                 <thead>
@@ -52,7 +52,7 @@
                         <th>Organisateur</th>
                         <th>Type d événement</th>
                         <th>Lieu</th>
-                        <th>Etat</th>
+                        {{--  <th>Etat</th>  --}}
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -79,7 +79,7 @@
                         <td>...</td>
                         @endif
                         <td>{{ $evenement->lieu->nom }}</td>
-                        <td class="evenement-etat">{{ $evenement->etat }}</td>
+                        {{--  <td class="evenement-etat">{{ $evenement->etat }}</td>  --}}
                         <td>
                             <form action="{{ route('evenement.destroy', $evenement->id) }}" method="POST">
                                 @csrf
@@ -91,7 +91,7 @@
                             <a class="btn btn-success btn-sm btn-rounded" id="logincss" title="edit" href="{{ route('evenement.edit', $evenement->id) }}" data-bs-toggle="tooltip">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
+                            {{--  @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
                             <form action="{{ route('evenement.accepter', $evenement->id) }}" method="post">
                                 @csrf
                                 <button type="submit" title="Accepter" class="btn btn-info btn-sm btn-rounded" onclick="return confirm('Etes-vous sûr ?')">
@@ -106,7 +106,7 @@
                                 </button>
                             </form>
 
-                            @endif
+                            @endif  --}}
                         </td>
                     </tr>
                     @endforeach

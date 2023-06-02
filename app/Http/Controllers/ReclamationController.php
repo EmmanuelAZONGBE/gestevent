@@ -63,31 +63,31 @@ class ReclamationController extends Controller
 
         return redirect()->route('reclamation.index')->with('success', 'Reclamation deleted successfully.');
     }
-    public function accepter($id)
-    {
-        if (organisateurPermission() == true || auth()->user()->usertype == 1) {
-            $reclamation = Reclamation::find($id);
-            // Mettre à jour le statut "état" de l'événement pour le marquer comme accepté
-            $reclamation->etat = "Accepté";
-            $reclamation->save();
+    // public function accepter($id)
+    // {
+    //     if (organisateurPermission() == true || auth()->user()->usertype == 1) {
+    //         $reclamation = Reclamation::find($id);
+    //         // Mettre à jour le statut "état" de l'événement pour le marquer comme accepté
+    //         $reclamation->etat = "Accepté";
+    //         $reclamation->save();
 
-            return back()->with('success', 'Publication acceptée');
-        } else {
-            return view('admin.page.index');
-        }
-    }
+    //         return back()->with('success', 'Publication acceptée');
+    //     } else {
+    //         return view('admin.page.index');
+    //     }
+    // }
 
-    public function rejeter($id)
-    {
-        if (organisateurPermission() == true ||auth()->user()->usertype == 1) {
-            $reclamation = Reclamation::find($id);
-            // Mettre à jour le statut "état" de l'événement pour le marquer comme accepté
-            $reclamation->etat = "Accepté";
-            $reclamation->save();
+    // public function rejeter($id)
+    // {
+    //     if (organisateurPermission() == true ||auth()->user()->usertype == 1) {
+    //         $reclamation = Reclamation::find($id);
+    //         // Mettre à jour le statut "état" de l'événement pour le marquer comme accepté
+    //         $reclamation->etat = "Accepté";
+    //         $reclamation->save();
 
-            return back()->with('success', 'Publication rejetée');
-        } else {
-            return view('admin.page.index');
-        }
-    }
+    //         return back()->with('success', 'Publication rejetée');
+    //     } else {
+    //         return view('admin.page.index');
+    //     }
+    // }
 }

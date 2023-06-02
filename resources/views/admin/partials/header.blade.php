@@ -112,10 +112,10 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow cart">
                     <li class="dropdown-header">
                         Vous avez
-                        
+
                         {{cart()}}
-                       
-                        services dans vôtre panier
+
+                        services dans votre panier
                         <a href="{{ route('paniers.index') }}"><span class="badge rounded-pill bg-primary p-2 ms-2">Voie Panier</span></a>
                     </li>
                     <li>

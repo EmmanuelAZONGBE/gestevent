@@ -32,7 +32,7 @@ class EvenementController extends Controller
             $typeevenements = TypeEvenement::all();
             $lieux = Lieu::all();
             // dd($lieux);
-            return view('frontend.page.evenements.create', 
+            return view('frontend.page.evenements.create',
             [
                 'organisateurs' => $organisateurs,
                 'typeevenements' => $typeevenements,

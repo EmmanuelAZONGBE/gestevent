@@ -3,26 +3,40 @@
 @extends('admin.layouts.app')
 
 @section('content')
+<div class="text-center">
     <h1>Contactez-nous</h1>
+</div>
 
-    <form method="POST" action="{{ route('contact.send') }}">
-        @csrf
+<section class="section">
 
-        <div>
-            <label for="name">Nom :</label>
-            <input type="text" id="name" name="name">
-        </div>
+    <div class="card-body">
+        <form method="POST" action="{{ route('contact.send') }}" class="row g-3">
+            @csrf
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Your Name" id="name" name="name" required>
+                    <label for="name">Nom </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
+                    <label for="email">Email :</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Message" id="message" name="message" style="height: 100px;"></textarea>
+                    <label for="message">Message </label>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </div>
 
-        <div>
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email">
-        </div>
+        </form>
+    </div>
+    </div>
+</section>
 
-        <div>
-            <label for="message">Message :</label>
-            <textarea id="message" name="message"></textarea>
-        </div>
-
-        <button type="submit">Envoyer</button>
-    </form>
 @endsection

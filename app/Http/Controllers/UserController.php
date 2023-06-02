@@ -8,11 +8,12 @@ use App\Models\Prestataire;
 
 use App\Models\Organisateur;
 use App\Models\User;
+use App\Notifications\NouvelleNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 
-class UserController extends Controller
+class UserController extends Controller 
 {
 
 
@@ -39,8 +40,6 @@ class UserController extends Controller
         'password' => Hash::make($request->password),
         'status' => $request->status
     ]);
-
-
 
 
     if ($request['status'] == 'client') {

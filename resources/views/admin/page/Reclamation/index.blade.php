@@ -15,7 +15,7 @@
 
                 <h5 class="card-title">Liste des reclamation</h5>
                 <!-- Bordered Table -->
-                <div class="col-xxl-2 col-lg-6">
+                {{--  <div class="col-xxl-2 col-lg-6">
                     <select class="form-control select2" name="etat" id="etatFilter">
                         <option value="">Choisissez un état</option>
                         <option value="accepté">Accepté</option>
@@ -46,7 +46,7 @@
                         });
 
                     </script>
-                </div>
+                </div>  --}}
 
                 <!-- Primary Color Bordered Table -->
                 <table class="table table-bordered border-primary">
@@ -55,7 +55,7 @@
                             <th>Date</th>
                             <th>Message</th>
                             <th>Description</th>
-                            <th>Etat</th>
+                            {{--  <th>Etat</th>  --}}
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -65,11 +65,11 @@
                             <td>{{ $reclamation->date }}</td>
                             <td>{{ $reclamation->message }}</td>
                             <td>{{ $reclamation->description }}</td>
-                        <td class="reclamation-etat">{{ $service->etat }}</td>
+                        {{--  <td class="reclamation-etat">{{ $service->etat }}</td>  --}}
                             <td>
-                                <a class="btn btn-success btn-sm btn-rounded " title="update" href="{{ route('reclamation.edit', $reclamation) }}" data-bs-toggle="tooltip">
+                                {{--  <a class="btn btn-success btn-sm btn-rounded " title="update" href="{{ route('reclamation.edit', $reclamation) }}" data-bs-toggle="tooltip">
                                     <i class="bi bi-pencil"></i>
-                                </a>
+                                </a>  --}}
                                 <form action="{{ route('reclamation.destroy', $reclamation->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -77,7 +77,7 @@
                                         <i class="bi bi-trash"></i>
                                     </button>
                                 </form>
-                                @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
+                                {{--  @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
                                 <form action="{{ route('reclamation.accepter', $reclamation->id) }}" method="post">
                                     @csrf
                                     <button type="submit" title="Accepter" class="btn btn-info btn-sm btn-rounded" onclick="return confirm('Etes-vous sûr ?')">
@@ -92,7 +92,7 @@
                                         </button>
                                     </form>
 
-                                @endif
+                                @endif  --}}
                             </td>
                         </tr>
                         @endforeach

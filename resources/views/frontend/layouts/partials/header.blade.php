@@ -35,12 +35,12 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="btn btn-primary" id="logincss" href="{{ url('/redirect')}}"> Tableau de bors </a>
+                                <a class="btn btn-primary" id="logincss" href="{{ url('/redirect')}}"> Tableau de bord </a>
                             </li>
 
 
                             <li class="nav-item">
-                                <a class="btn btn-rouned btn-info" id="logincss" href="{{ url('/logout')}}"> Déconnection </a>
+                                <a class="btn btn-rouned btn-info" id="logincss" href="{{ url('/logout')}}"> Déconnexion </a>
                             </li>
 
                             @else

@@ -16,7 +16,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <input type="text" name="nom" id="nom" class="form-control" placeholder="Ecrivez le nom de l'evenement" required>
-                            </div>
+                            </div> 
 
                             <div class="col-lg-6 col-md-6 col-12">
                                 <input type="number" name="nombre_participant" id="nombre_participant" class="form-control" placeholder="Nombre de personne invité" required>

@@ -16,7 +16,7 @@
     <div class="row ">
         <div class="col-lg-6 mx-lg-auto">
             <h5>Type Evenements</h5>
-            <div class="col-xxl-2 col-lg-6">
+            {{--  <div class="col-xxl-2 col-lg-6">
                 <select class="form-control select2" name="etat" id="etatFilter">
                     <option value="">Choisissez un état</option>
                     <option value="accepté">Accepté</option>
@@ -47,13 +47,13 @@
                     });
 
                 </script>
-            </div>
+            </div>  --}}
             <table class="table table-bordered border-primary">
                 <thead>
                     <tr>
 
                         <th>Nom </th>
-                        <th>Etat</th>
+                        {{--  <th>Etat</th>  --}}
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -62,11 +62,11 @@
                     <tr class="typeevenement-row">
 
                         <td>{{ $typeevenement->libelle }}</td>
-                        <td class="typeevenement-etat">{{ $typeevenement->etat }}</td>
+                        {{--  <td class="typeevenement-etat">{{ $typeevenement->etat }}</td>  --}}
                         <td>
-                            <a class="btn btn-success btn-sm btn-rounded " title="update" href="{{ route('type.edit', $typeevenement) }}" data-bs-toggle="tooltip">
+                            {{--  <a class="btn btn-success btn-sm btn-rounded " title="update" href="{{ route('type.edit', $typeevenement) }}" data-bs-toggle="tooltip">
                                 <i class="bi bi-pencil"></i>
-                            </a>
+                            </a>  --}}
                             <form action="{{ route('type.destroy', $typeevenement->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -74,7 +74,7 @@
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </form>
-                            @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
+                            {{--  @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
                             <form action="{{ route('type.accepter', $typeevenement->id) }}" method="post">
                                 @csrf
                                 <button type="submit" title="Accepter" class="btn btn-info btn-sm btn-rounded" onclick="return confirm('Etes-vous sûr ?')">
@@ -87,7 +87,7 @@
                                     <i class="bi bi-x"></i>
                                 </button>
                             </form>
-                            @endif
+                            @endif  --}}
                         </td>
                     </tr>
                     @endforeach
