@@ -19,16 +19,19 @@ class Evenement extends Model
         'heure',
         'nombre_participant',
         'facture',
-        'statut'
+        'statut',
+        'organisateur_id',
+        'type_evenement_id',
+        'lieu_id'
     ];
-    
+
     // indique que chaque évènement appartient a un seul organisateur
     public function organisateur()
     {
         return $this->belongsTo(Organisateur::class);
     }
  // indique que chaque évènement appartient a un seul type evenement
-    public function type_evement()
+    public function type_evenement()
     {
         return $this->belongsTo(TypeEvenement::class);
     }

@@ -39,14 +39,14 @@ class HomeController extends Controller
         $total_user = User::all()->count();
 
         $service = Service::all();
-        
-        $total_revenue=0;
-        foreach($service as $service)
-        {
-            $total_revenue=$total_revenue + $service->prix;
-        }
 
-        return view('admin.page.index',compact('total_service','total_lieu','total_evenement','total_user','total_revenue'));
+        // $total_revenue=0;
+        // foreach($service as $service)
+        // {
+        //     $total_revenue=$total_revenue + $service->prix;
+        // }
+
+        return view('admin.page.index',compact('total_service','total_lieu','total_evenement','total_user'));
     }
 
     public function welcome()

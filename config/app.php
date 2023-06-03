@@ -160,14 +160,29 @@ return [
 
 
 
+    'providers' => [
 
+        // Service Provider DomPDF
+        Barryvdh\DomPDF\ServiceProvider::class
+
+    ],
+
+    'aliases' => Facade::defaultAliases()->merge([
+
+        // Façade Laravel-dompdf
+        "PDF" => Barryvdh\DomPDF\Facade::class
+
+    ])->toArray(),
+    
 
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
          * Package Service Providers...
          */
         CartServiceProvider::class,
+        	// Service Provider DomPDF
         Barryvdh\DomPDF\ServiceProvider::class,
+
 
         /*
          * Application Service Providers...

@@ -50,6 +50,9 @@
                     <tr>
 
                         <th>Nom</th>
+                        @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
+                        <th scope="col"> Panier </th>
+                        @endif
                         <th>prix</th>
                         <th>Description</th>
                         <th>Adresse</th>
@@ -63,6 +66,18 @@
                     <tr class="lieu-row">
 
                         <td>{{ $lieu->nom }}</td>
+                        @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
+                        <td>
+
+                            <form action="{{ route('paniers.store') }}" method="POST">
+                                @csrf
+                                <input  name="lieu_id" value="{{ $lieu->id }}" type="hidden">
+                                <button type="submit" class="add_btn">
+                                 Ajouter au panier
+                                </button>
+                            </form>
+                        </td>
+                        @endif
                         <td>{{ $lieu->prix }}</td>
                         <td>{{ $lieu->description }}</td>
                         <td>{{ $lieu->adresse }}</td>

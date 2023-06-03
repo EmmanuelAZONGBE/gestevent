@@ -63,7 +63,7 @@ class EvenementController extends Controller
     public function store(Request $request)
     {
         //
-        //  dd($request);
+        // dd($request);
         if (clientPermission() == true) {
             $request->validate([
                 'nom' => 'required',
@@ -71,11 +71,11 @@ class EvenementController extends Controller
                 'date' => 'required',
                 'nombre_participant' => 'required',
                 'organisateur_id' => 'required',
-                'typeevenement_id' => 'required',
+                'type_evenement_id' => 'required',
                 'lieu_id' => 'required',
 
             ]);
-
+// dd($request);
             $evenement = new Evenement;
 
             $evenement->nom = $request->nom;
@@ -84,7 +84,7 @@ class EvenementController extends Controller
             $evenement->nombre_participant = $request->nombre_participant;
 
             $evenement->organisateur_id = $request->organisateur_id;
-            $evenement->typeevenement_id = $request->typeevenement_id;
+            $evenement->type_evenement_id = $request->type_evenement_id;
             $evenement->lieu_id = $request->lieu_id;
 
 

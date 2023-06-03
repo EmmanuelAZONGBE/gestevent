@@ -50,7 +50,7 @@
                         <th>Heure</th>
                         <th>Date</th>
                         <th>Organisateur</th>
-                        <th>Type d événement</th>
+                        {{--  <th>Type d événement</th>  --}}
                         <th>Lieu</th>
                         {{--  <th>Etat</th>  --}}
                         <th>Action</th>
@@ -70,14 +70,14 @@
                         </td>
                         @endif
                         @endforeach
-
-                        @if ($evenement->typeevenement)
+{{--  {{dd($evenement->typeevenement)}}  --}}
+                        {{--  @if ($evenement->type_evenement_id)
                         <td>
-                            {{ $evenement->typeevenement->libelle }}
+                            {{ $evenement->type_evenement_id->libelle }}
                         </td>
                         @else
                         <td>...</td>
-                        @endif
+                        @endif  --}}
                         <td>{{ $evenement->lieu->nom }}</td>
                         {{--  <td class="evenement-etat">{{ $evenement->etat }}</td>  --}}
                         <td>

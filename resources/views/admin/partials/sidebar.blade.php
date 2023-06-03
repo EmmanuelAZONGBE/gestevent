@@ -265,6 +265,7 @@
               <span>Profile</span>
           </a>
       </li>
+
       <!-- End Profile Page Nav -->
 
       <li class="nav-heading">Contact et message</li>
@@ -274,6 +275,12 @@
               <span>Contact</span>
           </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('contact.index') }}">
+            <i class="bi bi-envelope"></i>
+            <span>Contact</span>
+        </a>
+    </li>
       <!-- End contact Page Nav -->
 
       <li class="nav-item">

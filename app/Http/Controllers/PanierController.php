@@ -6,10 +6,10 @@ use App\Models\Lieu;
 use App\Models\Panier;
 
 use App\Models\Evenement;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
-use Barryvdh\DomPDF\PDF as PDF;
+
 use Illuminate\Support\Facades\Auth;
 
 class PanierController extends Controller
@@ -20,6 +20,8 @@ class PanierController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
+        $evenement = Evenement::all();
+        $lieu = Lieu::all();
         $panier = Panier::where('user_id', '=', $id)->get();
         $paniers = Panier::select(
             'paniers.*',
@@ -29,7 +31,7 @@ class PanierController extends Controller
             ->where('paniers.user_id', auth()->id())
             ->get();
 
-        return view('admin.page.panier.index', compact('paniers'));
+        return view('admin.page.panier.index', compact('paniers','lieu','evenement'));
     }
 
 
@@ -62,8 +64,11 @@ class PanierController extends Controller
      */
     public function show(Panier $panier)
     {
-        //
+        $lieu = Lieu::findOrFail($panier->evenement->lieu_id);
+
+        return view('admin.page.panier.show', compact('panier', 'lieu'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -100,22 +105,18 @@ class PanierController extends Controller
 
     public function downloadPDF($id)
     {
-
         $evenement = Evenement::all();
-        $lieux = Lieu::all();
-        $paniers = Panier::select(
-            'paniers.*',
-            'services.prix as prix'
-        )
-            ->join('services', 'services.id', '=', 'paniers.service_id')
-            ->where('paniers.user_id', auth()->id())
-            ->get();
+        $lieu = Lieu::all();
+        $panier = Panier::findOrFail($id);
 
-        $pdf = PDF::loadView('admin.page.panier.pdf', [
-            'evenement' => $evenement, 'paniers' => $paniers,
-            'lieux' => $lieux
-        ]);
-
-        return $pdf->download('paniers.pdf');
+        return  Pdf::loadView('admin.page.panier.pdf', [
+            'evenement' => $evenement,
+            'panier' => $panier,
+            'lieu' => $lieu
+        ])
+            ->setPaper('a4', 'landscape')
+            ->setWarnings(false)
+            ->save(public_path("storage/documents/panier.pdf"))
+            ->stream();
     }
 }
