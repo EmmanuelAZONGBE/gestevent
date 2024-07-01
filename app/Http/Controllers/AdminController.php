@@ -12,6 +12,5 @@ class AdminController extends Controller
     $lieux = Lieu::all();
     return view('frontend.layouts.welcome',compact('lieux'));
    }
- 
-}
 
+}

@@ -51,7 +51,7 @@
                 <thead>
                     <tr>
                         <th scope="col"> Nom du service </th>
-                        @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
+                        @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 0 && prestatairePermission() == false)
                         <th scope="col"> Panier </th>
                         @endif
                         <th scope="col"> Description </th>
@@ -65,14 +65,14 @@
                     @forelse ($services as $service)
                     <tr class="service-row">
                         <td> {{ $service->nom_service }} </td>
-                        @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
+                        @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 0 && prestatairePermission() == false)
                         <td>
 
                             <form action="{{ route('paniers.store') }}" method="POST">
                                 @csrf
-                                <input  name="service_id" value="{{ $service->id }}" type="hidden">
+                                <input name="service_id" value="{{ $service->id }}" type="hidden">
                                 <button type="submit" class="add_btn">
-                                 Ajouter au panier
+                                    Ajouter au panier
                                 </button>
                             </form>
                         </td>
@@ -82,13 +82,15 @@
                         <td class="service-etat">{{ $service->etat }}</td>
 
                         <td>
-                            <form action="{{ route('service.destroy', $service->id) }}" class="rounded-circle "method="POST">
+                            @if (auth()->user()?->usertype == 1 || prestatairePermission() == true)
+                            <form action="{{ route('service.destroy', $service->id) }}" class="rounded-circle " method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm btn-rounded" onclick="return confirm('Vous êtes sûres ???')" title="Remove" data-bs-toggle="tooltip">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </form>
+                            @endif
                             @if (clientPermission() == false && organisateurPermission() == true || auth()->user()?->usertype == 1 && prestatairePermission() == false)
                             <form action="{{ route('service.accepter', $service->id) }}" method="post">
                                 @csrf
@@ -105,12 +107,13 @@
                             </form>
                             @endif
                         </td>
-
+                        @if (auth()->user()?->usertype == 1 || prestatairePermission() == true)
                         <td>
                             <a class="btn btn-success btn-sm btn-rounded " title="update" href="{{ route('service.edit', $service->id) }}" data-bs-toggle="tooltip">
                                 <i class="bi bi-pencil"></i>
                             </a>
                         </td>
+                        @endif
                     </tr>
                     @empty
                     <p class="text text-info">Aucun type de service </p>

@@ -11,7 +11,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="mb-4">
-                                <h3>Sign Up</h3>
+                                <h3> Inscription </h3>
                                 <p class="mb-4">
                                     Bienvenue sur nôtre page de creaction de compte GestEvent
                                 </p>
@@ -70,7 +70,7 @@
                                         </span>
                                     @endif
                                 </div>
-                                
+
                                 <div class="col-12">
                                     <label for="adresse" class="form-label">Adresse</label>
                                     <input class="form-control {{ $errors->has('adresse') ? ' is-invalid' : '' }}"

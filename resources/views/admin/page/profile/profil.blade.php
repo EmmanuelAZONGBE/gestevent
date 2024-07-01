@@ -295,4 +295,4 @@
     </section>
 
   </main>
-  @endsectio 
+  @endsection

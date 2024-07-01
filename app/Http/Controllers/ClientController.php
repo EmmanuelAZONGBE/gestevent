@@ -8,8 +8,6 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 
-
-
 class ClientController extends Controller
 {
     /**
@@ -25,7 +23,7 @@ class ClientController extends Controller
 
             return view('admin.page.client.index', compact('clients'));
         } else {
-            return abort(403);
+            return view('admin.page.index');
         }
     }
 
@@ -40,7 +38,7 @@ class ClientController extends Controller
         if (clientPermission() == true) {
             return view('admin.page.client.create');
         } else {
-            return abort(403);
+            return view('admin.page.index');
         }
     }
 
@@ -75,7 +73,7 @@ class ClientController extends Controller
 
             return redirect()->route('client.index')->with('success', 'Le client a été ajouté avec succès.');
         } else {
-            return abort(403);
+            return view('admin.page.index');
         }
     }
     /**
@@ -89,7 +87,7 @@ class ClientController extends Controller
                 ->join('users', 'clients.user_id', '=', 'users.id');
             return view('admin.page.client.show', compact('clients'));
         } else {
-            return abort(403);
+            return view('admin.page.index');
         }
     }
 
@@ -102,7 +100,7 @@ class ClientController extends Controller
             $client = Client::find($id);
             return view('admin.page.client.edit', compact('client'));
         } else {
-            return abort(403);
+            return view('admin.page.index');
         }
     }
 
@@ -135,7 +133,7 @@ class ClientController extends Controller
 
             return redirect()->route('client.index')->with('success', 'Le client a été mis à jour avec succès.');
         } else {
-            return abort(403);
+            return view('admin.page.index');
         }
     }
     /**
@@ -153,7 +151,7 @@ class ClientController extends Controller
             // Redirige vers la liste des clients
             return redirect()->route('client.index')->with('success', 'Client supprimé avec succès.');
         } else {
-            return abort(403);
+            return view('admin.page.index');
         };
     }
 }

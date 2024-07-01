@@ -11,12 +11,12 @@
             <div class="col-lg-6 col-10 mx-auto">
                 <form class="custom-form ticket-form mb-5 mb-lg-0" action="{{ route('evenement.store') }}" method="post" role="form">
                     @csrf
-                    <h2 class="text-center mb-4">Get started here</h2>
+                    <h2 class="text-center mb-4">Commençons</h2>
                     <div class="ticket-form-body">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <input type="text" name="nom" id="nom" class="form-control" placeholder="Ecrivez le nom de l'evenement" required>
-                            </div> 
+                            </div>
 
                             <div class="col-lg-6 col-md-6 col-12">
                                 <input type="number" name="nombre_participant" id="nombre_participant" class="form-control" placeholder="Nombre de personne invité" required>
@@ -62,7 +62,7 @@
 
 
                         <div class="col-lg-4 col-md-10 col-8 mx-auto">
-                            <button type="submit" class="form-control btn btn-primary">Send Create</button>
+                            <button type="submit" class="form-control btn btn-primary">Valider</button>
                         </div>
                     </div>
                 </form>

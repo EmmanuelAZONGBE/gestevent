@@ -11,7 +11,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom_service')->nullable();
             $table->text('descriptions')->nullable();
-            $table->text('prix')->nullable();
+            $table->string('prix')->nullable();
             $table->enum('etat',['accepté','rejeté','en attente'])->default('en attente');
             $table->timestamps();
         });

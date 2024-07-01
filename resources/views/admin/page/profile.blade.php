@@ -9,7 +9,8 @@
         <li class="breadcrumb-item active">Profil de l utilisateur</li>
       </ol>
     </nav>
-  </div><!-- End Page Title -->
+  </div>
+  <!-- End Page Title -->
 
   <section class="section profile">
     <div class="row">

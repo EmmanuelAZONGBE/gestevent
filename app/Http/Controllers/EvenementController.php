@@ -17,7 +17,7 @@ class EvenementController extends Controller
      */
     public function index()
     {
-        if (clientPermission() == true || auth()->user()->usertype == 1 || organisateurPermission() == true || prestatairePermission() == true) {
+        if (clientPermission() == true || auth()->user()->usertype == 1 || organisateurPermission() == true && prestatairePermission() == false) {
             //récupère tous les évènements a partire de la base de donnée et les passe à la vue
             $evenement = Evenement::all();
             $typeevenements = TypeEvenement::all();

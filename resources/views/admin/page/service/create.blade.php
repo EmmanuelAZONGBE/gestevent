@@ -26,17 +26,17 @@
                                 <label for="nom_service">Nom service :</label>
                             </div>
                         </div>
-                        
+
                         <div class="col-12">
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="descriptions du service" id="descriptions" name="descriptions" style="height: 100px;"></textarea>
+                                <textarea type="text" class="form-control" placeholder="descriptions du service" id="descriptions" name="descriptions" style="height: 100px;"></textarea>
                                 <label for="descriptions">Description :</label>
                             </div>
                         </div>
 
                         <div class="col-12">
                             <div class="form-floating">
-                                <input class="form-control" placeholder="le prix du service proposer" id="prix" name="prix" required>
+                                <input type="number" class="form-control" placeholder="le prix du service proposer" id="prix" name="prix" required>
                                 <label for="prix">Prix :</label>
                             </div>
                         </div>

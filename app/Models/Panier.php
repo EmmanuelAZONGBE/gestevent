@@ -2,18 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Lieu;
+use App\Models\Service;
+use App\Models\Evenement;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Panier extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'service_id',
-        'nom_service',        
-        'descriptions',
-        'prix'
+
     ];
 
     protected $casts = [
@@ -24,5 +25,6 @@ class Panier extends Model
     {
         return $this->belongsTo(Service::class);
     }
+
 }
 

@@ -11,7 +11,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-8">
                                 <div class="mb-4">
-                                    <h3>Sign In</h3>
+                                    <h3>Connexion</h3>
                                     <p class="mb-4">
                                         Bienvenue sur nôtre page de connexion GestEvent
                                     </p>
@@ -52,7 +52,7 @@
                                                 Password</a></span>
                                     </div>
 
-                                    <input type="submit" value="Log In" class="btn btn-block btn-primary">
+                                    <input type="submit" value="Connexion" class="btn btn-block btn-primary">
 
                                     <span class="d-block text-left my-4 text-muted"><a href="{{ route('register') }}">&mdash; or Sign Up with &mdash;</a></span>
                                 </form>

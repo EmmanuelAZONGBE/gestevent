@@ -18,9 +18,6 @@ class ProfileController extends Controller
         $user = Auth::user();
         if(!$user) return back();
         $organisateur = Organisateur::firstWhere('user_id', $user->id );
-
-
-
         return view('admin.page.profile', compact('user', 'organisateur'));
     }
 

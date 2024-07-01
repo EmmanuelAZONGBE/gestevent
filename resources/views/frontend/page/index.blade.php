@@ -41,7 +41,7 @@
 
             <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center">
                 <div class="services-info">
-                    <h2 class="text-white mb-4">About GestEvent</h2>
+                    <h2 class="text-white mb-4">A propos GestEvent</h2>
 
                     <p class="text-white">GestEvent est un platforme de gestion d'événement qui vise à simplifier la
                         planification et lorganisation d'événement professionnels.</p>
@@ -71,9 +71,9 @@
 
 
                         <div class="ms-4">
-                            <h3>a happy moment</h3>
+                            <h3> Un moment heureux </h3>
 
-                            <p class="mb-0">your amazing festival experience with us</p>
+                            <p class="mb-0"> Votre incroyable expérience gestevent avec nous </p>
                         </div>
                     </div>
                 </div>
@@ -82,6 +82,7 @@
         </div>
     </div>
 </section>
+
 
 @auth
 <section class="artists-section section-padding" id="section_3">
@@ -134,7 +135,7 @@
 
 
 
-{{--  <section class="schedule-section section-padding" id="section_4">
+{{-- <section class="schedule-section section-padding" id="section_4">
     <div class="container">
         <div class="row">
 
@@ -162,78 +163,78 @@
                                     <th scope="row">Day 1</th>
 
                                     <td class="table-background-image-wrap " style='background-image : url({{ asset('/storage/.$lieu->photo') }})'>
-                                        <h3>Pop Night</h3>
+<h3>Pop Night</h3>
 
-                                        <p class="mb-2">5:00 - 7:00 PM</p>
+<p class="mb-2">5:00 - 7:00 PM</p>
 
-                                        <p>By Adele</p>
+<p>By Adele</p>
 
-                                        <div class="section-overlay"></div>
-                                    </td>
+<div class="section-overlay"></div>
+</td>
 
-                                    <td style="background-color: #F3DCD4"></td>
+<td style="background-color: #F3DCD4"></td>
 
-                                    <td class="table-background-image-wrap ">
-                                        <h3>Rock & Roll</h3>
+<td class="table-background-image-wrap ">
+    <h3>Rock & Roll</h3>
 
-                                        <p class="mb-2">7:00 - 11:00 PM</p>
+    <p class="mb-2">7:00 - 11:00 PM</p>
 
-                                        <p>By Rihana</p>
+    <p>By Rihana</p>
 
-                                        <div class="section-overlay"></div>
-                                    </td>
-                                </tr>
-
-
+    <div class="section-overlay"></div>
+</td>
+</tr>
 
 
-                                <tr>
-                                    <th scope="row">Day 2</th>
 
-                                    <td style="background: #ECC9C7"></td>
 
-                                    <td>
-                                        <h3>DJ Night</h3>
+<tr>
+    <th scope="row">Day 2</th>
 
-                                        <p class="mb-2">6:30 - 9:30 PM</p>
+    <td style="background: #ECC9C7"></td>
 
-                                        <p>By Rihana</p>
-                                    </td>
+    <td>
+        <h3>DJ Night</h3>
 
-                                    <td style="background-color: #D9E3DA"></td>
-                                </tr>
+        <p class="mb-2">6:30 - 9:30 PM</p>
 
-                                <tr>
-                                    <th scope="row">Day 3</th>
+        <p>By Rihana</p>
+    </td>
 
-                                    <td class="table-background-image-wrap country-background-image">
-                                        <h3>Country Music</h3>
+    <td style="background-color: #D9E3DA"></td>
+</tr>
 
-                                        <p class="mb-2">4:30 - 7:30 PM</p>
+<tr>
+    <th scope="row">Day 3</th>
 
-                                        <p>By Rihana</p>
+    <td class="table-background-image-wrap country-background-image">
+        <h3>Country Music</h3>
 
-                                        <div class="section-overlay"></div>
-                                    </td>
+        <p class="mb-2">4:30 - 7:30 PM</p>
 
-                                    <td style="background-color: #D1CFC0"></td>
+        <p>By Rihana</p>
 
-                                    <td>
-                                        <h3>Free Styles</h3>
+        <div class="section-overlay"></div>
+    </td>
 
-                                        <p class="mb-2">6:00 - 10:00 PM</p>
+    <td style="background-color: #D1CFC0"></td>
 
-                                        <p>By Members</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-            </div>
-        </div>
-    </div>
+    <td>
+        <h3>Free Styles</h3>
+
+        <p class="mb-2">6:00 - 10:00 PM</p>
+
+        <p>By Members</p>
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
 </section>
-  --}}
+--}}
 
 
 @auth
@@ -242,12 +243,12 @@
         <div class="row">
 
             <div class="col-lg-8 col-12 mx-auto">
-                <h2 class="text-center mb-4">Interested? Let s talk</h2>
+                <h2 class="text-center mb-4">Intéressé ? Réclamer</h2>
 
                 <nav class="d-flex justify-content-center">
                     <div class="nav nav-tabs align-items-baseline justify-content-center" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-ContactForm-tab" data-bs-toggle="tab" data-bs-target="#nav-ContactForm" type="button" role="tab" aria-controls="nav-ContactForm" aria-selected="false">
-                            <h5>Reclamation Form</h5>
+                            <h5>Reclamation </h5>
                         </button>
 
                     </div>

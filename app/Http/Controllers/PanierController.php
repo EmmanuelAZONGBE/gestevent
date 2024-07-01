@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Lieu;
 use App\Models\Panier;
-
+use App\Models\Service;
 use App\Models\Evenement;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-
-
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
 class PanierController extends Controller
@@ -19,19 +17,30 @@ class PanierController extends Controller
      */
     public function index()
     {
-        $id = Auth::user()->id;
-        $evenement = Evenement::all();
-        $lieu = Lieu::all();
-        $panier = Panier::where('user_id', '=', $id)->get();
-        $paniers = Panier::select(
-            'paniers.*',
-            'services.prix as prix'
-        )
-            ->join('services', 'services.id', '=', 'paniers.service_id')
-            ->where('paniers.user_id', auth()->id())
-            ->get();
+        if (organisateurPermission() == true) {
+            if (!Auth::check()) {
+                // Utilisateur non authentifié, rediriger ou retourner une réponse appropriée
+                return redirect()->route('login');
+            }
 
-        return view('admin.page.panier.index', compact('paniers','lieu','evenement'));
+            $id = Auth::user()->id;
+            $service = Service::all();
+            $paniers = Panier::select(
+                'paniers.*',
+                'services.prix as prix',
+                'services.nom_service as nom_service',
+                'services.descriptions as descriptions'
+
+
+            )
+                ->join('services', 'services.id', '=', 'paniers.service_id')
+                ->where('paniers.user_id', auth()->id())
+                ->get();
+
+            return view('admin.page.panier.index', compact('paniers', 'service'));
+        } else {
+            return view('admin.page.index');
+        }
     }
 
 
@@ -48,14 +57,22 @@ class PanierController extends Controller
      */
     public function store(Request $request)
     {
-        $panier = new Panier();
-        $panier->user_id = auth()->id();
-        $panier->service_id = $request->service_id;
-        // Autres attributs du panier à définir en fonction de vos besoins
+        if (organisateurPermission() == true) {
+            if (!Auth::check()) {
+                // Utilisateur non authentifié, rediriger ou retourner une réponse appropriée
+                return redirect()->route('login');
+            }
+            $panier = new Panier();
+            $panier->user_id = auth()->id();
+            $panier->service_id = $request->service_id;
+            // Autres attributs du panier à définir en fonction de vos besoins
 
-        $panier->save();
+            $panier->save();
 
-        return redirect()->back();
+            return redirect()->back();
+        } else {
+            return view('admin.page.index');
+        }
     }
 
 
@@ -64,9 +81,17 @@ class PanierController extends Controller
      */
     public function show(Panier $panier)
     {
-        $lieu = Lieu::findOrFail($panier->evenement->lieu_id);
+        if (organisateurPermission() == true) {
+            if (!Auth::check()) {
+                // Utilisateur non authentifié, rediriger ou retourner une réponse appropriée
+                return redirect()->route('login');
+            }
+            $lieu = Lieu::findOrFail($panier->service->lieu_id);
 
-        return view('admin.page.panier.show', compact('panier', 'lieu'));
+            return view('admin.page.panier.show', compact('panier', 'lieu', 'service'));
+        } else {
+            return view('admin.page.index');
+        }
     }
 
 
@@ -91,32 +116,41 @@ class PanierController extends Controller
      */
     public function destroy($id)
     {
-        $panier = Panier::find($id);
-        if (!$panier) {
-            return redirect()->back()->with('error', 'Le panier spécifié n\'existe pas.');
+        if (organisateurPermission() == true) {
+            if (!Auth::check()) {
+                // Utilisateur non authentifié, rediriger ou retourner une réponse appropriée
+                return redirect()->route('login');
+            }
+            $panier = Panier::find($id);
+            if (!$panier) {
+                return redirect()->back()->with('error', 'Le panier spécifié n\'existe pas.');
+            }
+
+            $panier->delete();
+
+            return redirect()->back()->with('success', 'Supprimé avec succès.')->with('panier', $panier);
+        } else {
+            return view('admin.page.index');
         }
-
-        $panier->delete();
-
-        return redirect()->back()->with('success', 'Supprimé avec succès.')->with('panier', $panier);
     }
-
 
 
     public function downloadPDF($id)
     {
-        $evenement = Evenement::all();
-        $lieu = Lieu::all();
-        $panier = Panier::findOrFail($id);
+        if (organisateurPermission() == true) {
+            if (!Auth::check()) {
+                // Utilisateur non authentifié, rediriger ou retourner une réponse appropriée
+                return redirect()->route('login');
+            }
+            $panier = Panier::findOrFail($id);
 
-        return  Pdf::loadView('admin.page.panier.pdf', [
-            'evenement' => $evenement,
-            'panier' => $panier,
-            'lieu' => $lieu
-        ])
-            ->setPaper('a4', 'landscape')
-            ->setWarnings(false)
-            ->save(public_path("storage/documents/panier.pdf"))
-            ->stream();
+            $pdf = PDF::loadView('admin.page.panier.pdf', compact('panier'))
+                ->setPaper('a4', 'landscape')
+                ->setWarnings(false);
+
+            return $pdf->stream('panier.pdf');
+        } else {
+            return view('admin.page.index');
+        }
     }
 }

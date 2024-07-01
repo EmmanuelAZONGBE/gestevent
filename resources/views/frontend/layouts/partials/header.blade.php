@@ -1,6 +1,6 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
-                    <a class="navbar-brand" methode="POST" href="{{url('welcome')}}">
+                    <a class="navbar-brand" methode="POST" href="/">
                         GestEvent
                     </a>
 
@@ -18,17 +18,18 @@
                                 <a class="nav-link click-scroll" href="#section_2"> A propos </a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_3"> Lieu </a>
-                            </li>
 
-                            {{--  <li class="nav-item">
+
+                            {{-- <li class="nav-item">
                                 <a class="nav-link click-scroll" href="#section_4"> Progamme </a>
                             </li>  --}}
 
                             @if (Route::has('login'))
-
                             @auth
+
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="#section_3"> Lieu </a>
+                            </li>
 
                             <li class="nav-item">
                                 <a class="nav-link click-scroll" href="#section_6"> Reclamation </a>

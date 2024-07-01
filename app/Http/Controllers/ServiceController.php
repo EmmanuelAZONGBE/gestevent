@@ -19,12 +19,20 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        // Récupérer tous les services
-        $services = Service::all();
+        if (prestatairePermission() == true || organisateurPermission() == true || auth()->user()->usertype == 1) {
+            if (!Auth::check()) {
+                // Utilisateur non authentifié, rediriger ou retourner une réponse appropriée
+                return redirect()->route('login');
+            }
+            // Récupérer tous les services
+            $services = Service::all();
 
-        // Retourner les services sous forme de réponse JSON
+            // Retourner les services sous forme de réponse JSON
 
-        return view('admin.page.service.index', compact('services'));
+            return view('admin.page.service.index', compact('services'));
+        } else {
+            return view('admin.page.index');
+        }
     }
 
     /**
@@ -32,8 +40,11 @@ class ServiceController extends Controller
      */
     public function create(Request $request)
     {
-        if (organisateurPermission() == false) {
-
+        if (prestatairePermission() == true) {
+            if (!Auth::check()) {
+                // Utilisateur non authentifié, rediriger ou retourner une réponse appropriée
+                return redirect()->route('login');
+            }
             // Valider les données de la requête
             $validator = Validator::make($request->all(), [
                 'nom_service' => 'required|string',
@@ -56,7 +67,7 @@ class ServiceController extends Controller
             // Retourner une réponse appropriée
             return view('admin.page.service.create');
         } else {
-            return abort(401);
+            return view('admin.page.index');
         }
     }
 
@@ -65,22 +76,30 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nom_service' => 'required|string',
-            'descriptions' => 'required|string',
-            'prix' => 'required|string',
-            'etat' => 'nullable',
-        ]);
+        if (prestatairePermission() == true) {
+            if (!Auth::check()) {
+                // Utilisateur non authentifié, rediriger ou retourner une réponse appropriée
+                return redirect()->route('login');
+            }
+            $request->validate([
+                'nom_service' => 'required|string',
+                'descriptions' => 'required|string',
+                'prix' => 'required|string',
+                'etat' => 'nullable',
+            ]);
 
-        Service::create([
+            Service::create([
 
-            'nom_service' => $request->nom_service,
-            'descriptions' => $request->descriptions,
-            'prix' => $request->prix,
-            'etat' => $request->has('etat')
+                'nom_service' => $request->nom_service,
+                'descriptions' => $request->descriptions,
+                'prix' => $request->prix,
+                'etat' => $request->has('etat')
 
-        ]);
-        return redirect()->route('service.index');
+            ]);
+            return redirect()->route('service.index');
+        } else {
+            return view('admin.page.index');
+        }
     }
 
     /**
@@ -105,8 +124,16 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        $service = Service::find($id);
-        return view('admin.page.service.edit', compact('service'));
+        if (prestatairePermission() == true) {
+            if (!Auth::check()) {
+                // Utilisateur non authentifié, rediriger ou retourner une réponse appropriée
+                return redirect()->route('login');
+            }
+            $service = Service::find($id);
+            return view('admin.page.service.edit', compact('service'));
+        } else {
+            return view('admin.page.index');
+        }
     }
 
     /**
@@ -114,22 +141,30 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Trouver le service par son identifiant
-        $service = Service::find($id);
+        if (prestatairePermission() == true) {
+            if (!Auth::check()) {
+                // Utilisateur non authentifié, rediriger ou retourner une réponse appropriée
+                return redirect()->route('login');
+            }
+            // Trouver le service par son identifiant
+            $service = Service::find($id);
 
-        // Valider les données de la requête
-        $request->validate([
-            'nom_service' => 'nullable|string',
-            'descriptions' => 'nullable|string',
-            'prix' => 'nullable|string',
-            'etat' => 'nullable|in:accepté,rejeté,en attente',
-        ]);
+            // Valider les données de la requête
+            $request->validate([
+                'nom_service' => 'nullable|string',
+                'descriptions' => 'nullable|string',
+                'prix' => 'nullable|string',
+                'etat' => 'nullable|in:accepté,rejeté,en attente',
+            ]);
 
-        // Mettre à jour les champs du service avec les données validées
-        $service->update($request->all());
+            // Mettre à jour les champs du service avec les données validées
+            $service->update($request->all());
 
-        // Retourner une réponse appropriée
-        return redirect()->route('service.index')->with('success', 'Le service a été mis à jour avec succès.');
+            // Retourner une réponse appropriée
+            return redirect()->route('service.index')->with('success', 'Le service a été mis à jour avec succès.');
+        } else {
+            return view('admin.page.index');
+        }
     }
 
 
@@ -138,14 +173,22 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        $service = Service::find($id);
-        if (!$service) {
-            // Si le service n'est pas trouvé, retourner une réponse d'erreur
-            return redirect()->back()->with('success', 'Service non trouvé');
+        if (prestatairePermission() == true) {
+            if (!Auth::check()) {
+                // Utilisateur non authentifié, rediriger ou retourner une réponse appropriée
+                return redirect()->route('login');
+            }
+            $service = Service::find($id);
+            if (!$service) {
+                // Si le service n'est pas trouvé, retourner une réponse d'erreur
+                return redirect()->back()->with('success', 'Service non trouvé');
+            }
+            $service->delete();
+            // Retourner une réponse appropriée
+            return redirect()->back()->with('success', 'le service à été supprimer');
+        } else {
+            return view('admin.page.index');
         }
-        $service->delete();
-        // Retourner une réponse appropriée
-        return redirect()->back()->with('success', 'le service à été supprimer');
     }
 
     public function accepter($id)

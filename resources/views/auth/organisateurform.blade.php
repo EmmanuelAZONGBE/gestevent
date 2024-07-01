@@ -11,7 +11,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="mb-4">
-                                <h3>Organisateur Up</h3>
+                                <h3> Inscription Organisateur </h3>
                                 <p class="mb-4">
                                     Bienvenue sur nôtre page de compte de GestEvent
                                 </p>

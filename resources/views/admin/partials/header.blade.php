@@ -97,78 +97,82 @@
 
             </li>
             <!-- End Messages Nav -->
+            @if (
+                (clientPermission() == false && organisateurPermission() == true) ||
+                    (auth()->user()?->usertype == 0 && prestatairePermission() == false))
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav-icon" data-bs-toggle="dropdown">
+                        <i class="bi bi-bag"></i>
+                        <span class="badge bg-primary badge-number">
 
-            <li class="nav-item dropdown">
-                <a class="nav-link nav-icon" data-bs-toggle="dropdown">
-                    <i class="bi bi-bag"></i>
-                    <span class="badge bg-primary badge-number">
+                            {{ cart() }}
 
-                        {{cart()}}
+                        </span>
+                    </a>
+                    <!-- End Cart Icon -->
 
-                    </span>
-                </a>
-                <!-- End Cart Icon -->
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow cart">
+                        <li class="dropdown-header">
+                            Vous avez
 
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow cart">
-                    <li class="dropdown-header">
-                        Vous avez
+                            {{ cart() }}
 
-                        {{cart()}}
+                            services dans votre panier
+                            <a href="{{ route('paniers.index') }}"><span
+                                    class="badge rounded-pill bg-primary p-2 ms-2">Voie Panier</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                    </ul>
 
-                        services dans votre panier
-                        <a href="{{ route('paniers.index') }}"><span class="badge rounded-pill bg-primary p-2 ms-2">Voie Panier</span></a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                </ul>
-
-                <!-- End Cart Dropdown Items -->
-            </li>
-
+                    <!-- End Cart Dropdown Items -->
+                </li>
+            @endif
 
             <li class="nav-item dropdown pe-3">
                 @auth
-                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="{{ Storage::url(Auth::user()->photo) }}" alt="Profile" class="rounded-circle ">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->last_name}} {{ Auth::user()->first_name}}</span>
-                </a>
-                <!-- End Profile Iamge Icon -->
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <img src="{{ Storage::url(Auth::user()->photo) }}" alt="Profile" class="rounded-circle ">
+                        <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->last_name }}
+                            {{ Auth::user()->first_name }}</span>
+                    </a>
+                    <!-- End Profile Iamge Icon -->
 
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
 
-                    <li class="dropdown-header">
-                        <h6>{{Auth::user()->last_name}}{{ Auth::user()->first_name}}</h6>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                        <li class="dropdown-header">
+                            <h6>{{ Auth::user()->last_name }}{{ Auth::user()->first_name }}</h6>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
 
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('user_profile.index') }}">
-                            <i class="bi bi-person"></i>
-                            <span>My Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('user_profile.index') }}">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
 
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
 
 
 
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ url('/logout')}}">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>Sign Out</span>
-                        </a>
-                    </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ url('/logout') }}">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </li>
 
-                </ul>
-                <!-- End Profile Dropdown Items -->
+                    </ul>
+                    <!-- End Profile Dropdown Items -->
                 @endauth
 
             </li>

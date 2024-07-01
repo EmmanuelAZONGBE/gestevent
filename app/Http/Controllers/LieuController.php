@@ -24,7 +24,7 @@ class LieuController extends Controller
         if (organisateurPermission() == true) {
             return view('admin.page.lieu.create');
         } else {
-            abort(401);
+            return view('admin.page.index');
         }
     }
 
@@ -51,7 +51,7 @@ class LieuController extends Controller
             ]);
 
 
-            return redirect()->route('lieu.index')->with('success', 'lieu created successfully.');
+            return redirect()->route('lieu.index')->with('success', 'lieu crée  avec succès.');
         } else {
             return view('admin.page.index');
         }
@@ -85,7 +85,7 @@ class LieuController extends Controller
             }
             $lieu->save();
 
-            return redirect()->route('lieu.index')->with('success', 'lieu updated successfully.');
+            return redirect()->route('lieu.index')->with('success', 'lieu modifié avec succès.');
         } else {
             return view('admin.page.index');
         }

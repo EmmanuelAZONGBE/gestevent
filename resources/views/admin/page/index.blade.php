@@ -7,12 +7,12 @@
     <h1>Dashboard</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="/redirect">Home</a></li>
             <li class="breadcrumb-item active">Dashboard</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
-
+@auth
 <section class="section dashboard">
     <div class="row">
 
@@ -39,7 +39,7 @@
                 <!-- End Service Card -->
 
                 <!-- Revenue Card -->
-                <div class="col-xxl-10 col-md-6">
+                 <div class="col-xxl-10 col-md-6">
                     <div class="card info-card revenue-card">
 
                         {{-- <div class="filter">
@@ -53,7 +53,7 @@
                 <li><a class="dropdown-item" href="#">This Month</a></li>
                 <li><a class="dropdown-item" href="#">This Year</a></li>
               </ul>
-            </div>  --}}
+            </div>--}}
 
                         <div class="card-body">
                             <h5 class="card-title">Revenue</h5>
@@ -63,59 +63,59 @@
                                     <i class="bi bi-currency-dollar"></i>
                                 </div>
                                 <div class="ps-3">
-                                    {{--  <h6>{{ $total_revenue }}</h6>  --}}
-                                </div>
-                            </div>
-                        </div>
+                                     <h6>{{ $total_revenue }}</h6>
+            </div>
+        </div>
+    </div>
 
+    </div>
+    </div>
+    <!-- End Revenue Card -->
+
+    <div class="col-xxl-4 col-md-6">
+        <div class="card info-card event-card">
+            <div class="card-body">
+                <h5 class="card-title">Événement </h5>
+                <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-calendar-event"></i>
+                    </div>
+                    <div class="ps-3">
+                        <h6>{{$total_evenement}}</h6>
                     </div>
                 </div>
-                <!-- End Revenue Card -->
+            </div>
+        </div>
+    </div>
 
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card info-card event-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Événement </h5>
-                            <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-calendar-event"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>{{$total_evenement}}</h6>
-                                </div>
-                            </div>
-                        </div>
+
+
+
+    <!-- Lieu Card -->
+
+    <div class="col-xxl-4 col-md-6">
+        <div class="card info-card location-card">
+            <div class="card-body">
+                <h5 class="card-title">Lieu</h5>
+                <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-geo-alt"></i>
+                    </div>
+                    <div class="ps-3">
+                        <h6>{{ $total_lieu }}</h6>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Lieu Card -->
 
+    <!-- Customers Card -->
+    <div class="col-xxl-4 col-xl-12">
 
+        <div class="card info-card customers-card">
 
-
-                <!-- Lieu Card -->
-
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card info-card location-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Lieu</h5>
-                            <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-geo-alt"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>{{ $total_lieu }}</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Lieu Card -->
-
-                <!-- Customers Card -->
-                <div class="col-xxl-4 col-xl-12">
-
-                    <div class="card info-card customers-card">
-
-                        {{--  <div class="filter">
+            {{-- <div class="filter">
                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                 <li class="dropdown-header text-start">
@@ -128,25 +128,25 @@
                             </ul>
                         </div>  --}}
 
-                        <div class="card-body">
-                            <h5 class="card-title">Customers</h5>
+            <div class="card-body">
+                <h5 class="card-title">Customers</h5>
 
-                            <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-people"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>{{ $total_user }}</h6>
-                                </div>
-                            </div>
-
-                        </div>
+                <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-people"></i>
                     </div>
-
+                    <div class="ps-3">
+                        <h6>{{ $total_user }}</h6>
+                    </div>
                 </div>
-                <!-- End Customers Card -->
 
-                {{--  <!-- Reports -->
+            </div>
+        </div>
+
+    </div>
+    <!-- End Customers Card -->
+
+    {{-- <!-- Reports -->
                 <div class="col-12">
                     <div class="card">
 
@@ -230,7 +230,7 @@
                 </div>
                 <!-- End Reports -->  --}}
 
-                {{--  <!-- Recent Sales -->
+    {{-- <!-- Recent Sales -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
 
@@ -305,7 +305,7 @@
                 </div>
                 <!-- End Recent Sales -->  --}}
 
-                {{--  <!-- Top Selling -->
+    {{-- <!-- Top Selling -->
                 <div class="col-12">
                     <div class="card top-selling overflow-auto">
 
@@ -380,10 +380,10 @@
                 </div>
                 <!-- End Top Selling -->  --}}
 
-            </div>
-        </div><!-- End Left side columns -->
+    </div>
+    </div><!-- End Left side columns -->
 
-        {{--  <!-- Right side columns -->
+    {{-- <!-- Right side columns -->
         <div class="col-lg-4">
 
             <!-- Recent Activity -->
@@ -672,7 +672,5 @@
 
     </div>
 </section>
-
-
-
+@endauth
 @endsection
